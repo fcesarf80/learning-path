@@ -1,0 +1,15 @@
+## Ignore pastas de compilação (binários)
+[Bb]in/
+[Oo]bj/
+
+## Ignore pastas de configuração do Visual Studio
+.vs/
+*.user
+*.userosscache
+*.sln.docstates
+
+## Ignore arquivos temporários e caches
+*.suo
+*.cache
+*.opendb
+*.ide
