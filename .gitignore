@@ -1,0 +1,22 @@
+# ===== C# / Visual Studio =====
+.vs/
+*.user
+*.suo
+bin/
+obj/
+Debug/
+Release/
+
+# ===== Node / JavaScript =====
+node_modules/
+
+# ===== Python =====
+__pycache__/
+*.pyc
+
+# ===== Geral =====
+.vscode/
+.idea/
+*.log
+.DS_Store
+Thumbs.db
