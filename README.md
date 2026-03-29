@@ -1,19 +1,61 @@
-# learning-path
+# 🚀 Learning Path
 
-Repositório de estudos em programação.
+Repositório dedicado aos meus estudos em programação, organizado por linguagem e trilha de aprendizado.
 
-## Trilhas
+---
 
-- cs-core → C#
-- cpp-core → C++
-- java-core → Java
-- js-core → JavaScript
-- php-core → PHP
-- py-core → Python
-- git-core → Git e GitHub
-- sql-core → SQL
-- web-core → Desenvolvimento Web
+## 📚 Estrutura do Projeto
 
-## Objetivo
 
-Organizar exercícios, projetos e evolução prática por linguagem.
+
+---
+
+## 🎯 Objetivo
+
+Organizar de forma clara e progressiva:
+
+- exercícios práticos  
+- projetos pessoais  
+- evolução técnica por linguagem  
+
+---
+
+## 🧠 Metodologia de Estudo
+
+- 📁 Organização por linguagem (`*-core`)
+- 🧩 Separação por módulos e fichas (`fch-01`, `fch-02`, etc.)
+- 🔢 Exercícios numerados (`ex-01`, `ex-02`, ...)
+- 📌 Foco em prática + entendimento da lógica
+
+---
+
+## 🛠️ Tecnologias em Estudo
+
+- C#
+- Java
+- Python
+- JavaScript
+- PHP
+- SQL
+- Git & GitHub
+- HTML & CSS
+
+---
+
+## 📈 Progresso
+
+Este repositório está em constante evolução conforme avanço nos estudos.
+
+---
+
+## 👨‍💻 Autor
+
+Fernando Cesar  
+📍 Estudante de Programação  
+💡 Em transição de carreira para tecnologia
+
+---
+
+## ⭐ Observação
+
+Este repositório faz parte do meu processo de aprendizado e evolução na área de desenvolvimento.
