@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36203.30 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ex-02-intercalacoes-strings", "ex-02-intercalacoes-strings.csproj", "{AEDFCA88-E2BC-47F7-83C2-7ACD556D0B84}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AEDFCA88-E2BC-47F7-83C2-7ACD556D0B84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEDFCA88-E2BC-47F7-83C2-7ACD556D0B84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEDFCA88-E2BC-47F7-83C2-7ACD556D0B84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEDFCA88-E2BC-47F7-83C2-7ACD556D0B84}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D00FC3ED-59FB-4D3E-9163-597260FF3E0F}
+	EndGlobalSection
+EndGlobal
