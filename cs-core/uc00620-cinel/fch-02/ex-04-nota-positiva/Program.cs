@@ -5,10 +5,6 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ex_04_nota_positiva
 {
@@ -16,6 +12,16 @@ namespace ex_04_nota_positiva
     {
         static void Main(string[] args)
         {
+            Console.Write("Digite a nota (0 a 20): ");
+            double nota = double.Parse(Console.ReadLine());
+
+            if (nota >= 10)
+            {
+                Console.WriteLine("Aprovado");
+            }
+
+            Console.WriteLine("\nPressione qualquer tecla para sair...");
+            Console.ReadKey();
         }
     }
 }
