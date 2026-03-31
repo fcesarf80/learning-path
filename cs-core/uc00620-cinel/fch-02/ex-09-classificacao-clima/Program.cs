@@ -6,17 +6,31 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ex_09_classificacao_clima
+namespace ex_09_classificacao_temperatura
 {
     internal class Program
     {
         static void Main(string[] args)
         {
+            Console.Write("Digite a temperatura em °C: ");
+            double temperatura = double.Parse(Console.ReadLine());
+
+            if (temperatura < 10)
+            {
+                Console.WriteLine("Frio");
+            }
+            else if (temperatura <= 25)
+            {
+                Console.WriteLine("Agradável");
+            }
+            else
+            {
+                Console.WriteLine("Quente");
+            }
+
+            Console.WriteLine("\nPressione qualquer tecla para sair...");
+            Console.ReadKey();
         }
     }
 }
