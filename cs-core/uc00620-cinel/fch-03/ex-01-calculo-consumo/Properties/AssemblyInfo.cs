@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ex-01-fundamentos-iteracao,")]
+[assembly: AssemblyTitle("ex-01-calculo-consumo")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ex-01-fundamentos-iteracao,")]
+[assembly: AssemblyProduct("ex-01-calculo-consumo")]
 [assembly: AssemblyCopyright("Copyright ©  2026")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("2343f0ee-c5bc-4926-a9ba-e28338f5fe5d")]
+[assembly: Guid("b0e526be-0275-4fb4-9f66-f7345cb5f5f6")]
 
 // Version information for an assembly consists of the following four values:
 //

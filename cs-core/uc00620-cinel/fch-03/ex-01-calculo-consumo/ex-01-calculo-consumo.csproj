@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2343F0EE-C5BC-4926-A9BA-E28338F5FE5D}</ProjectGuid>
+    <ProjectGuid>{B0E526BE-0275-4FB4-9F66-F7345CB5F5F6}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>ex_01_fundamentos_iteracao_</RootNamespace>
-    <AssemblyName>ex-01-fundamentos-iteracao,</AssemblyName>
+    <RootNamespace>ex_01_calculo_consumo</RootNamespace>
+    <AssemblyName>ex-01-calculo-consumo</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

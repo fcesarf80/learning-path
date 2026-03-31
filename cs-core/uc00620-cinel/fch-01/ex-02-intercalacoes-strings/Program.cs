@@ -20,7 +20,7 @@ namespace ex_02_intercalacoes_strings
             Console.WriteLine("Digite seu nome: ");
             string nome = Console.ReadLine();
 
-            Console.Write("Digite seu nome: ");
+            Console.Write("Digite seu sobrenome: ");
             string sobrenome = Console.ReadLine();
 
             Console.WriteLine($"Bem-vindo, {nome} {sobrenome}!");

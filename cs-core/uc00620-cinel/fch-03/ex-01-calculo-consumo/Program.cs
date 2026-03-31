@@ -1,9 +1,9 @@
 ﻿/*
- * Exercício 01 - calculo-consumo
- * Enunciado: Elabore um programa em C# que receba a quantidade de cafés consumidos.
- * Sabendo que cada café custa 0,85 €, o programa deve calcular e apresentar o valor total a pagar.
-*/
-
+ * ex - 01 - Calculo consumo
+ * Enunciado: Elabore um programa em C# que receba a quantidade
+ * de cafés consumidos. Sabendo que cada café custa 0,85 €, o 
+ * programa deve calcular e apresentar o valor total a pagar.
+ */
 using System;
 
 namespace ex_01_calculo_consumo

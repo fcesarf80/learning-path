@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36203.30 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ex-01-calculo-consumo", "ex-01-calculo-consumo.csproj", "{2343F0EE-C5BC-4926-A9BA-E28338F5FE5D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ex-01-calculo-consumo", "ex-01-calculo-consumo.csproj", "{B0E526BE-0275-4FB4-9F66-F7345CB5F5F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2343F0EE-C5BC-4926-A9BA-E28338F5FE5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2343F0EE-C5BC-4926-A9BA-E28338F5FE5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2343F0EE-C5BC-4926-A9BA-E28338F5FE5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2343F0EE-C5BC-4926-A9BA-E28338F5FE5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0E526BE-0275-4FB4-9F66-F7345CB5F5F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0E526BE-0275-4FB4-9F66-F7345CB5F5F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0E526BE-0275-4FB4-9F66-F7345CB5F5F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0E526BE-0275-4FB4-9F66-F7345CB5F5F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {DDD57974-6E02-4F98-B236-4D1208FC32C2}
+		SolutionGuid = {1C237DE2-3374-4A90-88D9-9744285AF95A}
 	EndGlobalSection
 EndGlobal
