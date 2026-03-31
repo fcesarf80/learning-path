@@ -5,10 +5,6 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ex_03_numero_par
 {
@@ -16,6 +12,16 @@ namespace ex_03_numero_par
     {
         static void Main(string[] args)
         {
+            Console.Write("Digite um número inteiro: ");
+            int numero = int.Parse(Console.ReadLine());
+
+            if (numero % 2 == 0)
+            {
+                Console.WriteLine("Número par");
+            }
+
+            Console.WriteLine("\nPressione qualquer tecla para sair...");
+            Console.ReadKey();
         }
     }
 }
