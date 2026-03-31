@@ -5,17 +5,23 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ex_02_maior_idade
+namespace ex_02_maior_de_idade
 {
     internal class Program
     {
         static void Main(string[] args)
         {
+            Console.Write("Digite a idade: ");
+            int idade = int.Parse(Console.ReadLine());
+
+            if (idade >= 18)
+            {
+                Console.WriteLine("Maior de idade");
+            }
+
+            Console.WriteLine("\nPressione qualquer tecla para sair...");
+            Console.ReadKey();
         }
     }
 }
