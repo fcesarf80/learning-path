@@ -6,10 +6,6 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ex_08_saldo_bancario
 {
@@ -17,6 +13,20 @@ namespace ex_08_saldo_bancario
     {
         static void Main(string[] args)
         {
+            Console.Write("Digite o saldo da conta: ");
+            double saldo = double.Parse(Console.ReadLine());
+
+            if (saldo >= 0)
+            {
+                Console.WriteLine("Saldo positivo");
+            }
+            else
+            {
+                Console.WriteLine("Saldo negativo");
+            }
+
+            Console.WriteLine("\nPressione qualquer tecla para sair...");
+            Console.ReadKey();
         }
     }
 }
