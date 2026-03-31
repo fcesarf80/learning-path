@@ -4,19 +4,24 @@
  * "Múltiplo de 5" se o número for divisível por 5.
 */
 
-
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ex_05_multiplo_cinco
+namespace ex_05_multiplo_de_5
 {
     internal class Program
     {
         static void Main(string[] args)
         {
+            Console.Write("Digite um número inteiro: ");
+            int numero = int.Parse(Console.ReadLine());
+
+            if (numero % 5 == 0)
+            {
+                Console.WriteLine("Múltiplo de 5");
+            }
+
+            Console.WriteLine("\nPressione qualquer tecla para sair...");
+            Console.ReadKey();
         }
     }
 }
