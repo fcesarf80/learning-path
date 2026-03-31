@@ -5,17 +5,31 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ex_10_faixa_etaria
+namespace ex_10_classificacao_idade
 {
     internal class Program
     {
         static void Main(string[] args)
         {
+            Console.Write("Digite a idade: ");
+            int idade = int.Parse(Console.ReadLine());
+
+            if (idade < 13)
+            {
+                Console.WriteLine("Criança");
+            }
+            else if (idade <= 17)
+            {
+                Console.WriteLine("Adolescente");
+            }
+            else
+            {
+                Console.WriteLine("Adulto");
+            }
+
+            Console.WriteLine("\nPressione qualquer tecla para sair...");
+            Console.ReadKey();
         }
     }
 }
