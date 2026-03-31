@@ -5,17 +5,27 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ex_07_validacao_senha
+namespace ex_07_senha
 {
     internal class Program
     {
         static void Main(string[] args)
         {
+            Console.Write("Digite a senha: ");
+            int senha = int.Parse(Console.ReadLine());
+
+            if (senha == 1234)
+            {
+                Console.WriteLine("Acesso permitido");
+            }
+            else
+            {
+                Console.WriteLine("Acesso negado");
+            }
+
+            Console.WriteLine("\nPressione qualquer tecla para sair...");
+            Console.ReadKey();
         }
     }
 }
