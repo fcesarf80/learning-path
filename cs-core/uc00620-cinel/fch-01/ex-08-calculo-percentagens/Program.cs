@@ -6,10 +6,6 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ex_08_calculo_percentagens
 {
@@ -17,6 +13,22 @@ namespace ex_08_calculo_percentagens
     {
         static void Main(string[] args)
         {
+            Console.Write("Digite o número de alunas: ");
+            double alunas = double.Parse(Console.ReadLine());
+
+            Console.Write("Digite o número de alunos: ");
+            double alunos = double.Parse(Console.ReadLine());
+
+            double total = alunas + alunos;
+
+            double percAlunas = (alunas / total) * 100;
+            double percAlunos = (alunos / total) * 100;
+
+            Console.WriteLine($"\nPercentagem de alunas: {percAlunas:F2}%");
+            Console.WriteLine($"Percentagem de alunos: {percAlunos:F2}%");
+
+            Console.WriteLine("\nPressione qualquer tecla para sair...");
+            Console.ReadKey();
         }
     }
 }
