@@ -6,17 +6,46 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ex_11_dia_semana
+namespace ex_11_dia_da_semana
 {
     internal class Program
     {
         static void Main(string[] args)
         {
+            Console.Write("Digite um número de 1 a 7: ");
+            int dia = int.Parse(Console.ReadLine());
+
+            switch (dia)
+            {
+                case 1:
+                    Console.WriteLine("Segunda");
+                    break;
+                case 2:
+                    Console.WriteLine("Terça");
+                    break;
+                case 3:
+                    Console.WriteLine("Quarta");
+                    break;
+                case 4:
+                    Console.WriteLine("Quinta");
+                    break;
+                case 5:
+                    Console.WriteLine("Sexta");
+                    break;
+                case 6:
+                    Console.WriteLine("Sábado");
+                    break;
+                case 7:
+                    Console.WriteLine("Domingo");
+                    break;
+                default:
+                    Console.WriteLine("Número inválido");
+                    break;
+            }
+
+            Console.WriteLine("\nPressione qualquer tecla para sair...");
+            Console.ReadKey();
         }
     }
 }
