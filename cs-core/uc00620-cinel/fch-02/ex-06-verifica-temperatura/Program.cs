@@ -5,17 +5,27 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ex_06_verifica_temperatura
+namespace ex_06_temperatura
 {
     internal class Program
     {
         static void Main(string[] args)
         {
+            Console.Write("Digite a temperatura em °C: ");
+            double temperatura = double.Parse(Console.ReadLine());
+
+            if (temperatura < 15)
+            {
+                Console.WriteLine("Está frio");
+            }
+            else
+            {
+                Console.WriteLine("Está quente");
+            }
+
+            Console.WriteLine("\nPressione qualquer tecla para sair...");
+            Console.ReadKey();
         }
     }
 }
