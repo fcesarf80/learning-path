@@ -5,12 +5,7 @@
  * O utilizador deve introduzir o valor de x para obter o resultado de y. 
 */
 
-
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ex_10_resolucao_equacao
 {
@@ -18,6 +13,27 @@ namespace ex_10_resolucao_equacao
     {
         static void Main(string[] args)
         {
+            Console.Write("Digite o valor de x: ");
+            double x = double.Parse(Console.ReadLine());
+
+            double y1 = 3 * Math.Pow(x, 2) + 5;
+            double y2 = (Math.Pow(x, 2) + 2 * x) / 3;
+
+            if (x == 1)
+            {
+                Console.WriteLine("\nA equação 3 não pode ser calculada, porque o denominador seria zero.");
+            }
+            else
+            {
+                double y3 = (Math.Pow(x, 2) + 2 * x + 5) / (x - 1);
+                Console.WriteLine($"\nResultado da equação 3: {y3:F2}");
+            }
+
+            Console.WriteLine($"\nResultado da equação 1: {y1:F2}");
+            Console.WriteLine($"Resultado da equação 2: {y2:F2}");
+
+            Console.WriteLine("\nPressione qualquer tecla para sair...");
+            Console.ReadKey();
         }
     }
 }
