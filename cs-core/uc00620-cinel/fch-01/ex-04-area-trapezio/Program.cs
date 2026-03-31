@@ -6,10 +6,6 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ex_04_area_trapezio
 {
@@ -17,6 +13,21 @@ namespace ex_04_area_trapezio
     {
         static void Main(string[] args)
         {
+            Console.Write("Digite a base maior (m): ");
+            double m = double.Parse(Console.ReadLine());
+
+            Console.Write("Digite a base menor (n): ");
+            double n = double.Parse(Console.ReadLine());
+
+            Console.Write("Digite a altura (h): ");
+            double h = double.Parse(Console.ReadLine());
+
+            double area = ((m + n) * h) / 2;
+
+            Console.WriteLine($"\nÁrea do trapézio é: {area:F1}");
+
+            Console.WriteLine("\nPressione qualquer tecla para sair...");
+            Console.ReadKey();
         }
     }
 }
