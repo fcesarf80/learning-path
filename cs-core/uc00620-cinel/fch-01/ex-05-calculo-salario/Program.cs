@@ -7,10 +7,6 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ex_05_calculo_salario
 {
@@ -18,6 +14,31 @@ namespace ex_05_calculo_salario
     {
         static void Main(string[] args)
         {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+            Console.Write("Digite o nome do funcionário: ");
+            string nome = Console.ReadLine();
+
+            Console.Write("Digite o número de horas trabalhadas: ");
+            double horasTrabalhadas = double.Parse(Console.ReadLine());
+
+            Console.Write("Digite o valor recebido por hora: ");
+            double valorHora = double.Parse(Console.ReadLine());
+
+            Console.Write("Digite o número de filhos: ");
+            int numeroFilhos = int.Parse(Console.ReadLine());
+
+            double salarioBruto = horasTrabalhadas * valorHora;
+            double acrescimo = salarioBruto * 0.03 * numeroFilhos;
+            double salarioFinal = salarioBruto + acrescimo;
+
+            Console.WriteLine($"\nFuncionário: {nome}");
+            Console.WriteLine($"Salário bruto: {salarioBruto:F2} €");
+            Console.WriteLine($"Acréscimo por filhos: {acrescimo:F2} €");
+            Console.WriteLine($"Salário final: {salarioFinal:F2} €");
+
+            Console.WriteLine("\nPressione qualquer tecla para sair...");
+            Console.ReadKey();
         }
     }
 }
+
