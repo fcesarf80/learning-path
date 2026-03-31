@@ -5,17 +5,28 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ex_08_contador_entradas
+namespace ex_08_contar_numeros
 {
     internal class Program
     {
         static void Main(string[] args)
         {
+            int contador = 0;
+            int numero;
+
+            do
+            {
+                Console.Write("Digite um número: ");
+                numero = int.Parse(Console.ReadLine());
+
+                if (numero != 0)
+                    contador++;
+
+            } while (numero != 0);
+
+            Console.WriteLine($"Quantidade: {contador}");
+            Console.ReadKey();
         }
     }
 }

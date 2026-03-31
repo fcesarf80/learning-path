@@ -5,17 +5,27 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ex_14_acumulador_soma
+namespace ex_14_soma_numeros
 {
     internal class Program
     {
         static void Main(string[] args)
         {
+            int soma = 0;
+            int numero;
+
+            do
+            {
+                Console.Write("Digite um número: ");
+                numero = int.Parse(Console.ReadLine());
+
+                soma += numero;
+
+            } while (numero != 0);
+
+            Console.WriteLine($"Soma total: {soma}");
+            Console.ReadKey();
         }
     }
 }

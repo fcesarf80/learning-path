@@ -5,10 +5,6 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ex_10_divisoes_sucessivas
 {
@@ -16,6 +12,15 @@ namespace ex_10_divisoes_sucessivas
     {
         static void Main(string[] args)
         {
+            double numero = double.Parse(Console.ReadLine());
+
+            while (numero >= 1)
+            {
+                Console.WriteLine(numero);
+                numero /= 2;
+            }
+
+            Console.ReadKey();
         }
     }
 }

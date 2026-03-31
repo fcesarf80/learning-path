@@ -6,10 +6,6 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ex_07_soma_positivos
 {
@@ -17,6 +13,21 @@ namespace ex_07_soma_positivos
     {
         static void Main(string[] args)
         {
+            int soma = 0;
+            int numero;
+
+            do
+            {
+                Console.Write("Digite um número: ");
+                numero = int.Parse(Console.ReadLine());
+
+                if (numero >= 0)
+                    soma += numero;
+
+            } while (numero >= 0);
+
+            Console.WriteLine($"Soma: {soma}");
+            Console.ReadKey();
         }
     }
 }

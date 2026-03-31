@@ -5,17 +5,24 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ex_12_validacao_senha
+namespace ex_12_senha_correta
 {
     internal class Program
     {
         static void Main(string[] args)
         {
+            int senha;
+
+            do
+            {
+                Console.Write("Digite a senha: ");
+                senha = int.Parse(Console.ReadLine());
+
+            } while (senha != 1234);
+
+            Console.WriteLine("Senha correta");
+            Console.ReadKey();
         }
     }
 }

@@ -5,17 +5,24 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ex_15_jogo_adivinhacao
+namespace ex_15_adivinhar_numero
 {
     internal class Program
     {
         static void Main(string[] args)
         {
+            int numero;
+
+            do
+            {
+                Console.Write("Adivinhe o número: ");
+                numero = int.Parse(Console.ReadLine());
+
+            } while (numero != 7);
+
+            Console.WriteLine("Acertou!");
+            Console.ReadKey();
         }
     }
 }

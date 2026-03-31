@@ -5,17 +5,26 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ex_11_menu_interativo
+namespace ex_11_menu_opcoes
 {
     internal class Program
     {
         static void Main(string[] args)
         {
+            int opcao;
+
+            do
+            {
+                Console.WriteLine("1 - Somar");
+                Console.WriteLine("2 - Subtrair");
+                Console.WriteLine("0 - Sair");
+
+                opcao = int.Parse(Console.ReadLine());
+
+            } while (opcao != 0);
+
+            Console.ReadKey();
         }
     }
 }

@@ -5,17 +5,28 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ex_09_maior_valor
+namespace ex_09_maior_numero
 {
     internal class Program
     {
         static void Main(string[] args)
         {
+            int maior = int.MinValue;
+            int numero;
+
+            do
+            {
+                Console.Write("Digite um número: ");
+                numero = int.Parse(Console.ReadLine());
+
+                if (numero != 0 && numero > maior)
+                    maior = numero;
+
+            } while (numero != 0);
+
+            Console.WriteLine($"Maior número: {maior}");
+            Console.ReadKey();
         }
     }
 }

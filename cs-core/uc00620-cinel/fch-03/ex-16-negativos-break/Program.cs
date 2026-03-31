@@ -6,17 +6,24 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ex_16_negativos_break
+namespace ex_16_break
 {
     internal class Program
     {
         static void Main(string[] args)
         {
+            while (true)
+            {
+                int numero = int.Parse(Console.ReadLine());
+
+                if (numero < 0)
+                    break;
+
+                Console.WriteLine(numero);
+            }
+
+            Console.ReadKey();
         }
     }
 }

@@ -5,17 +5,23 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ex_06_validacao_intervalo
+namespace ex_06_numero_intervalo
 {
     internal class Program
     {
         static void Main(string[] args)
         {
+            int numero;
+
+            do
+            {
+                Console.Write("Digite um número entre 1 e 100: ");
+                numero = int.Parse(Console.ReadLine());
+
+            } while (numero < 1 || numero > 100);
+
+            Console.ReadKey();
         }
     }
 }

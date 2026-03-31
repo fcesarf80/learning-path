@@ -5,17 +5,22 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ex_03_tabuada_for
+namespace ex_03_tabuada
 {
     internal class Program
     {
         static void Main(string[] args)
         {
+            Console.Write("Digite um número: ");
+            int numero = int.Parse(Console.ReadLine());
+
+            for (int i = 1; i <= 10; i++)
+            {
+                Console.WriteLine($"{numero} x {i} = {numero * i}");
+            }
+
+            Console.ReadKey();
         }
     }
 }
