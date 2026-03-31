@@ -5,10 +5,6 @@
  * adjacentes (dimensões b, h e a, c), elabore um programa que calcule a área total disponível. 
 */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ex_09_calculo_area
 {
@@ -16,6 +12,26 @@ namespace ex_09_calculo_area
     {
         static void Main(string[] args)
         {
+            Console.Write("Digite a base (a) do primeiro retângulo: ");
+            double a = double.Parse(Console.ReadLine());
+
+            Console.Write("Digite a altura (b) do primeiro retângulo: ");
+            double b = double.Parse(Console.ReadLine());
+
+            Console.Write("Digite a base (c) do segundo retângulo: ");
+            double c = double.Parse(Console.ReadLine());
+
+            Console.Write("Digite a altura (h) do segundo retângulo: ");
+            double h = double.Parse(Console.ReadLine());
+
+            double area1 = a * b;
+            double area2 = c * h;
+            double areaTotal = area1 + area2;
+
+            Console.WriteLine($"\nÁrea total disponível: {areaTotal:F2}");
+
+            Console.WriteLine("\nPressione qualquer tecla para sair...");
+            Console.ReadKey();
         }
     }
 }
