@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36203.30 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ex-17-filtro-impares", "ex-17-filtro-impares.csproj", "{53BF83EF-BFF3-47A6-8037-BFC67D0E706B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{53BF83EF-BFF3-47A6-8037-BFC67D0E706B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53BF83EF-BFF3-47A6-8037-BFC67D0E706B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53BF83EF-BFF3-47A6-8037-BFC67D0E706B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53BF83EF-BFF3-47A6-8037-BFC67D0E706B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F6F50C90-2C4E-4C47-8F55-2B6F2B968418}
+	EndGlobalSection
+EndGlobal

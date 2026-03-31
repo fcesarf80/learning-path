@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36203.30 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ex-12-validacao-senha", "ex-12-validacao-senha.csproj", "{9102E7E5-B29A-4EEA-9D56-39B2F66A6EC7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9102E7E5-B29A-4EEA-9D56-39B2F66A6EC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9102E7E5-B29A-4EEA-9D56-39B2F66A6EC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9102E7E5-B29A-4EEA-9D56-39B2F66A6EC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9102E7E5-B29A-4EEA-9D56-39B2F66A6EC7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {503CF2C0-0927-44D4-98AB-D4E725A48A88}
+	EndGlobalSection
+EndGlobal
