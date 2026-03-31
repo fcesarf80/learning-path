@@ -1,9 +1,45 @@
 ﻿/* 
-* Exercício 11 - Áreas diversas (Jardim) 
-* Enunciado: O Sr. Frederico tem uma quinta com várias divisões (pomar, casa, jardim, piscina).
- * Elabore um programa que receba as medidas de A, B, R e Y, e determine: 
-* Perímetro do pomar, Área do pomar, Área da casa, Área do jardim e Área da piscina.
- */
+* Exercício 11 - Áreas diversas (Jardim)
+* Enunciado: Considere uma quinta composta por quatro zonas distintas:
+1) Jardim (retângulo central)
+   - Comprimento: A
+   - Altura: X
+
+2) Casa (quadrado)
+   - Lado: B
+
+3) Piscina (meio círculo)
+   - O diâmetro da piscina corresponde à altura X
+   - Logo, o raio é X / 2
+
+4) Pomar (triângulo retângulo)
+   - Base: T
+   - Altura: X
+
+O programa deve solicitar ao utilizador os valores de:
+A, B, T e X
+
+E calcular:
+
+- Perímetro do pomar
+  (soma dos lados do triângulo)
+
+- Área do pomar
+  Fórmula: (T × X) / 2
+
+- Área da casa
+  Fórmula: B²
+
+- Área do jardim
+  Fórmula: A × X
+
+- Área da piscina
+  (meio círculo)
+  Fórmula: (π × (X/2)²) / 2
+
+Apresentar todos os resultados com duas casas decimais.
+*/
+
 
 using System;
 
