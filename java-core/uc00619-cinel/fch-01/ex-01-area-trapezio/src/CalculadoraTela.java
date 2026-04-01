@@ -61,7 +61,7 @@ public class CalculadoraTela extends javax.swing.JFrame {
         lblAltura.setText("Altura");
         lblAltura.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        lblResultado.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        lblResultado.setFont(new java.awt.Font("Dialog", 3, 12)); // NOI18N
         lblResultado.setText("Área:");
 
         txtBaseMaior.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
