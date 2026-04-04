@@ -20,3 +20,4 @@ __pycache__/
 *.log
 .DS_Store
 Thumbs.db
+/java-core/uc00619-cinel/fch-02/ex-01-gestao-clientes-supermercado/nbproject/private/

@@ -11,8 +11,10 @@ namespace ex_01_numeros_1_a_10
     {
         static void Main(string[] args)
         {
-            for (int i = 1; i <= 10; i++)
+            int i;
+            for (i = 10; i >= 1; i--)
             {
+
                 Console.WriteLine(i);
             }
 
