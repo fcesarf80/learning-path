@@ -4,7 +4,7 @@ public class Vetapp {
 
     public static void main(String[] args) {
 
-        ConsultaDAO dao = new ConsultaDAO();
+        FaturaDAO dao = new FaturaDAO();
         dao.deletar(1);
         dao.listar();
     }

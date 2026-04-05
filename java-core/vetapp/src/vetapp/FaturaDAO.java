@@ -53,4 +53,44 @@ public class FaturaDAO {
             e.printStackTrace();
         }
     }
+    public void atualizar(Fatura fatura) {
+
+    String sql = "UPDATE fatura SET data_emissao = ?, valor_total = ?, estado = ?, id_cliente = ?, id_consulta = ? WHERE id_fatura = ?";
+
+    try (Connection conn = Conexao.conectar();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        stmt.setString(1, fatura.getDataEmissao());
+        stmt.setDouble(2, fatura.getValorTotal());
+        stmt.setString(3, fatura.getEstado());
+        stmt.setInt(4, fatura.getIdCliente());
+        stmt.setInt(5, fatura.getIdConsulta());
+        stmt.setInt(6, fatura.getIdFatura());
+
+        stmt.executeUpdate();
+        System.out.println("Fatura atualizada com sucesso!");
+
+    } catch (SQLException e) {
+        System.out.println("Erro ao atualizar fatura:");
+        e.printStackTrace();
+    }
+}
+
+public void deletar(int idFatura) {
+
+    String sql = "DELETE FROM fatura WHERE id_fatura = ?";
+
+    try (Connection conn = Conexao.conectar();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        stmt.setInt(1, idFatura);
+
+        stmt.executeUpdate();
+        System.out.println("Fatura deletada com sucesso!");
+
+    } catch (SQLException e) {
+        System.out.println("Erro ao deletar fatura:");
+        e.printStackTrace();
+    }
+}
 }
