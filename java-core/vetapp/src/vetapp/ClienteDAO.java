@@ -49,4 +49,41 @@ public class ClienteDAO {
             e.printStackTrace();
         }
     }
+    public void atualizar(Cliente cliente) {
+
+    String sql = "UPDATE cliente SET nome = ?, telefone = ?, email = ? WHERE id_cliente = ?";
+
+    try (Connection conn = Conexao.conectar();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        stmt.setString(1, cliente.getNome());
+        stmt.setString(2, cliente.getTelefone());
+        stmt.setString(3, cliente.getEmail());
+        stmt.setInt(4, cliente.getIdCliente());
+
+        stmt.executeUpdate();
+        System.out.println("Cliente atualizado com sucesso!");
+
+    } catch (SQLException e) {
+        System.out.println("Erro ao atualizar cliente:");
+        e.printStackTrace();
+    }
+}
+    public void deletar(int idCliente) {
+
+    String sql = "DELETE FROM cliente WHERE id_cliente = ?";
+
+    try (Connection conn = Conexao.conectar();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        stmt.setInt(1, idCliente);
+
+        stmt.executeUpdate();
+        System.out.println("Cliente deletado com sucesso!");
+
+    } catch (SQLException e) {
+        System.out.println("Erro ao deletar cliente:");
+        e.printStackTrace();
+    }
+}
 }
