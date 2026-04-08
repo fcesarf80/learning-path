@@ -13,51 +13,59 @@ import tkinter as tk
 from time import strftime
 
 
-# =========================
-# FUNÇÃO DO RELÓGIO
-# =========================
+
+# Função do relógio
 def relogio():
-    hora = strftime("%H:%M:%S")
-    lbl_relogio.config(text=hora)
+    hora_atual = strftime("%H:%M:%S")
+    lbl_relogio.config(text=hora_atual)
     lbl_relogio.after(1000, relogio)
 
-
-# =========================
-# JANELA
-# =========================
+# Janela principal
 janela = tk.Tk()
 janela.title("Relógio Digital")
-janela.config(bg="#1e1e1e")  # fundo escuro
+janela.config(bg="white")
 janela.resizable(False, False)
 
-largura = 400
-altura = 200
+# Tamanho da janela
+largura_janela = 400
+altura_janela = 200
 
-screen_w = janela.winfo_screenwidth()
-screen_h = janela.winfo_screenheight()
+# Dimensões do ecrã
+largura_ecra = janela.winfo_screenwidth()
+altura_ecra = janela.winfo_screenheight()
 
-x = (screen_w // 2) - (largura // 2)
-y = (screen_h // 2) - (altura // 2)
+# Cálculo para centralizar
+pos_x = (largura_ecra // 2) - (largura_janela // 2)
+pos_y = (altura_ecra // 2) - (altura_janela // 2)
 
-janela.geometry(f"{largura}x{altura}+{x}+{y}")
+# Aplicar tamanho + posição
+janela.geometry(f"{largura_janela}x{altura_janela}+{pos_x}+{pos_y}")
 
 
-# =========================
-# LABEL RELÓGIO (CENTRO)
-# =========================
+# Fonte
+fonte_relogio = ("Arial", 16, "bold")
+
+# Labels
+lbl_titulo = tk.Label(
+    janela,
+    text="Hora atual:",
+    font=("Arial", 14, "bold"),
+    bg="white"
+)
+lbl_titulo.pack(pady=30)
+
 lbl_relogio = tk.Label(
     janela,
-    font=("Arial", 36, "bold"),
-    bg="#1e1e1e",
-    fg="#00ff88"
+    text="",
+    font=fonte_relogio,
+    bg="white",
+    fg="blue"
 )
+lbl_relogio.place(x=260, y=150)
 
-lbl_relogio.pack(expand=True)
+# Iniciar relógio
 
-
-# =========================
-# INICIAR
-# =========================
 relogio()
 
+# Loop principal
 janela.mainloop()
