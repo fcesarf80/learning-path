@@ -34,4 +34,3 @@ def exercicio_01():
 
 # Executar o programa
 exercicio_01()
-
