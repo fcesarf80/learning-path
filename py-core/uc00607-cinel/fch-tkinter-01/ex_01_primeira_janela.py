@@ -13,41 +13,33 @@ Mude a cor de fundo do botão e aplique uma pequena borda.
 
 import tkinter as tk
 
-# =========================
-# CRIAÇÃO DA JANELA
-# =========================
+# 1) Criação da janela
 janela = tk.Tk()
 
-# Título da janela
+# 2) Título da janela
 janela.title("Primeira janela em Tk")
 
-# Cor de fundo
+# 3) Cor de fundo
 janela.config(bg="orange")
 
-# Tamanho da janela + posição inicial
+# 4) Tamanho da janela + posição inicial
 # 400x330 = largura x altura
 # +300+500 = distância da esquerda e do topo
 janela.geometry("400x330+300+500")
 
-# Impedir redimensionamento
+# 5) Impedir redimensionamento
 janela.resizable(False, False)
 
-# Fonte pedida no enunciado
+# 6) Fonte pedida no enunciado
 fonte = ("Comic Sans MS", 14, "bold")
 
-# Ícone da janela
-# Coloque um ficheiro .ico na mesma pasta do programa
-# Exemplo: icone.ico
+# 7) Ícone da janela
 try:
     janela.iconbitmap("icone.ico")
 except:
     print("Ícone não encontrado. Coloque um ficheiro 'icone.ico' na mesma pasta do programa.")
 
-# =========================
-# COMPONENTES DA JANELA
-# =========================
-
-# Label
+# 9) Label com o texto "Olá Python"
 lbl_ola = tk.Label(
     janela,
     text="Olá Python",
@@ -56,7 +48,7 @@ lbl_ola = tk.Label(
 )
 lbl_ola.pack(pady=20)
 
-# Caixa de texto
+# 11) Caixa de texto
 entrada = tk.Entry(
     janela,
     font=fonte,
@@ -64,11 +56,11 @@ entrada = tk.Entry(
 )
 entrada.pack(pady=10)
 
-# Função para sair
+# 12) Função para sair
 def sair():
     janela.destroy()
 
-# Botão sair
+# 13) Botão sair
 btn_sair = tk.Button(
     janela,
     text="Sair",
@@ -79,7 +71,12 @@ btn_sair = tk.Button(
 )
 btn_sair.pack(pady=20)
 
-# =========================
-# LOOP PRINCIPAL
-# =========================
+# Bónus: imagem png no canto inferior esquerdo
+try:
+    imagem = tk.PhotoImage(file="img-milhouse.png")
+    lbl_imagem = tk.Label(janela, image=imagem, bg="orange")
+    lbl_imagem.place(x=5, y=220)
+except Exception as erro:
+    print("Erro ao carregar imagem:", erro)
+
 janela.mainloop()
