@@ -25,7 +25,7 @@ def validar_login():
 janela = tk.Tk()
 janela.title("Frames")
 janela.resizable(False, False)
-
+00000
 # Configuração de dimensões e centralização
 largura_janela, altura_janela = 300, 150
 largura_ecra = janela.winfo_screenwidth()
