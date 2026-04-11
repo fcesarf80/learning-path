@@ -17,6 +17,7 @@ janela = tk.Tk()
 janela.title("Grid com Labels")
 janela.resizable(False, False)
 
+
 # Tamanho da janela
 largura_janela = 500
 altura_janela = 220
