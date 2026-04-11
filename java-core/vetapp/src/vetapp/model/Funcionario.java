@@ -1,4 +1,4 @@
-package vetapp;
+package vetapp.model;
 
 public class Funcionario {
 

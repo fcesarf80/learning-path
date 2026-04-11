@@ -20,6 +20,7 @@ public class TelaConsulta extends JFrame {
     private JTextField txtAnimal;
     private JTextField txtVeterinario;
     private JTextField txtObservacao;
+    
     // Botões
     private JButton btnNovo;
     private JButton btnSalvar;
