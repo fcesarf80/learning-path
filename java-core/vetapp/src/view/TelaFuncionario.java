@@ -9,6 +9,7 @@ public class TelaFuncionario extends JFrame {
     private JPanel pnlDadosFuncionario;
     private JPanel pnlAcoes;
     private JPanel pnlListagemFuncionarios;
+
     private JTable tblFuncionarios;
 
     // Campos
@@ -181,18 +182,19 @@ public class TelaFuncionario extends JFrame {
     gbc.gridy = 4;
     gbc.gridwidth = 1;
     pnlForm.add(lblEmail, gbc);
-
     gbc.gridx = 1;
     gbc.gridwidth = 2;
     pnlForm.add(txtEmail, gbc);
+    
     JPanel pnlImagem = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
     lblFotoAnimal = new JLabel();
     lblFotoAnimal.setIcon(iconeSerio);
     lblFotoAnimal.setPreferredSize(new Dimension(110, 160));
+    
     pnlImagem.add(lblFotoAnimal);
 
-    pnlDadosCliente.add(pnlForm, BorderLayout.CENTER);
-    pnlDadosCliente.add(pnlImagem, BorderLayout.EAST);
+    pnlDadosFuncionario.add(pnlForm, BorderLayout.CENTER);
+    pnlDadosFuncionario.add(pnlImagem, BorderLayout.EAST);
     
     lblFotoAnimal.setFocusable(false);
 }
@@ -223,8 +225,8 @@ public class TelaFuncionario extends JFrame {
 
     private void criarPainelListagem() {
         pnlListagemFuncionarios = new JPanel(new BorderLayout());
-    pnlListagemFuncionarios.setBorder(BorderFactory.createTitledBorder("Listagem de Funcionários"));
-    pnlListagemFuncionarios.setPreferredSize(new Dimension(680, 150));
+        pnlListagemFuncionarios.setBorder(BorderFactory.createTitledBorder("Listagem de Funcionários"));
+        pnlListagemFuncionarios.setPreferredSize(new Dimension(680, 150));
 
         String[] colunas ={"ID", "Nome", "Cargo", "Telefone", "E-mail"};
         Object[][] dados = {
