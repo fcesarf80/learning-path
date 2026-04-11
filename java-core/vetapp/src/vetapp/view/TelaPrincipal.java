@@ -1,4 +1,4 @@
-package view;
+package vetapp.view;
 
 import javax.swing.*;
 import java.awt.*;

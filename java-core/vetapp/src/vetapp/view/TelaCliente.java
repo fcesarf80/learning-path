@@ -1,23 +1,21 @@
-package view;
+package vetapp.view;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class TelaFuncionario extends JFrame {
+public class TelaCliente extends JFrame {
 
     // Painéis
-    private JPanel pnlDadosFuncionario;
+    private JPanel pnlDadosCliente;
     private JPanel pnlAcoes;
-    private JPanel pnlListagemFuncionarios;
-
-    private JTable tblFuncionarios;
+    private JPanel pnlListagemClientes;
 
     // Campos
     private JTextField txtId;
     private JTextField txtNome;
-    private JTextField txtCargo;
     private JFormattedTextField fmtTelefone;
     private JTextField txtEmail;
+    private JTextField txtEndereco;
 
     // Botões
     private JButton btnNovo;
@@ -28,12 +26,15 @@ public class TelaFuncionario extends JFrame {
     private JButton btnLimpar;
     private JButton btnVoltar;
 
-    // Hamster
+    // Tabela
+    private JTable tblClientes;
+
+    // Bulldog
     private JLabel lblFotoAnimal;
     private ImageIcon iconeSerio;
     private ImageIcon iconeFeliz;
 
-    public TelaFuncionario() {
+    public TelaCliente() {
         configurarJanela();
         carregarImagens();
         criarComponentes();
@@ -43,7 +44,7 @@ public class TelaFuncionario extends JFrame {
     }
 
     private void configurarJanela() {
-        setTitle("Gestão de Funcionários");
+        setTitle("Gestão de Clientes");
         setSize(720, 520);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -52,16 +53,16 @@ public class TelaFuncionario extends JFrame {
     }
 
     private void carregarImagens() {
-    iconeSerio = carregarIconeRedimensionado(
-        "C:/Users/fcesa/Documents/learning-path/java-core/vetapp/src/img/hamster-serio.png",
-        110, 160
-    );
+        iconeSerio = carregarIconeRedimensionado(
+            "C:/Users/fcesa/Documents/learning-path/java-core/vetapp/src/img/bulldog-serio.png",
+            110, 160
+        );
 
-    iconeFeliz = carregarIconeRedimensionado(
-        "C:/Users/fcesa/Documents/learning-path/java-core/vetapp/src/img/hamster-feliz.png",
-        110, 160
-    );
-}
+        iconeFeliz = carregarIconeRedimensionado(
+            "C:/Users/fcesa/Documents/learning-path/java-core/vetapp/src/img/bulldog-feliz.png",
+            110, 160
+        );
+    }
 
     private ImageIcon carregarIconeRedimensionado(String caminho, int largura, int altura) {
         ImageIcon iconeOriginal = new ImageIcon(caminho);
@@ -72,30 +73,30 @@ public class TelaFuncionario extends JFrame {
     }
 
     private void criarComponentes() {
-    criarPainelDadosFuncionario();
+    criarPainelDadosCliente();
     criarPainelAcoes();
     criarPainelListagem();
 
     JPanel pnlPrincipal = new JPanel();
     pnlPrincipal.setLayout(new BoxLayout(pnlPrincipal, BoxLayout.Y_AXIS));
 
-    pnlDadosFuncionario.setAlignmentX(Component.CENTER_ALIGNMENT);
+    pnlDadosCliente.setAlignmentX(Component.CENTER_ALIGNMENT);
     pnlAcoes.setAlignmentX(Component.CENTER_ALIGNMENT);
-    pnlListagemFuncionarios.setAlignmentX(Component.CENTER_ALIGNMENT);
+    pnlListagemClientes.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-    pnlPrincipal.add(pnlDadosFuncionario);
+    pnlPrincipal.add(pnlDadosCliente);
     pnlPrincipal.add(Box.createVerticalStrut(8));
     pnlPrincipal.add(pnlAcoes);
     pnlPrincipal.add(Box.createVerticalStrut(8));
-    pnlPrincipal.add(pnlListagemFuncionarios);
+    pnlPrincipal.add(pnlListagemClientes);
 
     add(pnlPrincipal);
 }
 
-    private void criarPainelDadosFuncionario(){
-    pnlDadosFuncionario = new JPanel(new BorderLayout(10, 10));
-    pnlDadosFuncionario.setBorder(BorderFactory.createTitledBorder("Dados do Funcionário"));
-    pnlDadosFuncionario.setPreferredSize(new Dimension(680, 230));
+    private void criarPainelDadosCliente() {
+    pnlDadosCliente = new JPanel(new BorderLayout(10, 10));
+    pnlDadosCliente.setBorder(BorderFactory.createTitledBorder("Dados do Cliente"));
+    pnlDadosCliente.setPreferredSize(new Dimension(680, 230));
 
     JPanel pnlForm = new JPanel(new GridBagLayout());
     GridBagConstraints gbc = new GridBagConstraints();
@@ -106,21 +107,18 @@ public class TelaFuncionario extends JFrame {
     JLabel lblId = new JLabel("ID:");
     JLabel lblAuto = new JLabel("(auto)");
     JLabel lblNome = new JLabel("Nome:");
-    JLabel lblCargo = new JLabel("Cargo:");
     JLabel lblTelefone = new JLabel("Telefone:");
     JLabel lblEmail = new JLabel("E-mail:");
-
-    txtNome = new JTextField(18);
-    txtNome.setPreferredSize(new Dimension(180, 25));
-
-    txtCargo = new JTextField(18);
-    txtCargo.setPreferredSize(new Dimension(180, 25));
+    JLabel lblEndereco = new JLabel("Endereço:");
 
     txtId = new JTextField(6);
     txtId.setEditable(false);
     txtId.setFocusable(false);
     txtId.setPreferredSize(new Dimension(60, 25));
-    
+
+    txtNome = new JTextField(18);
+    txtNome.setPreferredSize(new Dimension(180, 25));
+
     try {
         fmtTelefone = new JFormattedTextField(
             new javax.swing.text.MaskFormatter("(##) #####-####")
@@ -133,8 +131,11 @@ public class TelaFuncionario extends JFrame {
     fmtTelefone.setPreferredSize(new Dimension(120, 25));
 
     txtEmail = new JTextField(18);
-    txtEmail.setPreferredSize(new Dimension(180, 25));    
-    
+    txtEmail.setPreferredSize(new Dimension(180, 25));
+
+    txtEndereco = new JTextField(18);
+    txtEndereco.setPreferredSize(new Dimension(180, 25));
+
     // linha 1
     gbc.gridx = 0;
     gbc.gridy = 0;
@@ -161,40 +162,40 @@ public class TelaFuncionario extends JFrame {
     gbc.gridx = 0;
     gbc.gridy = 2;
     gbc.gridwidth = 1;
-    pnlForm.add(lblCargo, gbc);
-
-    gbc.gridx = 1;
-    gbc.gridwidth = 2;
-    pnlForm.add(txtCargo, gbc);
-
-    // linha 4
-    gbc.gridx = 0;
-    gbc.gridy = 3;
-    gbc.gridwidth = 1;
     pnlForm.add(lblTelefone, gbc);
 
     gbc.gridx = 1;
     gbc.gridwidth = 1;
     pnlForm.add(fmtTelefone, gbc);
 
+    // linha 4
+    gbc.gridx = 0;
+    gbc.gridy = 3;
+    gbc.gridwidth = 1;
+    pnlForm.add(lblEmail, gbc);
+
+    gbc.gridx = 1;
+    gbc.gridwidth = 2;
+    pnlForm.add(txtEmail, gbc);
+
     // linha 5
     gbc.gridx = 0;
     gbc.gridy = 4;
     gbc.gridwidth = 1;
-    pnlForm.add(lblEmail, gbc);
+    pnlForm.add(lblEndereco, gbc);
+
     gbc.gridx = 1;
     gbc.gridwidth = 2;
-    pnlForm.add(txtEmail, gbc);
-    
+    pnlForm.add(txtEndereco, gbc);
+
     JPanel pnlImagem = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
     lblFotoAnimal = new JLabel();
     lblFotoAnimal.setIcon(iconeSerio);
     lblFotoAnimal.setPreferredSize(new Dimension(110, 160));
-    
     pnlImagem.add(lblFotoAnimal);
 
-    pnlDadosFuncionario.add(pnlForm, BorderLayout.CENTER);
-    pnlDadosFuncionario.add(pnlImagem, BorderLayout.EAST);
+    pnlDadosCliente.add(pnlForm, BorderLayout.CENTER);
+    pnlDadosCliente.add(pnlImagem, BorderLayout.EAST);
     
     lblFotoAnimal.setFocusable(false);
 }
@@ -224,22 +225,22 @@ public class TelaFuncionario extends JFrame {
     }
 
     private void criarPainelListagem() {
-        pnlListagemFuncionarios = new JPanel(new BorderLayout());
-        pnlListagemFuncionarios.setBorder(BorderFactory.createTitledBorder("Listagem de Funcionários"));
-        pnlListagemFuncionarios.setPreferredSize(new Dimension(680, 150));
+        pnlListagemClientes = new JPanel(new BorderLayout());
+        pnlListagemClientes.setBorder(BorderFactory.createTitledBorder("Listagem de Clientes"));
+        pnlListagemClientes.setPreferredSize(new Dimension(680, 150));
 
-        String[] colunas ={"ID", "Nome", "Cargo", "Telefone", "E-mail"};
+        String[] colunas = {"ID", "Nome", "Telefone", "E-mail", "Endereço"};
         Object[][] dados = {
-    {1, "Marcos Silva", "Recepcionista", "(11) 99999-1111", "marcos@email.com"},
-    {2, "Luciana Costa", "Veterinária", "(21) 98888-2222", "luciana@email.com"}
-};
+            {1, "Ana Souza", "(11) 99999-1111", "ana@email.com", "Rua A, 100"},
+            {2, "Carlos Lima", "(21) 98888-2222", "carlos@email.com", "Av. Central, 250"}
+        };
 
-        tblFuncionarios = new JTable(dados, colunas);
-        JScrollPane scroll = new JScrollPane(tblFuncionarios);
+        tblClientes = new JTable(dados, colunas);
+        JScrollPane scroll = new JScrollPane(tblClientes);
 
-        pnlListagemFuncionarios.add(scroll, BorderLayout.CENTER);
-    }  
-   
+        pnlListagemClientes.add(scroll, BorderLayout.CENTER);
+    }
+
     private void configurarEventos() {
         btnVoltar.addActionListener(e -> {
             new TelaPrincipal().setVisible(true);
@@ -255,7 +256,7 @@ public class TelaFuncionario extends JFrame {
 
         btnSalvar.addActionListener(e -> {
             if (camposPreenchidos()) {
-                JOptionPane.showMessageDialog(this, "Funcionário salvo com sucesso!");
+                JOptionPane.showMessageDialog(this, "Cliente salvo com sucesso!");
                 alternarHumor(true);
             } else {
                 JOptionPane.showMessageDialog(this, "Preencha todos os campos.");
@@ -268,15 +269,15 @@ public class TelaFuncionario extends JFrame {
         return !txtNome.getText().trim().isEmpty()
                 && !fmtTelefone.getText().trim().isEmpty()
                 && !txtEmail.getText().trim().isEmpty()
-                && !txtCargo.getText().trim().isEmpty();
+                && !txtEndereco.getText().trim().isEmpty();
     }
 
     private void limparCampos() {
         txtId.setText("");
         txtNome.setText("");
-        txtCargo.setText("");
         fmtTelefone.setValue(null);
         txtEmail.setText("");
+        txtEndereco.setText("");
         txtNome.requestFocusInWindow();
     }
     
@@ -296,7 +297,6 @@ public class TelaFuncionario extends JFrame {
 
     for (JButton botao : botoes) {
         botao.setFocusPainted(false);
-        botao.setFocusable(false); 
     }
 }
     

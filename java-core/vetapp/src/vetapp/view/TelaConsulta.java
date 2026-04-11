@@ -1,26 +1,26 @@
-package view;
+package vetapp.view;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class TelaFatura extends JFrame {
+public class TelaConsulta extends JFrame {
 
     // Painéis
+    private JPanel pnlDadosConsulta;
     private JPanel pnlAcoes;
-    private JPanel pnlListagemFaturas;
-    private JPanel pnlDadosFatura;
-    
-    // Painéis
-    private JTable tblFaturas;
+    private JPanel pnlListagemConsultas;
+
+    // Tabela
+    private JTable tblConsultas;
 
     // Campos
     private JTextField txtId;
-    private JTextField txtCliente;
-    private JTextField txtServico;
-    private JTextField txtValor;
     private JTextField txtData;
-    private JTextField txtStatus;
-
+    private JTextField txtHora;
+    private JTextField txtAnimal;
+    private JTextField txtVeterinario;
+    private JTextField txtObservacao;
+    
     // Botões
     private JButton btnNovo;
     private JButton btnSalvar;
@@ -30,22 +30,22 @@ public class TelaFatura extends JFrame {
     private JButton btnLimpar;
     private JButton btnVoltar;
 
-    // Gato
+    // Peixe
     private JLabel lblFotoAnimal;
     private ImageIcon iconeSerio;
     private ImageIcon iconeFeliz;
 
-    public TelaFatura() {
+    public TelaConsulta() {
         configurarJanela();
         carregarImagens();
         criarComponentes();
         configurarEventos();
-        SwingUtilities.invokeLater(() -> txtCliente.requestFocusInWindow());
+        SwingUtilities.invokeLater(() -> txtData.requestFocusInWindow());
         setVisible(true);
     }
 
     private void configurarJanela() {
-        setTitle("Gestão de Faturas");
+        setTitle("Gestão de Consultas");
         setSize(720, 520);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -55,12 +55,12 @@ public class TelaFatura extends JFrame {
 
     private void carregarImagens() {
     iconeSerio = carregarIconeRedimensionado(
-        "C:/Users/fcesa/Documents/learning-path/java-core/vetapp/src/img/gato-serio.png",
+        "C:/Users/fcesa/Documents/learning-path/java-core/vetapp/src/img/peixe-serio.png",
         110, 160
     );
 
     iconeFeliz = carregarIconeRedimensionado(
-        "C:/Users/fcesa/Documents/learning-path/java-core/vetapp/src/img/gato-feliz.png",
+        "C:/Users/fcesa/Documents/learning-path/java-core/vetapp/src/img/peixe-feliz.png",
         110, 160
     );
 }
@@ -73,33 +73,30 @@ public class TelaFatura extends JFrame {
         return new ImageIcon(imagemRedimensionada);
     }
 
-    private void criarPainelAcoes() {
-    pnlAcoes = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 12));
-    pnlAcoes.setBorder(BorderFactory.createTitledBorder("Ações"));
-    pnlAcoes.setPreferredSize(new Dimension(680, 80));
+    private void criarComponentes() {
+    criarPainelDadosConsulta();
+    criarPainelAcoes();
+    criarPainelListagem();
 
-    btnNovo = new JButton("Novo");
-    btnSalvar = new JButton("Salvar");
-    btnBuscar = new JButton("Buscar");
-    btnAtualizar = new JButton("Atualizar");
-    btnExcluir = new JButton("Excluir");
-    btnLimpar = new JButton("Limpar");
-    btnVoltar = new JButton("Voltar");
+    JPanel pnlPrincipal = new JPanel();
+    pnlPrincipal.setLayout(new BoxLayout(pnlPrincipal, BoxLayout.Y_AXIS));
 
-    pnlAcoes.add(btnNovo);
-    pnlAcoes.add(btnSalvar);
-    pnlAcoes.add(btnBuscar);
-    pnlAcoes.add(btnAtualizar);
-    pnlAcoes.add(btnExcluir);
-    pnlAcoes.add(btnLimpar);
-    pnlAcoes.add(btnVoltar);
+    pnlDadosConsulta.setAlignmentX(Component.CENTER_ALIGNMENT);
+    pnlAcoes.setAlignmentX(Component.CENTER_ALIGNMENT);
+    pnlListagemConsultas.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-    estilizarBotoes();
-}    
-    private void criarPainelDadosFatura() {
-    pnlDadosFatura = new JPanel(new BorderLayout(10, 10));
-    pnlDadosFatura.setBorder(BorderFactory.createTitledBorder("Dados da Fatura"));
-    pnlDadosFatura.setPreferredSize(new Dimension(680, 260));
+    pnlPrincipal.add(pnlDadosConsulta);
+    pnlPrincipal.add(Box.createVerticalStrut(8));
+    pnlPrincipal.add(pnlAcoes);
+    pnlPrincipal.add(Box.createVerticalStrut(8));
+    pnlPrincipal.add(pnlListagemConsultas);
+
+    add(pnlPrincipal);
+}
+    private void criarPainelDadosConsulta() {
+    pnlDadosConsulta = new JPanel(new BorderLayout(10, 10));
+    pnlDadosConsulta.setBorder(BorderFactory.createTitledBorder("Dados da Consulta"));
+    pnlDadosConsulta.setPreferredSize(new Dimension(680, 260));
 
     JPanel pnlForm = new JPanel(new GridBagLayout());
     GridBagConstraints gbc = new GridBagConstraints();
@@ -109,31 +106,31 @@ public class TelaFatura extends JFrame {
 
     JLabel lblId = new JLabel("ID:");
     JLabel lblAuto = new JLabel("(auto)");
-    JLabel lblCliente = new JLabel("Cliente:");
-    JLabel lblServico = new JLabel("Serviço:");
-    JLabel lblValor = new JLabel("Valor:");
     JLabel lblData = new JLabel("Data:");
-    JLabel lblStatus = new JLabel("Status:");
+    JLabel lblHora = new JLabel("Hora:");
+    JLabel lblAnimal = new JLabel("Animal:");
+    JLabel lblVeterinario = new JLabel("Veterinário:");
+    JLabel lblObservacao = new JLabel("Observação:");
 
     txtId = new JTextField(6);
     txtId.setEditable(false);
     txtId.setFocusable(false);
     txtId.setPreferredSize(new Dimension(60, 25));
 
-    txtCliente = new JTextField(18);
-    txtCliente.setPreferredSize(new Dimension(180, 25));
-
-    txtServico = new JTextField(18);
-    txtServico.setPreferredSize(new Dimension(180, 25));
-
-    txtValor = new JTextField(18);
-    txtValor.setPreferredSize(new Dimension(180, 25));
-
     txtData = new JTextField(18);
     txtData.setPreferredSize(new Dimension(180, 25));
 
-    txtStatus = new JTextField(18);
-    txtStatus.setPreferredSize(new Dimension(180, 25));
+    txtHora = new JTextField(18);
+    txtHora.setPreferredSize(new Dimension(180, 25));
+
+    txtAnimal = new JTextField(18);
+    txtAnimal.setPreferredSize(new Dimension(180, 25));
+
+    txtVeterinario = new JTextField(18);
+    txtVeterinario.setPreferredSize(new Dimension(180, 25));
+
+    txtObservacao = new JTextField(18);
+    txtObservacao.setPreferredSize(new Dimension(180, 25));
 
     // linha 1
     gbc.gridx = 0;
@@ -151,51 +148,51 @@ public class TelaFatura extends JFrame {
     gbc.gridx = 0;
     gbc.gridy = 1;
     gbc.gridwidth = 1;
-    pnlForm.add(lblCliente, gbc);
-
-    gbc.gridx = 1;
-    gbc.gridwidth = 2;
-    pnlForm.add(txtCliente, gbc);
-
-    // linha 3
-    gbc.gridx = 0;
-    gbc.gridy = 2;
-    gbc.gridwidth = 1;
-    pnlForm.add(lblServico, gbc);
-
-    gbc.gridx = 1;
-    gbc.gridwidth = 2;
-    pnlForm.add(txtServico, gbc);
-
-    // linha 4
-    gbc.gridx = 0;
-    gbc.gridy = 3;
-    gbc.gridwidth = 1;
-    pnlForm.add(lblValor, gbc);
-
-    gbc.gridx = 1;
-    gbc.gridwidth = 2;
-    pnlForm.add(txtValor, gbc);
-
-    // linha 5
-    gbc.gridx = 0;
-    gbc.gridy = 4;
-    gbc.gridwidth = 1;
     pnlForm.add(lblData, gbc);
 
     gbc.gridx = 1;
     gbc.gridwidth = 2;
     pnlForm.add(txtData, gbc);
 
+    // linha 3
+    gbc.gridx = 0;
+    gbc.gridy = 2;
+    gbc.gridwidth = 1;
+    pnlForm.add(lblHora, gbc);
+
+    gbc.gridx = 1;
+    gbc.gridwidth = 2;
+    pnlForm.add(txtHora, gbc);
+
+    // linha 4
+    gbc.gridx = 0;
+    gbc.gridy = 3;
+    gbc.gridwidth = 1;
+    pnlForm.add(lblAnimal, gbc);
+
+    gbc.gridx = 1;
+    gbc.gridwidth = 2;
+    pnlForm.add(txtAnimal, gbc);
+
+    // linha 5
+    gbc.gridx = 0;
+    gbc.gridy = 4;
+    gbc.gridwidth = 1;
+    pnlForm.add(lblVeterinario, gbc);
+
+    gbc.gridx = 1;
+    gbc.gridwidth = 2;
+    pnlForm.add(txtVeterinario, gbc);
+
     // linha 6
     gbc.gridx = 0;
     gbc.gridy = 5;
     gbc.gridwidth = 1;
-    pnlForm.add(lblStatus, gbc);
+    pnlForm.add(lblObservacao, gbc);
 
     gbc.gridx = 1;
     gbc.gridwidth = 2;
-    pnlForm.add(txtStatus, gbc);
+    pnlForm.add(txtObservacao, gbc);
 
     JPanel pnlImagem = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
     lblFotoAnimal = new JLabel();
@@ -204,55 +201,50 @@ public class TelaFatura extends JFrame {
     lblFotoAnimal.setFocusable(false);
     pnlImagem.add(lblFotoAnimal);
 
-    pnlDadosFatura.add(pnlForm, BorderLayout.CENTER);
-    pnlDadosFatura.add(pnlImagem, BorderLayout.EAST);
+    pnlDadosConsulta.add(pnlForm, BorderLayout.CENTER);
+    pnlDadosConsulta.add(pnlImagem, BorderLayout.EAST);
 }
-    
-    private boolean camposPreenchidos() {
-    return !txtCliente.getText().trim().isEmpty()
-            && !txtServico.getText().trim().isEmpty()
-            && !txtValor.getText().trim().isEmpty()
-            && !txtData.getText().trim().isEmpty()
-            && !txtStatus.getText().trim().isEmpty();
-}
-    
-    private void criarComponentes() {
-    criarPainelDadosFatura();
-    criarPainelAcoes();
-    criarPainelListagem();
+   
+    private void criarPainelAcoes() {
+        pnlAcoes = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 12));
+        pnlAcoes.setBorder(BorderFactory.createTitledBorder("Ações"));
+        pnlAcoes.setPreferredSize(new Dimension(680, 80));
 
-    JPanel pnlPrincipal = new JPanel();
-    pnlPrincipal.setLayout(new BoxLayout(pnlPrincipal, BoxLayout.Y_AXIS));
+        btnNovo = new JButton("Novo");
+        btnSalvar = new JButton("Salvar");
+        btnBuscar = new JButton("Buscar");
+        btnAtualizar = new JButton("Atualizar");
+        btnExcluir = new JButton("Excluir");
+        btnLimpar = new JButton("Limpar");
+        btnVoltar = new JButton("Voltar");
 
-    pnlDadosFatura.setAlignmentX(Component.CENTER_ALIGNMENT);
-    pnlAcoes.setAlignmentX(Component.CENTER_ALIGNMENT);
-    pnlListagemFaturas.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-    pnlPrincipal.add(pnlDadosFatura);
-    pnlPrincipal.add(Box.createVerticalStrut(8));
-    pnlPrincipal.add(pnlAcoes);
-    pnlPrincipal.add(Box.createVerticalStrut(8));
-    pnlPrincipal.add(pnlListagemFaturas);
-
-    add(pnlPrincipal);
-}
+        pnlAcoes.add(btnNovo);
+        pnlAcoes.add(btnSalvar);
+        pnlAcoes.add(btnBuscar);
+        pnlAcoes.add(btnAtualizar);
+        pnlAcoes.add(btnExcluir);
+        pnlAcoes.add(btnLimpar);
+        pnlAcoes.add(btnVoltar);
+        
+        estilizarBotoes();
+    }
 
     private void criarPainelListagem() {
-    pnlListagemFaturas = new JPanel(new BorderLayout());
-    pnlListagemFaturas.setBorder(BorderFactory.createTitledBorder("Listagem de Faturas"));
-    pnlListagemFaturas.setPreferredSize(new Dimension(680, 150));
+    pnlListagemConsultas = new JPanel(new BorderLayout());
+    pnlListagemConsultas.setBorder(BorderFactory.createTitledBorder("Listagem de Consultas"));
+    pnlListagemConsultas.setPreferredSize(new Dimension(680, 150));
 
-    String[] colunas = {"ID", "Cliente", "Serviço", "Valor", "Status"};
+    String[] colunas = {"ID", "Data", "Hora", "Animal", "Veterinário"};
     Object[][] dados = {
-        {1, "Ana Souza", "Consulta", "80,00 €", "Paga"},
-        {2, "Carlos Lima", "Vacinação", "45,00 €", "Pendente"}
+        {1, "10/04/2026", "09:00", "Rex", "Dr. Marcos"},
+        {2, "11/04/2026", "14:30", "Mimi", "Dra. Luciana"}
     };
 
-    tblFaturas = new JTable(dados, colunas);
-    JScrollPane scroll = new JScrollPane(tblFaturas);
+    tblConsultas = new JTable(dados, colunas);
+    JScrollPane scroll = new JScrollPane(tblConsultas);
 
-    pnlListagemFaturas.add(scroll, BorderLayout.CENTER);
-}
+    pnlListagemConsultas.add(scroll, BorderLayout.CENTER);
+}  
    
     private void configurarEventos() {
         btnVoltar.addActionListener(e -> {
@@ -269,7 +261,7 @@ public class TelaFatura extends JFrame {
 
         btnSalvar.addActionListener(e -> {
             if (camposPreenchidos()) {
-                JOptionPane.showMessageDialog(this, "Fatura salva com sucesso!");
+                JOptionPane.showMessageDialog(this, "Consulta salva com sucesso!");
                 alternarHumor(true);
             } else {
                 JOptionPane.showMessageDialog(this, "Preencha todos os campos.");
@@ -278,14 +270,22 @@ public class TelaFatura extends JFrame {
         });
     }
 
+    private boolean camposPreenchidos() {
+    return !txtData.getText().trim().isEmpty()
+            && !txtHora.getText().trim().isEmpty()
+            && !txtAnimal.getText().trim().isEmpty()
+            && !txtVeterinario.getText().trim().isEmpty()
+            && !txtObservacao.getText().trim().isEmpty();
+    }
+
     private void limparCampos() {
     txtId.setText("");
-    txtCliente.setText("");
-    txtServico.setText("");
-    txtValor.setText("");
     txtData.setText("");
-    txtStatus.setText("");
-    txtCliente.requestFocusInWindow();
+    txtHora.setText("");
+    txtAnimal.setText("");
+    txtVeterinario.setText("");
+    txtObservacao.setText("");
+    txtData.requestFocusInWindow();
 }
      
    private void estilizarBotoes() {
