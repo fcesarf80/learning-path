@@ -13,11 +13,12 @@ public class Cliente {
     }
     
     // Construtor completo
-    public Cliente(String nome, String telefone, String email, String endereco) {
+    public Cliente(int idCliente, String nome, String telefone, String email, String endereco) {
+    this.idCliente = idCliente;
     this.nome = nome;
     this.telefone = telefone;
     this.email = email;
-    this.endereco = endereco; // Adicione esta linha
+    this.endereco = endereco;
 }
 
 
@@ -66,4 +67,10 @@ public class Cliente {
     public void setEndereco(String endereco) {
     this.endereco = endereco;
     }
+    
+    @Override
+public String toString() {
+    return nome;
+}
+
 }

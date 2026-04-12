@@ -44,7 +44,7 @@ public class AnimalDAO {
 
     public List<Animal> listar() {
         List<Animal> lista = new ArrayList<>();
-        String sql = "SELECT * FROM animal ORDER BY id_animal";
+        String sql = "SELECT * FROM animal ORDER BY id_animal DESC";
 
         try (Connection conn = Conexao.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql);
