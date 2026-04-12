@@ -25,7 +25,7 @@ public class TelaConsulta extends JFrame {
     private JFormattedTextField txtHora;
     private JComboBox<Animal> cbAnimal;
     private JComboBox<Funcionario> cbVeterinario;
-    private JTextField txtObservacao;
+    private JTextArea txtObservacao;
 
     private JButton btnNovo;
     private JButton btnSalvar;
@@ -130,7 +130,10 @@ public class TelaConsulta extends JFrame {
         } catch (java.text.ParseException e) {
             txtData = new JFormattedTextField();
         }
-        txtData.setPreferredSize(new Dimension(180, 25));
+        txtHora.setPreferredSize(new Dimension(180, 25));
+        txtHora.setToolTipText("Formato: HH:MM:SS");
+
+
 
         try {
             txtHora = new JFormattedTextField(new javax.swing.text.MaskFormatter("##:##:##"));
@@ -145,13 +148,17 @@ public class TelaConsulta extends JFrame {
         cbVeterinario = new JComboBox<>();
         cbVeterinario.setPreferredSize(new Dimension(180, 25));
 
-        txtObservacao = new JTextField(18);
-        txtObservacao.setPreferredSize(new Dimension(180, 25));
+        txtObservacao = new JTextArea(3, 18);
+        txtObservacao.setLineWrap(true);
+        txtObservacao.setWrapStyleWord(true);
+
+        JScrollPane scrollObservacao = new JScrollPane(txtObservacao);
+        scrollObservacao.setPreferredSize(new Dimension(180, 60));
 
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 1;
-        pnlForm.add(lblId, gbc);
+        pnlForm.add(scrollObservacao, gbc);
 
         gbc.gridx = 1;
         pnlForm.add(txtId, gbc);
@@ -350,7 +357,7 @@ public class TelaConsulta extends JFrame {
                     limparCampos();
                     alternarHumor(true);
                 } else {
-                    JOptionPane.showMessageDialog(this, "Erro ao salvar consulta.");
+                    JOptionPane.showMessageDialog(this, "Não foi possível salvar a consulta.");
                     alternarHumor(false);
                 }
 
