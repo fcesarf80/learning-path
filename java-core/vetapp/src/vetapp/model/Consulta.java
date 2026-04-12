@@ -4,18 +4,18 @@ public class Consulta {
 
     private int idConsulta;
     private String dataConsulta;
-    private String descricao;
-    private double valor;
+    private String horaConsulta;
+    private String observacao;
     private int idAnimal;
     private int idFuncionario;
 
     public Consulta() {
     }
 
-    public Consulta(String dataConsulta, String descricao, double valor, int idAnimal, int idFuncionario) {
+    public Consulta(String dataConsulta, String horaConsulta, String observacao, int idAnimal, int idFuncionario) {
         this.dataConsulta = dataConsulta;
-        this.descricao = descricao;
-        this.valor = valor;
+        this.horaConsulta = horaConsulta;
+        this.observacao = observacao;
         this.idAnimal = idAnimal;
         this.idFuncionario = idFuncionario;
     }
@@ -36,20 +36,20 @@ public class Consulta {
         this.dataConsulta = dataConsulta;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getHoraConsulta() {
+        return horaConsulta;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setHoraConsulta(String horaConsulta) {
+        this.horaConsulta = horaConsulta;
     }
 
-    public double getValor() {
-        return valor;
+    public String getObservacao() {
+        return observacao;
     }
 
-    public void setValor(double valor) {
-        this.valor = valor;
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
     }
 
     public int getIdAnimal() {

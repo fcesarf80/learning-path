@@ -86,4 +86,9 @@ public class Animal {
     public void setNomeTutor(String nomeTutor) {
         this.nomeTutor = nomeTutor;
     }
+    
+    @Override
+public String toString() {
+    return nome;
+}
 }
