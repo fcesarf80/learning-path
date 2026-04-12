@@ -1,7 +1,11 @@
 package vetapp.view;
 
+import vetapp.dao.ClienteDAO;
+import vetapp.model.Cliente;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.util.List;
 
 public class TelaCliente extends JFrame {
 
@@ -33,15 +37,31 @@ public class TelaCliente extends JFrame {
     private JLabel lblFotoAnimal;
     private ImageIcon iconeSerio;
     private ImageIcon iconeFeliz;
+    
+    private Cliente obterClienteDosCampos() {
+    Cliente cliente = new Cliente();
+
+    if (!txtId.getText().trim().isEmpty()) {
+        cliente.setIdCliente(Integer.parseInt(txtId.getText().trim()));
+    }
+
+    cliente.setNome(txtNome.getText().trim());
+    cliente.setTelefone(fmtTelefone.getText().trim());
+    cliente.setEmail(txtEmail.getText().trim());
+    cliente.setEndereco(txtEndereco.getText().trim());
+
+    return cliente;
+}
 
     public TelaCliente() {
-        configurarJanela();
-        carregarImagens();
-        criarComponentes();
-        configurarEventos();
-        SwingUtilities.invokeLater(() -> txtNome.requestFocusInWindow());
-        setVisible(true);
-    }
+    configurarJanela();
+    carregarImagens();
+    criarComponentes();
+    configurarEventos();
+    carregarTabela();
+    SwingUtilities.invokeLater(() -> txtNome.requestFocusInWindow());
+    setVisible(true);
+}
 
     private void configurarJanela() {
         setTitle("Gestão de Clientes");
@@ -225,61 +245,217 @@ public class TelaCliente extends JFrame {
     }
 
     private void criarPainelListagem() {
-        pnlListagemClientes = new JPanel(new BorderLayout());
-        pnlListagemClientes.setBorder(BorderFactory.createTitledBorder("Listagem de Clientes"));
-        pnlListagemClientes.setPreferredSize(new Dimension(680, 150));
+    pnlListagemClientes = new JPanel(new BorderLayout());
+    pnlListagemClientes.setBorder(BorderFactory.createTitledBorder("Listagem de Clientes"));
+    pnlListagemClientes.setPreferredSize(new Dimension(680, 150));
 
-        String[] colunas = {"ID", "Nome", "Telefone", "E-mail", "Endereço"};
-        Object[][] dados = {
-            {1, "Ana Souza", "(11) 99999-1111", "ana@email.com", "Rua A, 100"},
-            {2, "Carlos Lima", "(21) 98888-2222", "carlos@email.com", "Av. Central, 250"}
-        };
+    String[] colunas = {"ID", "Nome", "Telefone", "E-mail", "Endereço"};
 
-        tblClientes = new JTable(dados, colunas);
-        JScrollPane scroll = new JScrollPane(tblClientes);
+    DefaultTableModel modelo = new DefaultTableModel(colunas, 0) {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    };
 
-        pnlListagemClientes.add(scroll, BorderLayout.CENTER);
+    tblClientes = new JTable(modelo);
+    JScrollPane scroll = new JScrollPane(tblClientes);
+
+    pnlListagemClientes.add(scroll, BorderLayout.CENTER);
+}
+
+    private void carregarTabela() {
+    DefaultTableModel modelo = (DefaultTableModel) tblClientes.getModel();
+    modelo.setRowCount(0);
+
+    ClienteDAO dao = new ClienteDAO();
+    List<Cliente> lista = dao.listar();
+
+    for (Cliente cliente : lista) {
+        modelo.addRow(new Object[]{
+            cliente.getIdCliente(),
+            cliente.getNome(),
+            cliente.getTelefone(),
+            cliente.getEmail(),
+            cliente.getEndereco()
+        });
     }
-
+}
+    
     private void configurarEventos() {
-        btnVoltar.addActionListener(e -> {
-            new TelaPrincipal().setVisible(true);
-            dispose();
-        });
 
-        btnLimpar.addActionListener(e -> limparCampos());
+    btnVoltar.addActionListener(e -> {
+        new TelaPrincipal().setVisible(true);
+        dispose();
+    });
 
-        btnNovo.addActionListener(e -> {
-            limparCampos();
+    btnLimpar.addActionListener(e -> limparCampos());
+
+    btnNovo.addActionListener(e -> {
+        limparCampos();
+        alternarHumor(false);
+    });
+
+    btnSalvar.addActionListener(e -> {
+
+        if (!camposPreenchidos()) {
+            JOptionPane.showMessageDialog(this, "Preencha todos os campos.");
             alternarHumor(false);
-        });
 
-        btnSalvar.addActionListener(e -> {
-            if (camposPreenchidos()) {
+        } else if (!emailValido(txtEmail.getText())) {
+            JOptionPane.showMessageDialog(this, "E-mail inválido.");
+            alternarHumor(false);
+
+        } else {
+            Cliente cliente = obterClienteDosCampos();
+            ClienteDAO dao = new ClienteDAO();
+
+            boolean sucesso = dao.inserir(cliente);
+
+            if (sucesso) {
                 JOptionPane.showMessageDialog(this, "Cliente salvo com sucesso!");
+                carregarTabela();
+                limparCampos();
                 alternarHumor(true);
             } else {
-                JOptionPane.showMessageDialog(this, "Preencha todos os campos.");
+                JOptionPane.showMessageDialog(this, "Erro ao salvar cliente.");
                 alternarHumor(false);
             }
-        });
+        }
+    });
+
+    btnAtualizar.addActionListener(e -> {
+
+        if (txtId.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Selecione um cliente na tabela para atualizar.");
+            alternarHumor(false);
+
+        } else if (!camposPreenchidos()) {
+            JOptionPane.showMessageDialog(this, "Preencha todos os campos.");
+            alternarHumor(false);
+
+        } else if (!emailValido(txtEmail.getText())) {
+            JOptionPane.showMessageDialog(this, "E-mail inválido.");
+            alternarHumor(false);
+
+        } else {
+            Cliente cliente = obterClienteDosCampos();
+            ClienteDAO dao = new ClienteDAO();
+
+            boolean sucesso = dao.atualizar(cliente);
+
+            if (sucesso) {
+                JOptionPane.showMessageDialog(this, "Cliente atualizado com sucesso!");
+                carregarTabela();
+                limparCampos();
+                alternarHumor(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "Erro ao atualizar cliente.");
+                alternarHumor(false);
+            }
+        }
+    });
+
+    tblClientes.getSelectionModel().addListSelectionListener(e -> {
+        if (!e.getValueIsAdjusting()) {
+            carregarCamposDaTabela();
+        }
+    });
+    
+    btnExcluir.addActionListener(e -> {
+
+    if (txtId.getText().trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Selecione um cliente na tabela para excluir.");
+        alternarHumor(false);
+
+    } else {
+        int confirmacao = JOptionPane.showConfirmDialog(
+                this,
+                "Deseja realmente excluir este cliente?",
+                "Confirmar exclusão",
+                JOptionPane.YES_NO_OPTION
+        );
+
+        if (confirmacao == JOptionPane.YES_OPTION) {
+            int idCliente = Integer.parseInt(txtId.getText().trim());
+
+            ClienteDAO dao = new ClienteDAO();
+            boolean sucesso = dao.deletar(idCliente);
+
+            if (sucesso) {
+                JOptionPane.showMessageDialog(this, "Cliente excluído com sucesso!");
+                carregarTabela();
+                limparCampos();
+                alternarHumor(true);
+                } else {
+                JOptionPane.showMessageDialog(
+                        this,
+            "Não foi possível excluir o cliente.\nEle pode estar vinculado a um animal ou outro registro do sistema."
+    );
+                alternarHumor(false);
+}
+        }
     }
+});
+    
+    btnBuscar.addActionListener(e -> {
+
+    if (txtId.getText().trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Informe ou selecione o ID do cliente para buscar.");
+        alternarHumor(false);
+        return;
+    }
+
+    try {
+        int idCliente = Integer.parseInt(txtId.getText().trim());
+
+        ClienteDAO dao = new ClienteDAO();
+        Cliente cliente = dao.buscarPorId(idCliente);
+
+        if (cliente != null) {
+            preencherCamposComCliente(cliente);
+            JOptionPane.showMessageDialog(this, "Cliente encontrado!");
+            alternarHumor(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Cliente não encontrado.");
+            alternarHumor(false);
+        }
+
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "ID inválido.");
+        alternarHumor(false);
+    }
+});
+}
 
     private boolean camposPreenchidos() {
-        return !txtNome.getText().trim().isEmpty()
-                && !fmtTelefone.getText().trim().isEmpty()
-                && !txtEmail.getText().trim().isEmpty()
-                && !txtEndereco.getText().trim().isEmpty();
-    }
+    String telefone = fmtTelefone.getText()
+            .replace("(", "")
+            .replace(")", "")
+            .replace("-", "")
+            .replace(" ", "")
+            .replace("_", "")
+            .trim();
+
+    return !txtNome.getText().trim().isEmpty()
+            && !telefone.isEmpty()
+            && !txtEmail.getText().trim().isEmpty()
+            && !txtEndereco.getText().trim().isEmpty();
+}
+    
+    private boolean emailValido(String email) {
+    return email.contains("@") && email.contains(".");
+}
 
     private void limparCampos() {
-        txtId.setText("");
-        txtNome.setText("");
-        fmtTelefone.setValue(null);
-        txtEmail.setText("");
-        txtEndereco.setText("");
-        txtNome.requestFocusInWindow();
-    }
+    txtId.setText("");
+    txtNome.setText("");
+    fmtTelefone.setValue(null);
+    txtEmail.setText("");
+    txtEndereco.setText("");
+    tblClientes.clearSelection();
+    txtNome.requestFocusInWindow();
+}
     
    private void estilizarBotoes() {
     btnNovo.setBackground(new Color(102, 255, 255));
@@ -309,6 +485,26 @@ public class TelaCliente extends JFrame {
         timer.start();
     }
     
+}
+    
+    private void carregarCamposDaTabela() {
+    int linhaSelecionada = tblClientes.getSelectedRow();
+
+    if (linhaSelecionada != -1) {
+        txtId.setText(tblClientes.getValueAt(linhaSelecionada, 0).toString());
+        txtNome.setText(tblClientes.getValueAt(linhaSelecionada, 1).toString());
+        fmtTelefone.setText(tblClientes.getValueAt(linhaSelecionada, 2).toString());
+        txtEmail.setText(tblClientes.getValueAt(linhaSelecionada, 3).toString());
+        txtEndereco.setText(tblClientes.getValueAt(linhaSelecionada, 4).toString());
+    }
+}
+    
+    private void preencherCamposComCliente(Cliente cliente) {
+    txtId.setText(String.valueOf(cliente.getIdCliente()));
+    txtNome.setText(cliente.getNome());
+    fmtTelefone.setText(cliente.getTelefone());
+    txtEmail.setText(cliente.getEmail());
+    txtEndereco.setText(cliente.getEndereco());
 }
     
 }

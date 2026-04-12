@@ -6,15 +6,19 @@ public class Animal {
     private String nome;
     private String especie;
     private String raca;
+    private String sexo;
+    private String dataNascimento;
     private int idCliente;
 
     public Animal() {
     }
 
-    public Animal(String nome, String especie, String raca, int idCliente) {
+    public Animal(String nome, String especie, String raca, String sexo, String dataNascimento, int idCliente) {
         this.nome = nome;
         this.especie = especie;
         this.raca = raca;
+        this.sexo = sexo;
+        this.dataNascimento = dataNascimento;
         this.idCliente = idCliente;
     }
 
@@ -48,6 +52,22 @@ public class Animal {
 
     public void setRaca(String raca) {
         this.raca = raca;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    public String getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(String dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
     public int getIdCliente() {

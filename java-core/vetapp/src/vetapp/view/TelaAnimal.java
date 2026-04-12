@@ -18,7 +18,8 @@ public class TelaAnimal extends JFrame {
     private JTextField txtNomeAnimal;
     private JTextField txtEspecie;
     private JTextField txtRaca;
-    private JTextField txtIdade;
+    private JTextField txtSexo;
+    private JTextField txtDataNascimento;
     private JTextField txtTutor;
 
     // Botões
@@ -46,7 +47,7 @@ public class TelaAnimal extends JFrame {
 
     private void configurarJanela() {
         setTitle("Gestão de Animais");
-        setSize(720, 520);
+        setSize(720, 560);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -97,7 +98,7 @@ public class TelaAnimal extends JFrame {
     private void criarPainelDadosAnimal() {
         pnlDadosAnimal = new JPanel(new BorderLayout(10, 10));
         pnlDadosAnimal.setBorder(BorderFactory.createTitledBorder("Dados do Animal"));
-        pnlDadosAnimal.setPreferredSize(new Dimension(680, 260));
+        pnlDadosAnimal.setPreferredSize(new Dimension(680, 290));
 
         JPanel pnlForm = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -110,7 +111,8 @@ public class TelaAnimal extends JFrame {
         JLabel lblNomeAnimal = new JLabel("Nome:");
         JLabel lblEspecie = new JLabel("Espécie:");
         JLabel lblRaca = new JLabel("Raça:");
-        JLabel lblIdade = new JLabel("Idade:");
+        JLabel lblSexo = new JLabel("Sexo:");
+        JLabel lblDataNascimento = new JLabel("Data Nasc.:");
         JLabel lblTutor = new JLabel("Tutor:");
 
         txtId = new JTextField(6);
@@ -127,8 +129,11 @@ public class TelaAnimal extends JFrame {
         txtRaca = new JTextField(18);
         txtRaca.setPreferredSize(new Dimension(180, 25));
 
-        txtIdade = new JTextField(18);
-        txtIdade.setPreferredSize(new Dimension(180, 25));
+        txtSexo = new JTextField(18);
+        txtSexo.setPreferredSize(new Dimension(180, 25));
+
+        txtDataNascimento = new JTextField(18);
+        txtDataNascimento.setPreferredSize(new Dimension(180, 25));
 
         txtTutor = new JTextField(18);
         txtTutor.setPreferredSize(new Dimension(180, 25));
@@ -179,15 +184,25 @@ public class TelaAnimal extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 4;
         gbc.gridwidth = 1;
-        pnlForm.add(lblIdade, gbc);
+        pnlForm.add(lblSexo, gbc);
 
         gbc.gridx = 1;
         gbc.gridwidth = 2;
-        pnlForm.add(txtIdade, gbc);
+        pnlForm.add(txtSexo, gbc);
 
         // linha 6
         gbc.gridx = 0;
         gbc.gridy = 5;
+        gbc.gridwidth = 1;
+        pnlForm.add(lblDataNascimento, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridwidth = 2;
+        pnlForm.add(txtDataNascimento, gbc);
+
+        // linha 7
+        gbc.gridx = 0;
+        gbc.gridy = 6;
         gbc.gridwidth = 1;
         pnlForm.add(lblTutor, gbc);
 
@@ -275,7 +290,8 @@ public class TelaAnimal extends JFrame {
         return !txtNomeAnimal.getText().trim().isEmpty()
                 && !txtEspecie.getText().trim().isEmpty()
                 && !txtRaca.getText().trim().isEmpty()
-                && !txtIdade.getText().trim().isEmpty()
+                && !txtSexo.getText().trim().isEmpty()
+                && !txtDataNascimento.getText().trim().isEmpty()
                 && !txtTutor.getText().trim().isEmpty();
     }
 
@@ -284,7 +300,8 @@ public class TelaAnimal extends JFrame {
         txtNomeAnimal.setText("");
         txtEspecie.setText("");
         txtRaca.setText("");
-        txtIdade.setText("");
+        txtSexo.setText("");
+        txtDataNascimento.setText("");
         txtTutor.setText("");
         txtNomeAnimal.requestFocusInWindow();
     }
