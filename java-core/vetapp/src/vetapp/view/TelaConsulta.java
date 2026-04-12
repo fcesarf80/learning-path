@@ -9,6 +9,7 @@ import vetapp.model.Funcionario;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class TelaConsulta extends JFrame {
     private JFormattedTextField txtData;
     private JFormattedTextField txtHora;
     private JComboBox<Animal> cbAnimal;
-    private JComboBox<Funcionario> cbVeterinario;
+    private JComboBox<Funcionario> cbFuncionario;
     private JTextArea txtObservacao;
 
     private JButton btnNovo;
@@ -102,125 +103,143 @@ public class TelaConsulta extends JFrame {
     }
 
     private void criarPainelDadosConsulta() {
-        pnlDadosConsulta = new JPanel(new BorderLayout(10, 10));
-        pnlDadosConsulta.setBorder(BorderFactory.createTitledBorder("Dados da Consulta"));
-        pnlDadosConsulta.setPreferredSize(new Dimension(680, 260));
+    pnlDadosConsulta = new JPanel(new BorderLayout(10, 10));
+    pnlDadosConsulta.setBorder(BorderFactory.createTitledBorder("Dados da Consulta"));
+    pnlDadosConsulta.setPreferredSize(new Dimension(680, 260));
 
-        JPanel pnlForm = new JPanel(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(5, 5, 5, 5);
-        gbc.anchor = GridBagConstraints.WEST;
-        gbc.fill = GridBagConstraints.NONE;
+    JPanel pnlForm = new JPanel(new GridBagLayout());
+    GridBagConstraints gbc = new GridBagConstraints();
+    gbc.insets = new Insets(5, 5, 5, 5);
+    gbc.anchor = GridBagConstraints.WEST;
+    gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        JLabel lblId = new JLabel("ID:");
-        JLabel lblAuto = new JLabel("(auto)");
-        JLabel lblData = new JLabel("Data:");
-        JLabel lblHora = new JLabel("Hora:");
-        JLabel lblAnimal = new JLabel("Animal:");
-        JLabel lblVeterinario = new JLabel("Veterinário:");
-        JLabel lblObservacao = new JLabel("Observação:");
+    JLabel lblId = new JLabel("ID:");
+    JLabel lblAuto = new JLabel("(auto)");
+    JLabel lblData = new JLabel("Data:");
+    JLabel lblHora = new JLabel("Hora:");
+    JLabel lblAnimal = new JLabel("Animal:");
+    JLabel lblVeterinario = new JLabel("Veterinário:");
+    JLabel lblObservacao = new JLabel("Observação:");
 
-        txtId = new JTextField(6);
-        txtId.setEditable(false);
-        txtId.setFocusable(false);
-        txtId.setPreferredSize(new Dimension(60, 25));
+    txtId = new JTextField(6);
+    txtId.setEditable(false);
+    txtId.setFocusable(false);
 
-        try {
-            txtData = new JFormattedTextField(new javax.swing.text.MaskFormatter("####-##-##"));
-        } catch (java.text.ParseException e) {
-            txtData = new JFormattedTextField();
-        }
-        txtHora.setPreferredSize(new Dimension(180, 25));
-        txtHora.setToolTipText("Formato: HH:MM:SS");
-
-
-
-        try {
-            txtHora = new JFormattedTextField(new javax.swing.text.MaskFormatter("##:##:##"));
-        } catch (java.text.ParseException e) {
-            txtHora = new JFormattedTextField();
-        }
-        txtHora.setPreferredSize(new Dimension(180, 25));
-
-        cbAnimal = new JComboBox<>();
-        cbAnimal.setPreferredSize(new Dimension(180, 25));
-
-        cbVeterinario = new JComboBox<>();
-        cbVeterinario.setPreferredSize(new Dimension(180, 25));
-
-        txtObservacao = new JTextArea(3, 18);
-        txtObservacao.setLineWrap(true);
-        txtObservacao.setWrapStyleWord(true);
-
-        JScrollPane scrollObservacao = new JScrollPane(txtObservacao);
-        scrollObservacao.setPreferredSize(new Dimension(180, 60));
-
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.gridwidth = 1;
-        pnlForm.add(scrollObservacao, gbc);
-
-        gbc.gridx = 1;
-        pnlForm.add(txtId, gbc);
-
-        gbc.gridx = 2;
-        pnlForm.add(lblAuto, gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.gridwidth = 1;
-        pnlForm.add(lblData, gbc);
-
-        gbc.gridx = 1;
-        gbc.gridwidth = 2;
-        pnlForm.add(txtData, gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        gbc.gridwidth = 1;
-        pnlForm.add(lblHora, gbc);
-
-        gbc.gridx = 1;
-        gbc.gridwidth = 2;
-        pnlForm.add(txtHora, gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 3;
-        gbc.gridwidth = 1;
-        pnlForm.add(lblAnimal, gbc);
-
-        gbc.gridx = 1;
-        gbc.gridwidth = 2;
-        pnlForm.add(cbAnimal, gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 4;
-        gbc.gridwidth = 1;
-        pnlForm.add(lblVeterinario, gbc);
-
-        gbc.gridx = 1;
-        gbc.gridwidth = 2;
-        pnlForm.add(cbVeterinario, gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 5;
-        gbc.gridwidth = 1;
-        pnlForm.add(lblObservacao, gbc);
-
-        gbc.gridx = 1;
-        gbc.gridwidth = 2;
-        pnlForm.add(txtObservacao, gbc);
-
-        JPanel pnlImagem = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        lblFotoAnimal = new JLabel();
-        lblFotoAnimal.setIcon(iconeSerio);
-        lblFotoAnimal.setPreferredSize(new Dimension(110, 160));
-        lblFotoAnimal.setFocusable(false);
-        pnlImagem.add(lblFotoAnimal);
-
-        pnlDadosConsulta.add(pnlForm, BorderLayout.CENTER);
-        pnlDadosConsulta.add(pnlImagem, BorderLayout.EAST);
+    try {
+        txtData = new JFormattedTextField(new javax.swing.text.MaskFormatter("####-##-##"));
+    } catch (java.text.ParseException e) {
+        txtData = new JFormattedTextField();
     }
+    txtData.setColumns(10);
+    txtData.setToolTipText("Formato: YYYY-MM-DD");
+
+    try {
+        txtHora = new JFormattedTextField(new javax.swing.text.MaskFormatter("##:##:##"));
+    } catch (java.text.ParseException e) {
+        txtHora = new JFormattedTextField();
+    }
+    txtHora.setColumns(8);
+    txtHora.setToolTipText("Formato: HH:MM:SS");
+
+    cbAnimal = new JComboBox<>();
+    cbFuncionario = new JComboBox<>();
+    cbAnimal.setPreferredSize(new Dimension(180, 25));
+    cbFuncionario.setPreferredSize(new Dimension(180, 25));
+
+    txtObservacao = new JTextArea(3, 18);
+    txtObservacao.setLineWrap(true);
+    txtObservacao.setWrapStyleWord(true);
+
+    JScrollPane scrollObservacao = new JScrollPane(txtObservacao);
+    scrollObservacao.setPreferredSize(new Dimension(180, 60));
+
+    // linha 1 - ID
+    gbc.gridx = 0;
+    gbc.gridy = 0;
+    gbc.gridwidth = 1;
+    gbc.weightx = 0;
+    pnlForm.add(lblId, gbc);
+
+    gbc.gridx = 1;
+    gbc.weightx = 0;
+    pnlForm.add(txtId, gbc);
+
+    gbc.gridx = 2;
+    gbc.weightx = 0;
+    pnlForm.add(lblAuto, gbc);
+
+    // linha 2 - Data
+    gbc.gridx = 0;
+    gbc.gridy = 1;
+    gbc.gridwidth = 1;
+    gbc.weightx = 0;
+    pnlForm.add(lblData, gbc);
+
+    gbc.gridx = 1;
+    gbc.gridwidth = 2;
+    gbc.weightx = 1.0;
+    pnlForm.add(txtData, gbc);
+
+    // linha 3 - Hora
+    gbc.gridx = 0;
+    gbc.gridy = 2;
+    gbc.gridwidth = 1;
+    gbc.weightx = 0;
+    pnlForm.add(lblHora, gbc);
+
+    gbc.gridx = 1;
+    gbc.gridwidth = 2;
+    gbc.weightx = 1.0;
+    pnlForm.add(txtHora, gbc);
+
+    // linha 4 - Animal
+    gbc.gridx = 0;
+    gbc.gridy = 3;
+    gbc.gridwidth = 1;
+    gbc.weightx = 0;
+    pnlForm.add(lblAnimal, gbc);
+
+    gbc.gridx = 1;
+    gbc.gridwidth = 2;
+    gbc.weightx = 1.0;
+    pnlForm.add(cbAnimal, gbc);
+
+    // linha 5 - Veterinário
+    gbc.gridx = 0;
+    gbc.gridy = 4;
+    gbc.gridwidth = 1;
+    gbc.weightx = 0;
+    pnlForm.add(lblVeterinario, gbc);
+
+    gbc.gridx = 1;
+    gbc.gridwidth = 2;
+    gbc.weightx = 1.0;
+    pnlForm.add(cbFuncionario, gbc);
+
+    // linha 6 - Observação
+    gbc.gridx = 0;
+    gbc.gridy = 5;
+    gbc.gridwidth = 1;
+    gbc.weightx = 0;
+    gbc.weighty = 0;
+    pnlForm.add(lblObservacao, gbc);
+
+    gbc.gridx = 1;
+    gbc.gridwidth = 2;
+    gbc.weightx = 1.0;
+    gbc.weighty = 1.0;
+    pnlForm.add(scrollObservacao, gbc);
+
+    JPanel pnlImagem = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
+    lblFotoAnimal = new JLabel();
+    lblFotoAnimal.setIcon(iconeSerio);
+    lblFotoAnimal.setPreferredSize(new Dimension(110, 160));
+    lblFotoAnimal.setFocusable(false);
+    pnlImagem.add(lblFotoAnimal);
+
+    pnlDadosConsulta.add(pnlForm, BorderLayout.CENTER);
+    pnlDadosConsulta.add(pnlImagem, BorderLayout.EAST);
+}
 
     private void criarPainelAcoes() {
         pnlAcoes = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 12));
@@ -281,10 +300,10 @@ public class TelaConsulta extends JFrame {
         FuncionarioDAO dao = new FuncionarioDAO();
         List<Funcionario> lista = dao.listarFuncionarios();
 
-        cbVeterinario.removeAllItems();
+        cbFuncionario.removeAllItems();
 
         for (Funcionario funcionario : lista) {
-            cbVeterinario.addItem(funcionario);
+        cbFuncionario.addItem(funcionario);
         }
     }
 
@@ -311,6 +330,21 @@ public class TelaConsulta extends JFrame {
                 consulta.getObservacao()
             });
         }
+        
+        tblConsultas.setRowHeight(22);
+        tblConsultas.getTableHeader().setReorderingAllowed(false);
+        
+        DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+        centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+
+        tblConsultas.getColumnModel().getColumn(0).setCellRenderer(centralizado); // ID
+        tblConsultas.getColumnModel().getColumn(1).setCellRenderer(centralizado); // Data
+        tblConsultas.getColumnModel().getColumn(2).setCellRenderer(centralizado); // Hora
+        tblConsultas.getColumnModel().getColumn(0).setPreferredWidth(40); // ID
+        tblConsultas.getColumnModel().getColumn(1).setPreferredWidth(80); // Data
+        tblConsultas.getColumnModel().getColumn(2).setPreferredWidth(70); // Hora
+        
+        
     }
 
     private void configurarEventos() {
@@ -492,50 +526,50 @@ public class TelaConsulta extends JFrame {
     }
 
     private Consulta obterConsultaDosCampos() {
-        Consulta consulta = new Consulta();
+    Consulta consulta = new Consulta();
 
-        if (!txtId.getText().trim().isEmpty()) {
-            consulta.setIdConsulta(Integer.parseInt(txtId.getText().trim()));
-        }
-
-        consulta.setDataConsulta(txtData.getText().trim());
-        consulta.setHoraConsulta(txtHora.getText().trim());
-        consulta.setObservacao(txtObservacao.getText().trim());
-
-        Animal animalSelecionado = (Animal) cbAnimal.getSelectedItem();
-        Funcionario funcionarioSelecionado = (Funcionario) cbVeterinario.getSelectedItem();
-
-        consulta.setIdAnimal(animalSelecionado.getIdAnimal());
-        consulta.setIdFuncionario(funcionarioSelecionado.getIdFuncionario());
-
-        return consulta;
+    if (!txtId.getText().trim().isEmpty()) {
+        consulta.setIdConsulta(Integer.parseInt(txtId.getText().trim()));
     }
+
+    consulta.setDataConsulta(txtData.getText().trim());
+    consulta.setHoraConsulta(txtHora.getText().trim());
+    consulta.setObservacao(txtObservacao.getText().trim());
+
+    Animal animalSelecionado = (Animal) cbAnimal.getSelectedItem();
+    Funcionario funcionarioSelecionado = (Funcionario) cbFuncionario.getSelectedItem();
+
+    consulta.setIdAnimal(animalSelecionado.getIdAnimal());
+    consulta.setIdFuncionario(funcionarioSelecionado.getIdFuncionario());
+
+    return consulta;
+}
 
     private boolean camposPreenchidos() {
         return !txtData.getText().trim().isEmpty()
-                && !txtHora.getText().trim().isEmpty()
-                && cbAnimal.getSelectedItem() != null
-                && cbVeterinario.getSelectedItem() != null
-                && !txtObservacao.getText().trim().isEmpty();
-    }
+            && !txtHora.getText().trim().isEmpty()
+            && cbAnimal.getSelectedItem() != null
+            && cbFuncionario.getSelectedItem() != null
+            && !txtObservacao.getText().trim().isEmpty();
+}
 
     private void limparCampos() {
-        txtId.setText("");
-        txtData.setText("");
-        txtHora.setText("");
-        txtObservacao.setText("");
+    txtId.setText("");
+    txtData.setText("");
+    txtHora.setText("");
+    txtObservacao.setText("");
 
-        if (cbAnimal.getItemCount() > 0) {
-            cbAnimal.setSelectedIndex(0);
-        }
-
-        if (cbVeterinario.getItemCount() > 0) {
-            cbVeterinario.setSelectedIndex(0);
-        }
-
-        tblConsultas.clearSelection();
-        txtData.requestFocusInWindow();
+    if (cbAnimal.getItemCount() > 0) {
+        cbAnimal.setSelectedIndex(0);
     }
+
+    if (cbFuncionario.getItemCount() > 0) {
+        cbFuncionario.setSelectedIndex(0);
+    }
+
+    tblConsultas.clearSelection();
+    txtData.requestFocusInWindow();
+}
 
     private void carregarCamposDaTabela() {
         int linhaSelecionada = tblConsultas.getSelectedRow();
@@ -559,27 +593,27 @@ public class TelaConsulta extends JFrame {
     }
 
     private void preencherCamposComConsulta(Consulta consulta) {
-        txtId.setText(String.valueOf(consulta.getIdConsulta()));
-        txtData.setText(consulta.getDataConsulta());
-        txtHora.setText(consulta.getHoraConsulta());
-        txtObservacao.setText(consulta.getObservacao());
+    txtId.setText(String.valueOf(consulta.getIdConsulta()));
+    txtData.setText(consulta.getDataConsulta());
+    txtHora.setText(consulta.getHoraConsulta());
+    txtObservacao.setText(consulta.getObservacao());
 
-        for (int i = 0; i < cbAnimal.getItemCount(); i++) {
-            Animal animal = cbAnimal.getItemAt(i);
-            if (animal.getIdAnimal() == consulta.getIdAnimal()) {
-                cbAnimal.setSelectedIndex(i);
-                break;
-            }
-        }
-
-        for (int i = 0; i < cbVeterinario.getItemCount(); i++) {
-            Funcionario funcionario = cbVeterinario.getItemAt(i);
-            if (funcionario.getIdFuncionario() == consulta.getIdFuncionario()) {
-                cbVeterinario.setSelectedIndex(i);
-                break;
-            }
+    for (int i = 0; i < cbAnimal.getItemCount(); i++) {
+        Animal animal = cbAnimal.getItemAt(i);
+        if (animal.getIdAnimal() == consulta.getIdAnimal()) {
+            cbAnimal.setSelectedIndex(i);
+            break;
         }
     }
+
+    for (int i = 0; i < cbFuncionario.getItemCount(); i++) {
+        Funcionario funcionario = cbFuncionario.getItemAt(i);
+        if (funcionario.getIdFuncionario() == consulta.getIdFuncionario()) {
+            cbFuncionario.setSelectedIndex(i);
+            break;
+        }
+    }
+}
 
     private boolean dataValida(String data) {
         try {
@@ -628,4 +662,7 @@ public class TelaConsulta extends JFrame {
             timer.start();
         }
     }
+    
+    
+    
 }

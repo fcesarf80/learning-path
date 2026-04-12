@@ -57,9 +57,9 @@ public class Funcionario {
     public void setEmail(String email) {
         this.email = email;
     }
-    @Override
+   @Override
 public String toString() {
-    return nome;
+    return nome + " (" + funcao + ")";
 }
     
 }
