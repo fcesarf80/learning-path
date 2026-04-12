@@ -268,6 +268,47 @@ public class TelaConsulta extends JFrame {
                 alternarHumor(false);
             }
         });
+        
+        btnExcluir.addActionListener(e -> {
+
+    if (txtId.getText().trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Selecione um animal na tabela para excluir.");
+        alternarHumor(false);
+        return;
+    }
+
+    int confirmacao = JOptionPane.showConfirmDialog(
+            this,
+            "Deseja realmente excluir este animal?",
+            "Confirmar exclusão",
+            JOptionPane.YES_NO_OPTION
+    );
+
+    if (confirmacao == JOptionPane.YES_OPTION) {
+        try {
+            int idAnimal = Integer.parseInt(txtId.getText().trim());
+
+            AnimalDAO dao = new AnimalDAO();
+            boolean sucesso = dao.deletar(idAnimal);
+
+            if (sucesso) {
+                JOptionPane.showMessageDialog(this, "Animal excluído com sucesso!");
+                carregarTabela();
+                limparCampos();
+                alternarHumor(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "Erro ao excluir animal.");
+                alternarHumor(false);
+            }
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao excluir animal.");
+            ex.printStackTrace();
+            alternarHumor(false);
+        }
+    }
+});
+        
     }
 
     private boolean camposPreenchidos() {

@@ -367,6 +367,55 @@ public class TelaAnimal extends JFrame {
     }
 });
         
+        tblAnimais.getSelectionModel().addListSelectionListener(e -> {
+    if (!e.getValueIsAdjusting()) {
+        carregarCamposDaTabela();
+    }
+});
+     
+    btnAtualizar.addActionListener(e -> {
+
+    if (txtId.getText().trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Selecione um animal na tabela para atualizar.");
+        alternarHumor(false);
+        return;
+    }
+
+    if (!camposPreenchidos()) {
+        JOptionPane.showMessageDialog(this, "Preencha todos os campos.");
+        alternarHumor(false);
+        return;
+    }
+
+    if (!dataValida(txtDataNascimento.getText().trim())) {
+        JOptionPane.showMessageDialog(this, "Data inválida. Use o formato YYYY-MM-DD.");
+        alternarHumor(false);
+        return;
+    }
+
+    try {
+        Animal animal = obterAnimalDosCampos();
+        AnimalDAO dao = new AnimalDAO();
+
+        boolean sucesso = dao.atualizar(animal);
+
+        if (sucesso) {
+            JOptionPane.showMessageDialog(this, "Animal atualizado com sucesso!");
+            carregarTabela();
+            limparCampos();
+            alternarHumor(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Erro ao atualizar animal.");
+            alternarHumor(false);
+        }
+
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(this, "Erro ao atualizar animal.");
+        ex.printStackTrace();
+        alternarHumor(false);
+    }
+});
+        
     }
 
     private boolean camposPreenchidos() {
@@ -389,6 +438,44 @@ private void limparCampos() {
     cbTutor.setSelectedIndex(0);
     }
     txtNomeAnimal.requestFocusInWindow();
+}
+
+private void carregarCamposDaTabela() {
+    int linhaSelecionada = tblAnimais.getSelectedRow();
+
+    if (linhaSelecionada != -1) {
+        txtId.setText(tblAnimais.getValueAt(linhaSelecionada, 0).toString());
+        txtNomeAnimal.setText(tblAnimais.getValueAt(linhaSelecionada, 1).toString());
+        txtEspecie.setText(tblAnimais.getValueAt(linhaSelecionada, 2).toString());
+        txtRaca.setText(tblAnimais.getValueAt(linhaSelecionada, 3).toString());
+
+        txtSexo.setText("");
+        txtDataNascimento.setText("");
+
+        int idClienteTabela = Integer.parseInt(tblAnimais.getValueAt(linhaSelecionada, 4).toString());
+
+        for (int i = 0; i < cbTutor.getItemCount(); i++) {
+            Cliente c = cbTutor.getItemAt(i);
+
+            if (c.getIdCliente() == idClienteTabela) {
+                cbTutor.setSelectedIndex(i);
+                break;
+            }
+        }
+
+        try {
+            int idAnimal = Integer.parseInt(txtId.getText().trim());
+            AnimalDAO dao = new AnimalDAO();
+            Animal animal = dao.buscarPorId(idAnimal);
+
+            if (animal != null) {
+                txtSexo.setText(animal.getSexo() != null ? animal.getSexo() : "");
+                txtDataNascimento.setText(animal.getDataNascimento() != null ? animal.getDataNascimento() : "");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
 
 private void estilizarBotoes() {
