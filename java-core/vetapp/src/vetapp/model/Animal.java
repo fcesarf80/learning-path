@@ -9,6 +9,7 @@ public class Animal {
     private String sexo;
     private String dataNascimento;
     private int idCliente;
+    private String nomeTutor;
 
     public Animal() {
     }
@@ -76,5 +77,13 @@ public class Animal {
 
     public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
+    }
+
+    public String getNomeTutor() {
+        return nomeTutor;
+    }
+
+    public void setNomeTutor(String nomeTutor) {
+        this.nomeTutor = nomeTutor;
     }
 }

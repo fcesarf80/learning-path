@@ -44,7 +44,11 @@ public class AnimalDAO {
 
     public List<Animal> listar() {
         List<Animal> lista = new ArrayList<>();
-        String sql = "SELECT * FROM animal ORDER BY id_animal DESC";
+
+        String sql = "SELECT a.*, c.nome AS nome_tutor " +
+                     "FROM animal a " +
+                     "JOIN cliente c ON a.id_cliente = c.id_cliente " +
+                     "ORDER BY a.id_animal DESC";
 
         try (Connection conn = Conexao.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql);
@@ -60,6 +64,7 @@ public class AnimalDAO {
                 animal.setSexo(rs.getString("sexo"));
                 animal.setDataNascimento(rs.getString("data_nascimento"));
                 animal.setIdCliente(rs.getInt("id_cliente"));
+                animal.setNomeTutor(rs.getString("nome_tutor"));
 
                 lista.add(animal);
             }
@@ -73,7 +78,10 @@ public class AnimalDAO {
     }
 
     public Animal buscarPorId(int idAnimal) {
-        String sql = "SELECT * FROM animal WHERE id_animal = ?";
+        String sql = "SELECT a.*, c.nome AS nome_tutor " +
+                     "FROM animal a " +
+                     "JOIN cliente c ON a.id_cliente = c.id_cliente " +
+                     "WHERE a.id_animal = ?";
 
         try (Connection conn = Conexao.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -91,6 +99,7 @@ public class AnimalDAO {
                     animal.setSexo(rs.getString("sexo"));
                     animal.setDataNascimento(rs.getString("data_nascimento"));
                     animal.setIdCliente(rs.getInt("id_cliente"));
+                    animal.setNomeTutor(rs.getString("nome_tutor"));
 
                     return animal;
                 }

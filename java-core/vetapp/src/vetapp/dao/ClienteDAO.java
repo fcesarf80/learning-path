@@ -1,70 +1,72 @@
 package vetapp.dao;
 
 import vetapp.model.Cliente;
+import vetapp.util.Conexao;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import vetapp.util.Conexao;
 
 public class ClienteDAO {
 
     public boolean inserir(Cliente cliente) {
-    String sql = "INSERT INTO cliente (nome, telefone, email, endereco) VALUES (?, ?, ?, ?)";
-
-    try (Connection conn = Conexao.conectar();
-         PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-        stmt.setString(1, cliente.getNome());
-        stmt.setString(2, cliente.getTelefone());
-        stmt.setString(3, cliente.getEmail());
-        stmt.setString(4, cliente.getEndereco());
-
-        int linhasAfetadas = stmt.executeUpdate();
-
-        if (linhasAfetadas > 0) {
-            System.out.println("Cliente inserido com sucesso!");
-            return true;
-        } else {
-            System.out.println("Nenhum cliente foi inserido.");
-            return false;
-        }
-
-    } catch (SQLException e) {
-        System.out.println("Erro ao inserir cliente:");
-        e.printStackTrace();
-        return false;
-    }
-}
-public List<Cliente> listar() {
-        List<Cliente> lista = new ArrayList<>();
-        String sql = "SELECT * FROM cliente ORDER BY id_cliente";
+        String sql = "INSERT INTO cliente (nome, telefone, email, endereco) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = Conexao.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            while (rs.next()) {
-                Cliente cliente = new Cliente();
+            stmt.setString(1, cliente.getNome());
+            stmt.setString(2, cliente.getTelefone());
+            stmt.setString(3, cliente.getEmail());
+            stmt.setString(4, cliente.getEndereco());
 
-                cliente.setIdCliente(rs.getInt("id_cliente"));
-                cliente.setNome(rs.getString("nome"));
-                cliente.setTelefone(rs.getString("telefone"));
-                cliente.setEmail(rs.getString("email"));
-                cliente.setEndereco(rs.getString("endereco"));
+            int linhasAfetadas = stmt.executeUpdate();
 
-                lista.add(cliente);
+            if (linhasAfetadas > 0) {
+                System.out.println("Cliente inserido com sucesso!");
+                return true;
+            } else {
+                System.out.println("Nenhum cliente foi inserido.");
+                return false;
             }
 
         } catch (SQLException e) {
-            System.out.println("Erro ao listar clientes:");
+            System.out.println("Erro ao inserir cliente:");
             e.printStackTrace();
+            return false;
+        }
+    }
+
+    public List<Cliente> listarClientes() {
+    List<Cliente> lista = new ArrayList<>();
+    String sql = "SELECT * FROM cliente ORDER BY id_cliente";
+
+    try (Connection conn = Conexao.conectar();
+         PreparedStatement stmt = conn.prepareStatement(sql);
+         ResultSet rs = stmt.executeQuery()) {
+
+        while (rs.next()) {
+            Cliente cliente = new Cliente();
+
+            cliente.setIdCliente(rs.getInt("id_cliente"));
+            cliente.setNome(rs.getString("nome"));
+            cliente.setTelefone(rs.getString("telefone"));
+            cliente.setEmail(rs.getString("email"));
+            cliente.setEndereco(rs.getString("endereco"));
+
+            lista.add(cliente);
         }
 
-        return lista;
+    } catch (SQLException e) {
+        System.out.println("Erro ao listar clientes:");
+        e.printStackTrace();
     }
+
+    return lista;
+}
 
     public Cliente buscarPorId(int idCliente) {
         String sql = "SELECT * FROM cliente WHERE id_cliente = ?";
@@ -119,27 +121,24 @@ public List<Cliente> listar() {
     }
 
     public boolean deletar(int idCliente) {
-    String sql = "DELETE FROM cliente WHERE id_cliente = ?";
+        String sql = "DELETE FROM cliente WHERE id_cliente = ?";
 
-    try (Connection conn = Conexao.conectar();
-         PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-        stmt.setInt(1, idCliente);
+            stmt.setInt(1, idCliente);
 
-        int linhasAfetadas = stmt.executeUpdate();
-        return linhasAfetadas > 0;
+            int linhasAfetadas = stmt.executeUpdate();
+            return linhasAfetadas > 0;
 
-    } catch (SQLException e) {
-    if (e.getSQLState() != null && e.getSQLState().startsWith("23")) {
-        System.out.println("Não é possível excluir o cliente porque ele possui registros relacionados.");
-    } else {
-        System.out.println("Erro ao deletar cliente:");
-        e.printStackTrace();
+        } catch (SQLException e) {
+            if (e.getSQLState() != null && e.getSQLState().startsWith("23")) {
+                System.out.println("Não é possível excluir o cliente porque ele possui registros relacionados.");
+            } else {
+                System.out.println("Erro ao deletar cliente:");
+                e.printStackTrace();
+            }
+            return false;
+        }
     }
-    return false;
 }
-}
-}
-
-       
-   

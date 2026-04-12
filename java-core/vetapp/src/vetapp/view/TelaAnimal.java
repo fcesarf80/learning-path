@@ -4,6 +4,7 @@ import vetapp.model.Cliente;
 import vetapp.dao.ClienteDAO;
 import vetapp.dao.AnimalDAO;
 import vetapp.model.Animal;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -11,24 +12,20 @@ import java.util.List;
 
 public class TelaAnimal extends JFrame {
 
-    // Painéis
     private JPanel pnlDadosAnimal;
     private JPanel pnlAcoes;
     private JPanel pnlListagemAnimais;
 
-    // Tabela
     private JTable tblAnimais;
 
-    // Campos
     private JTextField txtId;
     private JTextField txtNomeAnimal;
     private JTextField txtEspecie;
     private JTextField txtRaca;
-    private JTextField txtSexo;
+    private JComboBox<String> cbSexo;
     private JFormattedTextField txtDataNascimento;
     private JComboBox<Cliente> cbTutor;
 
-    // Botões
     private JButton btnNovo;
     private JButton btnSalvar;
     private JButton btnBuscar;
@@ -37,22 +34,20 @@ public class TelaAnimal extends JFrame {
     private JButton btnLimpar;
     private JButton btnVoltar;
 
-    // Camaleão
     private JLabel lblFotoAnimal;
     private ImageIcon iconeSerio;
     private ImageIcon iconeFeliz;
 
     public TelaAnimal() {
-    configurarJanela();
-    carregarImagens();
-    criarComponentes();
-    carregarClientes();
-    configurarEventos();
-    carregarTabela();
-    SwingUtilities.invokeLater(() -> txtNomeAnimal.requestFocusInWindow());
-    setVisible(true);
-
-}
+        configurarJanela();
+        carregarImagens();
+        criarComponentes();
+        carregarClientes();
+        configurarEventos();
+        carregarTabela();
+        SwingUtilities.invokeLater(() -> txtNomeAnimal.requestFocusInWindow());
+        setVisible(true);
+    }
 
     private void configurarJanela() {
         setTitle("Gestão de Animais");
@@ -138,23 +133,24 @@ public class TelaAnimal extends JFrame {
         txtRaca = new JTextField(18);
         txtRaca.setPreferredSize(new Dimension(180, 25));
 
-        txtSexo = new JTextField(18);
-        txtSexo.setPreferredSize(new Dimension(180, 25));
+        cbSexo = new JComboBox<>();
+        cbSexo.setPreferredSize(new Dimension(180, 25));
+        cbSexo.addItem("M");
+        cbSexo.addItem("F");
 
         try {
             txtDataNascimento = new JFormattedTextField(
-                    new javax.swing.text.MaskFormatter("####-##-##")
-    );
+                new javax.swing.text.MaskFormatter("####-##-##")
+            );
         } catch (java.text.ParseException e) {
             txtDataNascimento = new JFormattedTextField();
         }
-        
+
         txtDataNascimento.setPreferredSize(new Dimension(180, 25));
 
         cbTutor = new JComboBox<>();
         cbTutor.setPreferredSize(new Dimension(180, 25));
 
-        // linha 1
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 1;
@@ -166,7 +162,6 @@ public class TelaAnimal extends JFrame {
         gbc.gridx = 2;
         pnlForm.add(lblAuto, gbc);
 
-        // linha 2
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.gridwidth = 1;
@@ -176,7 +171,6 @@ public class TelaAnimal extends JFrame {
         gbc.gridwidth = 2;
         pnlForm.add(txtNomeAnimal, gbc);
 
-        // linha 3
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.gridwidth = 1;
@@ -186,7 +180,6 @@ public class TelaAnimal extends JFrame {
         gbc.gridwidth = 2;
         pnlForm.add(txtEspecie, gbc);
 
-        // linha 4
         gbc.gridx = 0;
         gbc.gridy = 3;
         gbc.gridwidth = 1;
@@ -196,7 +189,6 @@ public class TelaAnimal extends JFrame {
         gbc.gridwidth = 2;
         pnlForm.add(txtRaca, gbc);
 
-        // linha 5
         gbc.gridx = 0;
         gbc.gridy = 4;
         gbc.gridwidth = 1;
@@ -204,9 +196,8 @@ public class TelaAnimal extends JFrame {
 
         gbc.gridx = 1;
         gbc.gridwidth = 2;
-        pnlForm.add(txtSexo, gbc);
+        pnlForm.add(cbSexo, gbc);
 
-        // linha 6
         gbc.gridx = 0;
         gbc.gridy = 5;
         gbc.gridwidth = 1;
@@ -216,7 +207,6 @@ public class TelaAnimal extends JFrame {
         gbc.gridwidth = 2;
         pnlForm.add(txtDataNascimento, gbc);
 
-        // linha 7
         gbc.gridx = 0;
         gbc.gridy = 6;
         gbc.gridwidth = 1;
@@ -262,278 +252,319 @@ public class TelaAnimal extends JFrame {
     }
 
     private void criarPainelListagem() {
-    pnlListagemAnimais = new JPanel(new BorderLayout());
-    pnlListagemAnimais.setBorder(BorderFactory.createTitledBorder("Listagem de Animais"));
-    pnlListagemAnimais.setPreferredSize(new Dimension(680, 150));
+        pnlListagemAnimais = new JPanel(new BorderLayout());
+        pnlListagemAnimais.setBorder(BorderFactory.createTitledBorder("Listagem de Animais"));
+        pnlListagemAnimais.setPreferredSize(new Dimension(680, 150));
 
-    String[] colunas = {"ID", "Nome", "Espécie", "Raça", "Tutor"};
+        String[] colunas = {"ID", "Nome", "Espécie", "Raça", "Tutor"};
 
-    DefaultTableModel modelo = new DefaultTableModel(colunas, 0) {
-        @Override
-        public boolean isCellEditable(int row, int column) {
-            return false;
-        }
-    };
+        DefaultTableModel modelo = new DefaultTableModel(colunas, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
 
-    tblAnimais = new JTable(modelo);
-    JScrollPane scroll = new JScrollPane(tblAnimais);
+        tblAnimais = new JTable(modelo);
+        JScrollPane scroll = new JScrollPane(tblAnimais);
 
-    pnlListagemAnimais.add(scroll, BorderLayout.CENTER);
-}
-    
+        pnlListagemAnimais.add(scroll, BorderLayout.CENTER);
+    }
+
     private void carregarTabela() {
-    DefaultTableModel modelo = (DefaultTableModel) tblAnimais.getModel();
-    modelo.setRowCount(0);
+        DefaultTableModel modelo = (DefaultTableModel) tblAnimais.getModel();
+        modelo.setRowCount(0);
 
-    AnimalDAO dao = new AnimalDAO();
-    List<Animal> lista = dao.listar();
+        AnimalDAO dao = new AnimalDAO();
+        List<Animal> lista = dao.listar();
 
-    System.out.println("Quantidade de animais carregados: " + lista.size());
-
-    for (Animal animal : lista) {
-        modelo.addRow(new Object[]{
-            animal.getIdAnimal(),
-            animal.getNome(),
-            animal.getEspecie(),
-            animal.getRaca(),
-            animal.getIdCliente()
-        });
+        for (Animal animal : lista) {
+            modelo.addRow(new Object[]{
+                animal.getIdAnimal(),
+                animal.getNome(),
+                animal.getEspecie(),
+                animal.getRaca(),
+                animal.getNomeTutor()
+            });
+        }
     }
 
-    modelo.fireTableDataChanged();
-    tblAnimais.revalidate();
-    tblAnimais.repaint();
-}
     private void carregarClientes() {
-    ClienteDAO dao = new ClienteDAO();
-    List<Cliente> lista = dao.listar();
+        ClienteDAO dao = new ClienteDAO();
+        List<Cliente> lista = dao.listarClientes();
 
-    cbTutor.removeAllItems();
+        cbTutor.removeAllItems();
 
-    for (Cliente cliente : lista) {
-        cbTutor.addItem(cliente);
+        for (Cliente cliente : lista) {
+            cbTutor.addItem(cliente);
+        }
     }
-}
-    
 
     private void configurarEventos() {
-        btnVoltar.addActionListener(e -> {
-            new TelaPrincipal().setVisible(true);
-            dispose();
-        });
+    btnVoltar.addActionListener(e -> {
+        new TelaPrincipal().setVisible(true);
+        dispose();
+    });
 
-        btnLimpar.addActionListener(e -> limparCampos());
+    btnLimpar.addActionListener(e -> limparCampos());
 
-        btnNovo.addActionListener(e -> {
-            limparCampos();
-            alternarHumor(false);
-        });
-
-        btnSalvar.addActionListener(e -> {
-
-    if (!camposPreenchidos()) {
-        JOptionPane.showMessageDialog(this, "Preencha todos os campos.");
+    btnNovo.addActionListener(e -> {
+        limparCampos();
         alternarHumor(false);
-        return;
-    }
+    });
 
-    // 👇 VALIDAÇÃO DA DATA AQUI (ANTES DO TRY)
-    if (!dataValida(txtDataNascimento.getText().trim())) {
-        JOptionPane.showMessageDialog(this, "Data inválida. Use formato YYYY-MM-DD.");
-        alternarHumor(false);
-        return;
-    }
-
-    try {
-        Animal animal = obterAnimalDosCampos();
-        AnimalDAO dao = new AnimalDAO();
-
-        boolean sucesso = dao.inserir(animal);
-
-        if (sucesso) {
-            JOptionPane.showMessageDialog(this, "Animal salvo com sucesso!");
-            carregarTabela();
-            limparCampos();
-            alternarHumor(true);
-        } else {
-            JOptionPane.showMessageDialog(this, "Erro ao salvar animal.");
+    btnSalvar.addActionListener(e -> {
+        if (!camposPreenchidos()) {
+            JOptionPane.showMessageDialog(this, "Preencha todos os campos.");
             alternarHumor(false);
+            return;
         }
 
-    } catch (Exception ex) {
-        JOptionPane.showMessageDialog(this, "Erro ao salvar animal.");
-        ex.printStackTrace();
-        alternarHumor(false);
-    }
-});
-        
-        tblAnimais.getSelectionModel().addListSelectionListener(e -> {
-    if (!e.getValueIsAdjusting()) {
-        carregarCamposDaTabela();
-    }
-});
-     
-    btnAtualizar.addActionListener(e -> {
-
-    if (txtId.getText().trim().isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Selecione um animal na tabela para atualizar.");
-        alternarHumor(false);
-        return;
-    }
-
-    if (!camposPreenchidos()) {
-        JOptionPane.showMessageDialog(this, "Preencha todos os campos.");
-        alternarHumor(false);
-        return;
-    }
-
-    if (!dataValida(txtDataNascimento.getText().trim())) {
-        JOptionPane.showMessageDialog(this, "Data inválida. Use o formato YYYY-MM-DD.");
-        alternarHumor(false);
-        return;
-    }
-
-    try {
-        Animal animal = obterAnimalDosCampos();
-        AnimalDAO dao = new AnimalDAO();
-
-        boolean sucesso = dao.atualizar(animal);
-
-        if (sucesso) {
-            JOptionPane.showMessageDialog(this, "Animal atualizado com sucesso!");
-            carregarTabela();
-            limparCampos();
-            alternarHumor(true);
-        } else {
-            JOptionPane.showMessageDialog(this, "Erro ao atualizar animal.");
+        if (!dataValida(txtDataNascimento.getText().trim())) {
+            JOptionPane.showMessageDialog(this, "Data inválida. Use formato YYYY-MM-DD.");
             alternarHumor(false);
+            return;
         }
 
-    } catch (Exception ex) {
-        JOptionPane.showMessageDialog(this, "Erro ao atualizar animal.");
-        ex.printStackTrace();
-        alternarHumor(false);
-    }
-});
-        
-    }
+        try {
+            Animal animal = obterAnimalDosCampos();
+            AnimalDAO dao = new AnimalDAO();
 
-    private boolean camposPreenchidos() {
-    return !txtNomeAnimal.getText().trim().isEmpty()
-            && !txtEspecie.getText().trim().isEmpty()
-            && !txtRaca.getText().trim().isEmpty()
-            && !txtSexo.getText().trim().isEmpty()
-            && !txtDataNascimento.getText().trim().isEmpty()
-            && cbTutor.getSelectedItem() != null;
-}
+            boolean sucesso = dao.inserir(animal);
 
-private void limparCampos() {
-    txtId.setText("");
-    txtNomeAnimal.setText("");
-    txtEspecie.setText("");
-    txtRaca.setText("");
-    txtSexo.setText("");
-    txtDataNascimento.setText("");
-    if (cbTutor.getItemCount() > 0) {
-    cbTutor.setSelectedIndex(0);
-    }
-    txtNomeAnimal.requestFocusInWindow();
-}
-
-private void carregarCamposDaTabela() {
-    int linhaSelecionada = tblAnimais.getSelectedRow();
-
-    if (linhaSelecionada != -1) {
-        txtId.setText(tblAnimais.getValueAt(linhaSelecionada, 0).toString());
-        txtNomeAnimal.setText(tblAnimais.getValueAt(linhaSelecionada, 1).toString());
-        txtEspecie.setText(tblAnimais.getValueAt(linhaSelecionada, 2).toString());
-        txtRaca.setText(tblAnimais.getValueAt(linhaSelecionada, 3).toString());
-
-        txtSexo.setText("");
-        txtDataNascimento.setText("");
-
-        int idClienteTabela = Integer.parseInt(tblAnimais.getValueAt(linhaSelecionada, 4).toString());
-
-        for (int i = 0; i < cbTutor.getItemCount(); i++) {
-            Cliente c = cbTutor.getItemAt(i);
-
-            if (c.getIdCliente() == idClienteTabela) {
-                cbTutor.setSelectedIndex(i);
-                break;
+            if (sucesso) {
+                JOptionPane.showMessageDialog(this, "Animal salvo com sucesso!");
+                carregarTabela();
+                limparCampos();
+                alternarHumor(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "Erro ao salvar animal.");
+                alternarHumor(false);
             }
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao salvar animal.");
+            ex.printStackTrace();
+            alternarHumor(false);
+        }
+    });
+
+    tblAnimais.getSelectionModel().addListSelectionListener(e -> {
+        if (!e.getValueIsAdjusting()) {
+            carregarCamposDaTabela();
+        }
+    });
+
+    btnAtualizar.addActionListener(e -> {
+        if (txtId.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Selecione um animal na tabela para atualizar.");
+            alternarHumor(false);
+            return;
+        }
+
+        if (!camposPreenchidos()) {
+            JOptionPane.showMessageDialog(this, "Preencha todos os campos.");
+            alternarHumor(false);
+            return;
+        }
+
+        if (!dataValida(txtDataNascimento.getText().trim())) {
+            JOptionPane.showMessageDialog(this, "Data inválida. Use o formato YYYY-MM-DD.");
+            alternarHumor(false);
+            return;
+        }
+
+        try {
+            Animal animal = obterAnimalDosCampos();
+            AnimalDAO dao = new AnimalDAO();
+
+            boolean sucesso = dao.atualizar(animal);
+
+            if (sucesso) {
+                JOptionPane.showMessageDialog(this, "Animal atualizado com sucesso!");
+                carregarTabela();
+                limparCampos();
+                alternarHumor(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "Erro ao atualizar animal.");
+                alternarHumor(false);
+            }
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao atualizar animal.");
+            ex.printStackTrace();
+            alternarHumor(false);
+        }
+    });
+
+    btnExcluir.addActionListener(e -> {
+        if (txtId.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Selecione um animal na tabela para excluir.");
+            alternarHumor(false);
+            return;
+        }
+
+        int confirmacao = JOptionPane.showConfirmDialog(
+            this,
+            "Deseja realmente excluir este animal?",
+            "Confirmação",
+            JOptionPane.YES_NO_OPTION
+        );
+
+        if (confirmacao != JOptionPane.YES_OPTION) {
+            return;
         }
 
         try {
             int idAnimal = Integer.parseInt(txtId.getText().trim());
             AnimalDAO dao = new AnimalDAO();
-            Animal animal = dao.buscarPorId(idAnimal);
 
-            if (animal != null) {
-                txtSexo.setText(animal.getSexo() != null ? animal.getSexo() : "");
-                txtDataNascimento.setText(animal.getDataNascimento() != null ? animal.getDataNascimento() : "");
+            boolean sucesso = dao.deletar(idAnimal);
+
+            if (sucesso) {
+                JOptionPane.showMessageDialog(this, "Animal excluído com sucesso!");
+                carregarTabela();
+                limparCampos();
+                alternarHumor(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "Erro ao excluir animal.");
+                alternarHumor(false);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao excluir animal.");
+            ex.printStackTrace();
+            alternarHumor(false);
+        }
+    });
+}
+
+    private boolean camposPreenchidos() {
+        return !txtNomeAnimal.getText().trim().isEmpty()
+                && !txtEspecie.getText().trim().isEmpty()
+                && !txtRaca.getText().trim().isEmpty()
+                && cbSexo.getSelectedItem() != null
+                && !txtDataNascimento.getText().trim().isEmpty()
+                && cbTutor.getSelectedItem() != null;
+    }
+
+    private void limparCampos() {
+        txtId.setText("");
+        txtNomeAnimal.setText("");
+        txtEspecie.setText("");
+        txtRaca.setText("");
+        cbSexo.setSelectedIndex(0);
+        txtDataNascimento.setText("");
+
+        if (cbTutor.getItemCount() > 0) {
+            cbTutor.setSelectedIndex(0);
+        }
+
+        tblAnimais.clearSelection();
+        txtNomeAnimal.requestFocusInWindow();
+    }
+
+    private void carregarCamposDaTabela() {
+        int linhaSelecionada = tblAnimais.getSelectedRow();
+
+        if (linhaSelecionada != -1) {
+            txtId.setText(tblAnimais.getValueAt(linhaSelecionada, 0).toString());
+            txtNomeAnimal.setText(tblAnimais.getValueAt(linhaSelecionada, 1).toString());
+            txtEspecie.setText(tblAnimais.getValueAt(linhaSelecionada, 2).toString());
+            txtRaca.setText(tblAnimais.getValueAt(linhaSelecionada, 3).toString());
+
+            try {
+                int idAnimal = Integer.parseInt(txtId.getText().trim());
+                AnimalDAO dao = new AnimalDAO();
+                Animal animal = dao.buscarPorId(idAnimal);
+
+                if (animal != null) {
+                    String sexo = animal.getSexo();
+
+                    for (int i = 0; i < cbSexo.getItemCount(); i++) {
+                        if (cbSexo.getItemAt(i).equals(sexo)) {
+                            cbSexo.setSelectedIndex(i);
+                            break;
+                        }
+                    }
+
+                    txtDataNascimento.setText(
+                        animal.getDataNascimento() != null ? animal.getDataNascimento() : ""
+                    );
+
+                    int idCliente = animal.getIdCliente();
+
+                    for (int i = 0; i < cbTutor.getItemCount(); i++) {
+                        Cliente c = cbTutor.getItemAt(i);
+
+                        if (c.getIdCliente() == idCliente) {
+                            cbTutor.setSelectedIndex(i);
+                            break;
+                        }
+                    }
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
-}
 
-private void estilizarBotoes() {
-    btnNovo.setBackground(new Color(102, 255, 255));
-    btnSalvar.setBackground(new Color(102, 255, 102));
-    btnBuscar.setBackground(new Color(102, 153, 255));
-    btnAtualizar.setBackground(new Color(255, 153, 51));
-    btnExcluir.setBackground(Color.RED);
-    btnLimpar.setBackground(Color.LIGHT_GRAY);
-    btnVoltar.setBackground(new Color(255, 204, 51));
+    private void estilizarBotoes() {
+        btnNovo.setBackground(new Color(102, 255, 255));
+        btnSalvar.setBackground(new Color(102, 255, 102));
+        btnBuscar.setBackground(new Color(102, 153, 255));
+        btnAtualizar.setBackground(new Color(255, 153, 51));
+        btnExcluir.setBackground(Color.RED);
+        btnLimpar.setBackground(Color.LIGHT_GRAY);
+        btnVoltar.setBackground(new Color(255, 204, 51));
 
-    JButton[] botoes = {
-        btnNovo, btnSalvar, btnBuscar, btnAtualizar,
-        btnExcluir, btnLimpar, btnVoltar
-    };
+        JButton[] botoes = {
+            btnNovo, btnSalvar, btnBuscar, btnAtualizar,
+            btnExcluir, btnLimpar, btnVoltar
+        };
 
-    for (JButton botao : botoes) {
-        botao.setFocusPainted(false);
-        botao.setFocusable(false);
-    }
-}
-
-private void alternarHumor(boolean feliz) {
-    lblFotoAnimal.setIcon(feliz ? iconeFeliz : iconeSerio);
-
-    if (feliz) {
-        Timer timer = new Timer(4000, e -> lblFotoAnimal.setIcon(iconeSerio));
-        timer.setRepeats(false);
-        timer.start();
-    }
-}
-
-private Animal obterAnimalDosCampos() {
-    Animal animal = new Animal();
-
-    if (!txtId.getText().trim().isEmpty()) {
-        animal.setIdAnimal(Integer.parseInt(txtId.getText().trim()));
+        for (JButton botao : botoes) {
+            botao.setFocusPainted(false);
+            botao.setFocusable(false);
+        }
     }
 
-    animal.setNome(txtNomeAnimal.getText().trim());
-    animal.setEspecie(txtEspecie.getText().trim());
-    animal.setRaca(txtRaca.getText().trim());
-    animal.setSexo(txtSexo.getText().trim());
-    animal.setDataNascimento(txtDataNascimento.getText().trim());
+    private void alternarHumor(boolean feliz) {
+        lblFotoAnimal.setIcon(feliz ? iconeFeliz : iconeSerio);
 
-    Cliente clienteSelecionado = (Cliente) cbTutor.getSelectedItem();
-    animal.setIdCliente(clienteSelecionado.getIdCliente());
-
-    return animal;
-}
-
-private boolean dataValida(String data) {
-    try {
-        java.time.LocalDate.parse(data);
-        return true;
-    } catch (Exception e) {
-        return false;
+        if (feliz) {
+            Timer timer = new Timer(4000, e -> lblFotoAnimal.setIcon(iconeSerio));
+            timer.setRepeats(false);
+            timer.start();
+        }
     }
-}
 
+    private Animal obterAnimalDosCampos() {
+        Animal animal = new Animal();
+
+        if (!txtId.getText().trim().isEmpty()) {
+            animal.setIdAnimal(Integer.parseInt(txtId.getText().trim()));
+        }
+
+        animal.setNome(txtNomeAnimal.getText().trim());
+        animal.setEspecie(txtEspecie.getText().trim());
+        animal.setRaca(txtRaca.getText().trim());
+        animal.setSexo(cbSexo.getSelectedItem().toString());
+        animal.setDataNascimento(txtDataNascimento.getText().trim());
+
+        Cliente clienteSelecionado = (Cliente) cbTutor.getSelectedItem();
+        animal.setIdCliente(clienteSelecionado.getIdCliente());
+
+        return animal;
+    }
+
+    private boolean dataValida(String data) {
+        try {
+            java.time.LocalDate.parse(data);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

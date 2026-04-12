@@ -7,14 +7,20 @@ public class TesteClienteDAO {
 
     public static void main(String[] args) {
 
-        Cliente cliente = new Cliente(
-                "Tio Tomás Chorão",
-                "912345678",
-                "jchorão@email.com",
-                "Rua Carroça a Vapor, 8"
-        );
+        Cliente cliente = new Cliente();
+        cliente.setNome("Fulano");
+        cliente.setTelefone("919999999");
+        cliente.setEmail("fulano@email.com");
+        cliente.setEndereco("Rua X");
 
         ClienteDAO dao = new ClienteDAO();
-        dao.inserir(cliente);
+
+        boolean sucesso = dao.inserir(cliente);
+
+        if (sucesso) {
+            System.out.println("Cliente inserido com sucesso!");
+        } else {
+            System.out.println("Erro ao inserir cliente.");
+        }
     }
 }
