@@ -10,7 +10,7 @@ O nome do ficheiro de saída deverá ser solicitado ao utilizador.
 import os
 
 # 2.3 - A FUNÇÃO (O Robô que recebe os nomes e trabalha)
-def junta_fich(nome_arq1, nome_arq2, nome_saida):
+def junta_fch(nome_arq1, nome_arq2, nome_saida):
     # Definimos onde os arquivos estão (sua pasta do Bloco 1)
     pasta = r"C:\Users\fcesa\Documents\MeusProjetosGitHub\projects\python-projects\01-python-estudos\UC00607-CINEL\ficha_01\Bloco 1 - Manipulação Básica de Arquivos"
     
@@ -40,7 +40,7 @@ def exercicio_02():
     arquivo_novo = input("Qual será o nome do novo arquivo de saída? ")
 
     # Chama a função enviando os 3 nomes como argumentos
-    junta_fich(arquivo1, arquivo2, arquivo_novo)
+    junta_fch(arquivo1, arquivo2, arquivo_novo)
 
 # Chama o programa principal
 exercicio_02()
