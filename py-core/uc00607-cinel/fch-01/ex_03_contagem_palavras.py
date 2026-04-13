@@ -5,7 +5,7 @@ utilizador, indique quantas vezes ocorre essa palavra (string) no ficheiro.
 """
 import string
 
-palavra_busca = input("Qual a palavra a procurar? ").lower()
+palavra_busca = input("Qual a palavra que você procurar? ").lower()
 
 try:
     with open("texto.txt", "r", encoding="utf-8") as fp:
@@ -29,4 +29,4 @@ try:
         print(f"'{palavra_busca}' ocorre {qt} {'vez' if qt == 1 else 'vezes'}.")
 
 except FileNotFoundError:
-    print("Erro: O ficheiro 'texto.txt' não foi encontrado.")
+    print("Erro: O arquivo 'texto.txt' não foi encontrado.")
