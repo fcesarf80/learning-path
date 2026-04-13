@@ -593,18 +593,32 @@ public class TelaConsulta extends JFrame {
     }
 
     private void preencherCamposComConsulta(Consulta consulta) {
+
     txtId.setText(String.valueOf(consulta.getIdConsulta()));
     txtData.setText(consulta.getDataConsulta());
     txtHora.setText(consulta.getHoraConsulta());
     txtObservacao.setText(consulta.getObservacao());
 
+    // Selecionar Animal no ComboBox
     for (int i = 0; i < cbAnimal.getItemCount(); i++) {
         Animal animal = cbAnimal.getItemAt(i);
+
         if (animal.getIdAnimal() == consulta.getIdAnimal()) {
             cbAnimal.setSelectedIndex(i);
             break;
         }
     }
+
+    // Selecionar Funcionário no ComboBox
+    for (int i = 0; i < cbFuncionario.getItemCount(); i++) {
+        Funcionario funcionario = cbFuncionario.getItemAt(i);
+
+        if (funcionario.getIdFuncionario() == consulta.getIdFuncionario()) {
+            cbFuncionario.setSelectedIndex(i);
+            break;
+        }
+    }
+}
 
     for (int i = 0; i < cbFuncionario.getItemCount(); i++) {
         Funcionario funcionario = cbFuncionario.getItemAt(i);
