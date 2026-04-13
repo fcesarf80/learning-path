@@ -262,6 +262,14 @@ public class TelaFuncionario extends JFrame {
                 alternarHumor(false);
             }
         });
+        
+        tblFuncionarios.getSelectionModel().addListSelectionListener(e -> {
+    if (!e.getValueIsAdjusting()) {
+        carregarCamposDaTabela();
+    }
+});       
+               
+        
     }
 
     private boolean camposPreenchidos() {
@@ -279,6 +287,19 @@ public class TelaFuncionario extends JFrame {
         txtEmail.setText("");
         txtNome.requestFocusInWindow();
     }
+    
+    private void carregarCamposDaTabela() {
+    int linhaSelecionada = tblFuncionarios.getSelectedRow();
+
+    if (linhaSelecionada != -1) {
+        txtId.setText(tblFuncionarios.getValueAt(linhaSelecionada, 0).toString());
+        txtNome.setText(tblFuncionarios.getValueAt(linhaSelecionada, 1).toString());
+        txtCargo.setText(tblFuncionarios.getValueAt(linhaSelecionada, 2).toString());
+        fmtTelefone.setText(tblFuncionarios.getValueAt(linhaSelecionada, 3).toString());
+        txtEmail.setText(tblFuncionarios.getValueAt(linhaSelecionada, 4).toString());
+    }
+}
+    
     
    private void estilizarBotoes() {
     btnNovo.setBackground(new Color(102, 255, 255));

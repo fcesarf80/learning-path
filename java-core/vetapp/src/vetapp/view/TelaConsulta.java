@@ -297,15 +297,21 @@ public class TelaConsulta extends JFrame {
     }
 
     private void carregarFuncionarios() {
-        FuncionarioDAO dao = new FuncionarioDAO();
-        List<Funcionario> lista = dao.listarFuncionarios();
+    FuncionarioDAO dao = new FuncionarioDAO();
+    List<Funcionario> lista = dao.listarFuncionarios();
 
-        cbFuncionario.removeAllItems();
+    System.out.println("Quantidade de funcionários no combo: " + lista.size());
 
-        for (Funcionario funcionario : lista) {
+    cbFuncionario.removeAllItems();
+
+    for (Funcionario funcionario : lista) {
+        System.out.println("Funcionário carregado: " 
+            + funcionario.getIdFuncionario() + " - " 
+            + funcionario.getNome());
+
         cbFuncionario.addItem(funcionario);
-        }
     }
+}
 
     private void carregarTabela() {
         DefaultTableModel modelo = (DefaultTableModel) tblConsultas.getModel();
@@ -570,30 +576,28 @@ public class TelaConsulta extends JFrame {
     tblConsultas.clearSelection();
     txtData.requestFocusInWindow();
 }
+private void carregarCamposDaTabela() {
+    int linhaSelecionada = tblConsultas.getSelectedRow();
 
-    private void carregarCamposDaTabela() {
-        int linhaSelecionada = tblConsultas.getSelectedRow();
+    if (linhaSelecionada != -1) {
+        txtId.setText(tblConsultas.getValueAt(linhaSelecionada, 0).toString());
 
-        if (linhaSelecionada != -1) {
-            txtId.setText(tblConsultas.getValueAt(linhaSelecionada, 0).toString());
+        try {
+            int idConsulta = Integer.parseInt(txtId.getText().trim());
+            ConsultaDAO dao = new ConsultaDAO();
+            Consulta consulta = dao.buscarPorId(idConsulta);
 
-            try {
-                int idConsulta = Integer.parseInt(txtId.getText().trim());
-                ConsultaDAO dao = new ConsultaDAO();
-                Consulta consulta = dao.buscarPorId(idConsulta);
-
-                if (consulta != null) {
-                    preencherCamposComConsulta(consulta);
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (consulta != null) {
+                preencherCamposComConsulta(consulta);
             }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
+}
 
-    private void preencherCamposComConsulta(Consulta consulta) {
-
+private void preencherCamposComConsulta(Consulta consulta) {
     txtId.setText(String.valueOf(consulta.getIdConsulta()));
     txtData.setText(consulta.getDataConsulta());
     txtHora.setText(consulta.getHoraConsulta());
@@ -602,16 +606,19 @@ public class TelaConsulta extends JFrame {
     // Selecionar Animal no ComboBox
     for (int i = 0; i < cbAnimal.getItemCount(); i++) {
         Animal animal = cbAnimal.getItemAt(i);
-
         if (animal.getIdAnimal() == consulta.getIdAnimal()) {
             cbAnimal.setSelectedIndex(i);
             break;
         }
     }
 
+    // Debug do Funcionário
+    System.out.println("ID funcionário da consulta: " + consulta.getIdFuncionario());
+
     // Selecionar Funcionário no ComboBox
     for (int i = 0; i < cbFuncionario.getItemCount(); i++) {
         Funcionario funcionario = cbFuncionario.getItemAt(i);
+        System.out.println("Combo funcionário ID: " + funcionario.getIdFuncionario());
 
         if (funcionario.getIdFuncionario() == consulta.getIdFuncionario()) {
             cbFuncionario.setSelectedIndex(i);
@@ -619,15 +626,7 @@ public class TelaConsulta extends JFrame {
         }
     }
 }
-
-    for (int i = 0; i < cbFuncionario.getItemCount(); i++) {
-        Funcionario funcionario = cbFuncionario.getItemAt(i);
-        if (funcionario.getIdFuncionario() == consulta.getIdFuncionario()) {
-            cbFuncionario.setSelectedIndex(i);
-            break;
-        }
-    }
-}
+    
 
     private boolean dataValida(String data) {
         try {
