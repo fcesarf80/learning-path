@@ -2,7 +2,7 @@
 Exercício 02 - Junta ficheiros
 Enunciado: Crie 2 ficheiros de texto com algo escrito em ambos.
 Desenvolva um programa que solicite o nome dos 2 ficheiros ao utilizador.
-Crie a função junta_fich() que recebe os 2 nomes como argumentos.
+Crie a função junta_fch() que recebe os 2 nomes como argumentos.
 A função deverá criar o ficheiro de saída com a concatenação dos 2 ficheiros.
 O nome do ficheiro de saída deverá ser solicitado ao utilizador.
 """
