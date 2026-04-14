@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+* Exercício 06 - Arrays multidimensionais 
+* Enunciado: "Escreva um programa em C# que leia os valores de uma matriz 3x3 fornecidos pelo usuário e, em seguida, exiba na tela cada valor com sua respectiva posição."
+* */
+
+using System;
 
 namespace ex_06_arrays_multidimensionais
 {
@@ -6,32 +11,30 @@ namespace ex_06_arrays_multidimensionais
     {
         static void Main(string[] args)
         {
-            // 1. Declaração da matriz 3x3
             int[,] matriz = new int[3, 3];
 
-            // 2. Loop para preencher a matriz
-            for (int i = 0; i <= 2; i++)
+            // 1. Leitura dos dados
+            for (int i = 0; i < 3; i++)
             {
-                for (int j = 0; j <= 2; j++)
+                for (int j = 0; j < 3; j++)
                 {
-                    Console.Write($"Introduza o valor para a posição {i + 1}, {j + 1}: ");
-                    string entrada = Console.ReadLine();
-                    matriz[i, j] = Convert.ToInt32(entrada);
+                    Console.Write($"Valor [{i + 1},{j + 1}]: ");
+                    matriz[i, j] = Convert.ToInt32(Console.ReadLine());
                 }
             }
 
-            Console.WriteLine("\n--- Valores Guardados ---");
-
-            // 3. Loop para exibir os valores
-            for (int i = 0; i <= 2; i++)
+            // 2. Exibição simplificada em formato de matriz
+            Console.WriteLine("\n--- Matriz Resultante ---");
+            for (int i = 0; i < 3; i++)
             {
-                for (int j = 0; j <= 2; j++)
+                for (int j = 0; j < 3; j++)
                 {
-                    Console.WriteLine($"O valor da posição {i + 1}, {j + 1} é: {matriz[i, j]}");
+                    // O "\t" alinha os números em colunas
+                    Console.Write(matriz[i, j] + "\t");
                 }
+                Console.WriteLine(); // Pula linha após cada linha da matriz
             }
 
-            // Mantém a consola aberta até premires uma tecla
             Console.ReadKey();
         }
     }
