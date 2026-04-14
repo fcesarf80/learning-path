@@ -4,8 +4,8 @@ Enunciado: Considere o seguinte ficheiro de texto: (ou em formato csv separados 
 Ana;Lisboa;22;Centro	      Pedro;Faro;23;Sul	    	Sofia;Viseu;26;Centro
 Pedro;Porto;45;Norte	      José;Covilhã;56;Centro	Bruno;Guimarães;34;Norte
 Isabel;Coimbra;22;Centro      Marta; Bragança;28;Norte  Helena; Évora;52;Sul
-Ana;Chaves;33;Norte	      Luís;Aveiro;39;Centro	Tiago; Coimbra;29;Centro
-José;Beja;45;Sul	      Carla;Setúbal;31;Sul	Patrícia;Bragança;41;Norte
+Ana;Chaves;33;Norte	          Luís;Aveiro;39;Centro	    Tiago; Coimbra;29;Centro
+José;Beja;45;Sul	          Carla;Setúbal;31;Sul	    Patrícia;Bragança;41;Norte
 Francisco; Bragança;19;Norte  Rui;Évora;47;Sul	    	André;Santarém;38;Centro
 
 a. Quantas pessoas se encontram registadas?
