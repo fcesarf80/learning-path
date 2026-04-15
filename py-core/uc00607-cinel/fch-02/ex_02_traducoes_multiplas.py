@@ -1,5 +1,5 @@
 """
-Exercício 02 - Trauções multiplas
+Exercício 02 - Traduções multiplas
 Enunciado: A partir do arquivo criado no exercício anterior,
 carregue o dicionário para memória. Altere o dicionário por 
 forma a acrescentar as cores em francês. Assim, o seu dicionário
@@ -13,7 +13,7 @@ Sugestão: alterar cada valor do dicionário para uma lista/tupla de valores,
 onde o 1º valor é a palavra em inglês (que já lá está) e o 2º valor a palavra
 em francês que irá ser solicitada ao utilizador."""
 
-# --- PARTE 1: Carregar dados do ficheiro anterior ---
+# --- PARTE 1: Carregar dados do arquivo anterior ---
 dcores = {}
 
 try:
@@ -24,7 +24,7 @@ try:
                 chave, valor = linha.split(";")
                 dcores[chave] = valor
 except FileNotFoundError:
-    print("Erro: O ficheiro 'dicING.csv' não foi encontrado. Corre o Exercício 01 primeiro.")
+    print("Erro: O arquivo 'dicING.csv' não foi encontrado. Corre o Exercício 01 primeiro.")
     exit()
 
 # --- PARTE 2: Adicionar as traduções em Francês ---
@@ -35,8 +35,8 @@ for chave in dcores:
     # Atualiza o dicionário para guardar uma tupla (Inglês, Francês)
     dcores[chave] = (corING, corFR)
 
-# --- PARTE 3: Guardar no novo ficheiro (corPT;corING;corFR) ---
-print("\n--- A gravar novo ficheiro 'dicINGFR.csv' ---")
+# --- PARTE 3: Guardar no novo arquivo (corPT;corING;corFR) ---
+print("\n--- A gravar novo arquivo 'dicINGFR.csv' ---")
 with open("dicINGFR.csv", "w", encoding="utf-8") as fp:
     for chave, (ing, fr) in dcores.items():
         # Escreve no formato solicitado pelo enunciado
