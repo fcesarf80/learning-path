@@ -1,6 +1,8 @@
 ﻿/*
 * Exercício 06 - Arrays multidimensionais 
-* Enunciado: "Escreva um programa em C# que leia os valores de uma matriz 3x3 fornecidos pelo usuário e, em seguida, exiba na tela cada valor com sua respectiva posição."
+* Enunciado: "Escreva um programa em C# que leia os valores
+* de uma matriz 3x3 fornecidos pelo usuário e, em seguida, 
+* exiba na tela cada valor com sua respectiva posição."
 * */
 
 using System;
