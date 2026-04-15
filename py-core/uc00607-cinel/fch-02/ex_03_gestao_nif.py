@@ -27,60 +27,65 @@ Exemplo: {
           ...}
 • O utilizador introduz um NIF e o programa devolve o respetivo dicionário.
 """
+import os
+# 1. Configuração do caminho dinâmico para encontrar o arquivo CSV
+diretorio_script = os.path.dirname(os.path.abspath(__file__))
+caminho_csv = os.path.join(diretorio_script, "clientes.csv")
+
 dCli = {}
-# 1. Importação e Estruturação dos Dados
+
 try:
-    with open("clientes.csv", "r", encoding="utf-8") as fp:
-        # O strip() e a verificação 'if linha' evitam erros com linhas vazias no fim do arquivo
+    # 2. Leitura do ficheiro
+    with open(caminho_csv, "r", encoding="utf-8") as fp:
+        # Filtra linhas vazias para evitar erros no split
         cont = [linha.strip() for linha in fp.read().split("\n") if linha.strip()]
+
     for linha in cont:
         info = linha.split(";")
         nif = info[0]
-        dados = info[1:] # [Nome, Cidade, Idade, Zona]
+        dados = info[1:]  # [Nome, Cidade, Idade, Zona]
         dCli[nif] = dados
-    # a) Indicar dicionário (formato inicial de lista)
-    print(f"a) Dicionário importado: {dCli}")
-    # b) Quantidade de registos
-    print(f"\nb) Quantidade de registos lidos: {len(dCli)}")
+
+    print(f"a) Dicionário importado com sucesso.")
+    print(f"b) Quantidade de registos lidos: {len(dCli)}")
+
     # c) Pessoas com idade superior a 40 anos
-    maior40 = []
-    for info in dCli.values():
-        if int(info[2]) > 40:
-            maior40.append(info[0])    
-    print("\nc) Pessoas com mais de 40 anos:")
+    maior40 = [info[0] for info in dCli.values() if int(info[2]) > 40]
+    print("\nc) Nomes com mais de 40 anos:")
     for nome in maior40:
         print(f"\t- {nome}")
+
     # d) Quantidade de pessoas por zona
-    zonas_lista = ["Norte", "Centro", "Sul"]
-    dZonas = {zona: 0 for zona in zonas_lista} # Inicializa contadores
-    
+    zonas_ref = ["Norte", "Centro", "Sul"]
+    dZonas = {zona: 0 for zona in zonas_ref}
     for dados in dCli.values():
         zona = dados[3]
         if zona in dZonas:
             dZonas[zona] += 1
     print(f"\nd) Quantidade por zonas: {dZonas}")
-    # e) Idade média global
-    soma_total = sum(int(dados[2]) for dados in dCli.values())
-    media_global = soma_total / len(dCli)
-    print(f"\ne) Média de idades global: {media_global:.1f} anos")
-    # f) Idade média por região
-    # Criamos um dicionário onde cada chave tem sua própria lista [contador, soma]
-    dZonasMedia = {zona: [0, 0] for zona in zonas_lista}
+
+    # e) Média de idades global
+    soma_idades = sum(int(dados[2]) for dados in dCli.values())
+    print(f"\ne) Média de idades global: {soma_idades/len(dCli):.1f} anos")
+
+    # f) Média de idades por zona
+    # Criamos dicionários independentes para evitar erros de referência de memória
+    dZonasMedia = {zona: [0, 0] for zona in zonas_ref} # [contador, soma_idades]
 
     for dados in dCli.values():
         zona = dados[3]
         idade = int(dados[2])
         if zona in dZonasMedia:
-            dZonasMedia[zona][0] += 1      # Incrementa quantidade
-            dZonasMedia[zona][1] += idade  # Soma idade    
-    print("\nf) Média de idades por região:")
+            dZonasMedia[zona][0] += 1
+            dZonasMedia[zona][1] += idade
 
+    print("\nf) Média de idades por zona:")
     for zona, valores in dZonasMedia.items():
         if valores[0] > 0:
             media = valores[1] / valores[0]
             print(f"\t{zona}: {media:.1f} anos")
-    # g) Converter dCli para Dicionário de Dicionários
-    
+
+    # g) Criar dicionário de dicionários (Estrutura final)
     for nif, info in dCli.items():
         dCli[nif] = {
             "nome": info[0],
@@ -88,20 +93,21 @@ try:
             "idade": info[2],
             "zona": info[3]
         }
-    print(f"\ng) Dicionário de dicionários estruturado com sucesso.")
-    # h) Consulta por NIF
-    print("\nh) Consulta de Cliente")
-    nifProc = input("Qual o NIF do cliente a listar? ")
-    # .get() evita erro se o NIF não existir
-    cliente = dCli.get(nifProc)
-    
-    if cliente:
-        print(f"Dados do cliente {nifProc}:")
+    print("\ng) Dicionário de dicionários estruturado.")
 
+    # h) Busca por NIF
+    print("\nh) Consulta de Cliente")
+    nif_proc = input("Qual o NIF do cliente a listar? ")
+    cliente = dCli.get(nif_proc)
+
+    if cliente:
+        print(f"Dados do cliente {nif_proc}:")
         for campo, valor in cliente.items():
             print(f"\t{campo.capitalize()}: {valor}")
     else:
-        print("NIF não encontrado na base de dados.")
-        
+        print("Aviso: NIF não encontrado.")
+
 except FileNotFoundError:
-    print("Erro: O arquivo 'clientes.csv' não foi encontrado.")
+    print(f"Erro: O ficheiro 'clientes.csv' não foi encontrado em: {caminho_csv}")
+except Exception as e:
+    print(f"Ocorreu um erro inesperado: {e}")
