@@ -15,18 +15,16 @@ em francês que irá ser solicitada ao utilizador."""
 
 # --- PARTE 1: Carregar dados do arquivo anterior ---
 dcores = {}
-
 try:
     with open("dicING.csv", "r", encoding="utf-8") as fp:
         for linha in fp:
-            linha = linha.strip() # Remove espaços e o \n (salto de linha)
-            if linha and ";" in linha: # Garante que a linha tem conteúdo e o separador
+            linha = linha.strip()
+            if linha and ";" in linha: 
                 chave, valor = linha.split(";")
                 dcores[chave] = valor
 except FileNotFoundError:
     print("Erro: O arquivo 'dicING.csv' não foi encontrado. Corre o Exercício 01 primeiro.")
     exit()
-
 # --- PARTE 2: Adicionar as traduções em Francês ---
 print("--- Tradução para Francês ---")
 for chave in dcores:
@@ -34,12 +32,10 @@ for chave in dcores:
     corFR = input(f"Tradução de «{chave}» para francês? ").strip().title()
     # Atualiza o dicionário para guardar uma tupla (Inglês, Francês)
     dcores[chave] = (corING, corFR)
-
 # --- PARTE 3: Guardar no novo arquivo (corPT;corING;corFR) ---
 print("\n--- A gravar novo arquivo 'dicINGFR.csv' ---")
 with open("dicINGFR.csv", "w", encoding="utf-8") as fp:
     for chave, (ing, fr) in dcores.items():
-        # Escreve no formato solicitado pelo enunciado
         fp.write(f"{chave};{ing};{fr}\n")
 
 print("Dicionário completo: ", dcores)
