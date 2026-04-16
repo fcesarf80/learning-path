@@ -1,26 +1,23 @@
 """
 exercicio_08_menu_pessoas.py
-Enunciado: 8. Considere a seguinte lista de tuplas: 
+Enunciado: Considere a seguinte lista de tuplas: 
 [ (“Ana”,20,”F”), (“Rui”,17,”M”), (“Eva”,56,”F”), (“Kika”,10,”F”),
 (“Ze”,22,”M”),(“Xico”,34,”M”), (“Xana”,21,”F”), (“Bela”,33,”F”) ] 
-Cada tupla é constituída por 3 valores, o nome (string),
-a idade (inteiro) e o sexo (string). 
-Apresente ao utilizador o seguinte menu: 
-1- Mostrar nomes     2- Nomes masculinos 
-3- Nomes femininos   4- Média das idades 
-5- Maiores de idade (>=18 anos)   0-	Sair 
+Cada tupla é constituída por 3 valores, o nome (string), a idade
+(inteiro) e o sexo (string). Apresente ao utilizador o seguinte menu: 
+1- Mostrar nomes     2- Nomes masculinos     3- Nomes femininos
+4- Média das idades  5- Maiores de idade (>=18 anos)   0-	Sair 
 1-	Implemente cada opção do menu.
 """
-
 lista = [('Ana', 'Braga'), ('Zé', 'Faro'), ('Nelo', 'Braga'), ('Xica', 'Beja'), ('Rui', 'Braga')]
 
-def mostrar_onde_vive(nome_escolhido): # Mudei o nome da função para não confundir com a variável 'nome'
+def mostrar_onde_vive(nome_escolhido):
     for nome, cidade in lista:
         if nome == nome_escolhido:
             print(f"A pessoa {nome} vive em {cidade}")
-            return # O return deve estar DENTRO do IF para parar só quando encontrar
-
-def cidade_cheia(): # Corrigido para o nome que você definiu
+            return
+        
+def cidade_cheia():
     contador = {}
     for nome, cidade in lista:
         contador[cidade] = contador.get(cidade, 0) + 1
@@ -45,7 +42,6 @@ def remover_pessoa(nome_para_sair):
             lista_nova.append((nome, cidade))
     print(f"Nova lista: {lista_nova}")
 
-# Chamadas das funções
 nome_input = input("Digite um nome: ")
 mostrar_onde_vive(nome_input)
 
