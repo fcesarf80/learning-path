@@ -43,6 +43,7 @@ public class TelaProcurar extends javax.swing.JFrame {
         txtNome = new javax.swing.JTextField();
         btnProcurar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
+        btnAtualizar = new javax.swing.JButton();
 
         jCheckBox1.setText("jCheckBox1");
 
@@ -71,6 +72,13 @@ public class TelaProcurar extends javax.swing.JFrame {
             }
         });
 
+        btnAtualizar.setText("Atualizar");
+        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -89,24 +97,26 @@ public class TelaProcurar extends javax.swing.JFrame {
                                 .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtTelefone)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtEmail))
+                        .addComponent(btnProcurar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15)
+                        .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 3, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnProcurar, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(txtGrupo))))
-                .addGap(97, 97, 97))
+                            .addComponent(txtGrupo)
+                            .addComponent(txtEmail))))
+                .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(82, 82, 82)
+                .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNome)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -123,10 +133,11 @@ public class TelaProcurar extends javax.swing.JFrame {
                     .addComponent(lblGrupo)
                     .addComponent(txtGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btnProcurar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(btnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(28, Short.MAX_VALUE))
+                    .addComponent(btnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAtualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -260,6 +271,68 @@ public class TelaProcurar extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnExcluirActionPerformed
 
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+                                                    
+    String nomeOriginal = txtNome.getText().trim();
+
+    if (nomeOriginal.isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Busque um contato antes de atualizar.",
+                "Aviso",
+                javax.swing.JOptionPane.WARNING_MESSAGE
+        );
+        return;
+    }
+
+    String nome = txtNome.getText().trim();
+    String telefone = txtTelefone.getText().trim();
+    String email = txtEmail.getText().trim();
+    String grupo = txtGrupo.getText().trim();
+
+    if (nome.isEmpty() || telefone.isEmpty() || email.isEmpty() || grupo.isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Preencha todos os campos.",
+                "Aviso",
+                javax.swing.JOptionPane.WARNING_MESSAGE
+        );
+        return;
+    }
+
+    Contato novoContato = new Contato(nome, telefone, email, grupo);
+    ContatoDAO dao = new ContatoDAO();
+
+    try {
+        boolean atualizado = dao.atualizar(nomeOriginal, novoContato);
+
+        if (atualizado) {
+            javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "Contato atualizado com sucesso.",
+                    "Sucesso",
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE
+            );
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "Contato não encontrado.",
+                    "Aviso",
+                    javax.swing.JOptionPane.WARNING_MESSAGE
+            );
+        }
+
+    } catch (IOException e) {
+        javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Erro ao atualizar: " + e.getMessage(),
+                "Erro",
+                javax.swing.JOptionPane.ERROR_MESSAGE
+        );
+    }
+
+    }//GEN-LAST:event_btnAtualizarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -286,6 +359,7 @@ public class TelaProcurar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAtualizar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnProcurar;
     private javax.swing.JCheckBox jCheckBox1;

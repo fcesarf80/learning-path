@@ -72,6 +72,27 @@ public class ContatoDAO {
     }
 
     return removido;
+}
+
+public boolean atualizar(String nomeOriginal, Contato novoContato) throws IOException {
+    java.util.List<Contato> lista = listar();
+    boolean atualizado = false;
+
+    for (int i = 0; i < lista.size(); i++) {
+        Contato c = lista.get(i);
+
+        if (c.getNome().equalsIgnoreCase(nomeOriginal)) {
+            lista.set(i, novoContato);
+            atualizado = true;
+            break;
+        }
+    }
+
+    if (atualizado) {
+        regravar(lista);
+    }
+
+    return atualizado;
 }    
     
 }
