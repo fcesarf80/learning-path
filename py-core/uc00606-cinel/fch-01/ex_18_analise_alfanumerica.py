@@ -14,16 +14,13 @@ def analisar_frase(frase):
         elif caractere.isdigit():
             numeros += 1
     return maiusculos, minusculos, numeros
-
 def executar():
     entrada = input("Digite uma frase alfanumérica: ")
     mai, min, num = analisar_frase(entrada)
-
     print(f"\nAnálise da frase:")
     print(f"- Letras maiúsculas: {mai}")
     print(f"- Letras minúsculas: {min}")
     print(f"- Caracteres numéricos: {num}")
     print(f"- Total de caracteres: {len(entrada)}")
-
 if __name__ == "__main__":
     executar()    
