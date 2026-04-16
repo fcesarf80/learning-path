@@ -4,10 +4,11 @@
  */
 package view;
 
-/**
- *
- * @author fcesa
- */
+import dao.ContatoDAO;
+import model.Contato;
+import java.io.IOException;
+import java.util.List;
+
 public class TelaProcurar extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaProcurar.class.getName());
@@ -31,6 +32,7 @@ public class TelaProcurar extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jCheckBox1 = new javax.swing.JCheckBox();
         lblNome = new javax.swing.JLabel();
         lblTelefone = new javax.swing.JLabel();
         lblEmail = new javax.swing.JLabel();
@@ -39,10 +41,13 @@ public class TelaProcurar extends javax.swing.JFrame {
         txtEmail = new javax.swing.JTextField();
         txtTelefone = new javax.swing.JTextField();
         txtNome = new javax.swing.JTextField();
-        btnCancelar = new javax.swing.JButton();
+        btnProcurar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
+
+        jCheckBox1.setText("jCheckBox1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Procurar - Nome");
+        setTitle("Procurar Contato");
 
         lblNome.setText("Nome");
 
@@ -52,7 +57,19 @@ public class TelaProcurar extends javax.swing.JFrame {
 
         lblGrupo.setText("Grupo");
 
-        btnCancelar.setText("Procurar");
+        btnProcurar.setText("Procurar");
+        btnProcurar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProcurarActionPerformed(evt);
+            }
+        });
+
+        btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -72,18 +89,19 @@ public class TelaProcurar extends javax.swing.JFrame {
                                 .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtTelefone)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtGrupo))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtEmail)))
+                        .addComponent(txtEmail))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnProcurar, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(txtGrupo))))
                 .addGap(97, 97, 97))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(157, 157, 157)
-                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,12 +123,142 @@ public class TelaProcurar extends javax.swing.JFrame {
                     .addComponent(lblGrupo)
                     .addComponent(txtGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnProcurar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(btnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnProcurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcurarActionPerformed
+                                                
+    String nome = txtNome.getText().trim();
+    String telefone = txtTelefone.getText().trim();
+    String email = txtEmail.getText().trim();
+    String grupo = txtGrupo.getText().trim();
+
+    ContatoDAO dao = new ContatoDAO();
+
+    try {
+        List<Contato> lista = dao.listar();
+        boolean encontrado = false;
+
+        for (Contato c : lista) {
+            boolean match = true;
+
+            if (!nome.isEmpty() && !c.getNome().toLowerCase().contains(nome.toLowerCase())) {
+                match = false;
+            }
+
+            if (!telefone.isEmpty() && !c.getTelefone().toLowerCase().contains(telefone.toLowerCase())) {
+                match = false;
+            }
+
+            if (!email.isEmpty() && !c.getEmail().toLowerCase().contains(email.toLowerCase())) {
+                match = false;
+            }
+
+            if (!grupo.isEmpty() && !c.getGrupo().toLowerCase().contains(grupo.toLowerCase())) {
+                match = false;
+            }
+
+            if (match) {
+                txtNome.setText(c.getNome());
+                txtTelefone.setText(c.getTelefone());
+                txtEmail.setText(c.getEmail());
+                txtGrupo.setText(c.getGrupo());
+
+                encontrado = true;
+                break;
+            }
+        }
+
+        if (!encontrado) {
+            javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "Contato não encontrado.",
+                    "Aviso",
+                    javax.swing.JOptionPane.WARNING_MESSAGE
+            );
+        }
+
+    } catch (IOException e) {
+        javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Erro ao ler ficheiro: " + e.getMessage(),
+                "Erro",
+                javax.swing.JOptionPane.ERROR_MESSAGE
+        );
+    }
+
+
+    }//GEN-LAST:event_btnProcurarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+                                                    
+    String nome = txtNome.getText().trim();
+
+    if (nome.isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Informe o nome do contato para excluir.",
+                "Aviso",
+                javax.swing.JOptionPane.WARNING_MESSAGE
+        );
+        return;
+    }
+
+    int confirmacao = javax.swing.JOptionPane.showConfirmDialog(
+            this,
+            "Tem certeza que deseja excluir este contato?",
+            "Confirmação",
+            javax.swing.JOptionPane.YES_NO_OPTION
+    );
+
+    if (confirmacao != javax.swing.JOptionPane.YES_OPTION) {
+        return;
+    }
+
+    ContatoDAO dao = new ContatoDAO();
+
+    try {
+        boolean removido = dao.excluir(nome);
+
+        if (removido) {
+            javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "Contato excluído com sucesso.",
+                    "Sucesso",
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE
+            );
+
+            // limpa campos
+            txtNome.setText("");
+            txtTelefone.setText("");
+            txtEmail.setText("");
+            txtGrupo.setText("");
+
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "Contato não encontrado.",
+                    "Aviso",
+                    javax.swing.JOptionPane.WARNING_MESSAGE
+            );
+        }
+
+    } catch (IOException e) {
+        javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Erro ao excluir: " + e.getMessage(),
+                "Erro",
+                javax.swing.JOptionPane.ERROR_MESSAGE
+        );
+    }
+
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -138,7 +286,9 @@ public class TelaProcurar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnProcurar;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblGrupo;
     private javax.swing.JLabel lblNome;

@@ -30,7 +30,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         lblBackground = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        mbPrincipal = new javax.swing.JMenuBar();
         menuFicheiro = new javax.swing.JMenu();
         miSair = new javax.swing.JMenuItem();
         menuContatos = new javax.swing.JMenu();
@@ -54,7 +54,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         miSair.setText("Sair");
         menuFicheiro.add(miSair);
 
-        jMenuBar1.add(menuFicheiro);
+        mbPrincipal.add(menuFicheiro);
 
         menuContatos.setText("Contatos");
 
@@ -66,7 +66,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         menuContatos.add(miNovo);
 
-        jMenuBar1.add(menuContatos);
+        mbPrincipal.add(menuContatos);
 
         menuProcurar.setText("Procurar");
 
@@ -78,9 +78,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         menuProcurar.add(miProcurar);
 
-        jMenuBar1.add(menuProcurar);
+        mbPrincipal.add(menuProcurar);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(mbPrincipal);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -130,8 +130,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JLabel lblBackground;
+    private javax.swing.JMenuBar mbPrincipal;
     private javax.swing.JMenu menuContatos;
     private javax.swing.JMenu menuFicheiro;
     private javax.swing.JMenu menuProcurar;
