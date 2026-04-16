@@ -4,10 +4,8 @@
  */
 package view;
 
-/**
- *
- * @author fcesa
- */
+import view.TelaProcurar;
+
 public class TelaPrincipal extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaPrincipal.class.getName());
@@ -31,40 +29,56 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        lblBackground = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
+        menuFicheiro = new javax.swing.JMenu();
+        miSair = new javax.swing.JMenuItem();
+        menuContatos = new javax.swing.JMenu();
+        miNovo = new javax.swing.JMenuItem();
+        menuProcurar = new javax.swing.JMenu();
+        miProcurar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("AGENDA");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/img/nota.ico")).getImage()
+        );
+        setName("telaAgenda"); // NOI18N
         setResizable(false);
         setSize(new java.awt.Dimension(600, 400));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/background-img.png"))); // NOI18N
-        jLabel1.setMaximumSize(new java.awt.Dimension(500, 293));
-        jLabel1.setMinimumSize(new java.awt.Dimension(400, 234));
-        jLabel1.setPreferredSize(new java.awt.Dimension(500, 293));
+        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/background-img.png"))); // NOI18N
+        lblBackground.setMinimumSize(new java.awt.Dimension(400, 234));
 
-        jMenu1.setText("Ficheiro");
-        jMenuBar1.add(jMenu1);
+        menuFicheiro.setText("Ficheiro");
 
-        jMenu2.setText("Contatos");
+        miSair.setText("Sair");
+        menuFicheiro.add(miSair);
 
-        jMenuItem1.setText("AGENDA");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuBar1.add(menuFicheiro);
+
+        menuContatos.setText("Contatos");
+
+        miNovo.setText("Novo");
+        miNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                miNovoActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem1);
+        menuContatos.add(miNovo);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(menuContatos);
 
-        jMenu3.setText("Procurar");
-        jMenuBar1.add(jMenu3);
+        menuProcurar.setText("Procurar");
+
+        miProcurar.setText("Procurar");
+        miProcurar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miProcurarActionPerformed(evt);
+            }
+        });
+        menuProcurar.add(miProcurar);
+
+        jMenuBar1.add(menuProcurar);
 
         setJMenuBar(jMenuBar1);
 
@@ -72,19 +86,23 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(lblBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(lblBackground, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void miNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miNovoActionPerformed
         new TelaNovoContato().setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_miNovoActionPerformed
+
+    private void miProcurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miProcurarActionPerformed
+        new TelaProcurar().setVisible(true);
+    }//GEN-LAST:event_miProcurarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -112,11 +130,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JLabel lblBackground;
+    private javax.swing.JMenu menuContatos;
+    private javax.swing.JMenu menuFicheiro;
+    private javax.swing.JMenu menuProcurar;
+    private javax.swing.JMenuItem miNovo;
+    private javax.swing.JMenuItem miProcurar;
+    private javax.swing.JMenuItem miSair;
     // End of variables declaration//GEN-END:variables
 }

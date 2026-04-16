@@ -4,6 +4,9 @@
  */
 package view;
 
+import dao.ContatoDAO;
+import model.Contato;
+import java.io.IOException;
 /**
  *
  * @author fcesa
@@ -135,7 +138,8 @@ public class TelaNovoContato extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        String nome = txtNome.getText().trim();
+                                                  
+    String nome = txtNome.getText().trim();
     String telefone = txtTelefone.getText().trim();
     String email = txtEmail.getText().trim();
     String grupo = txtGrupo.getText().trim();
@@ -150,14 +154,30 @@ public class TelaNovoContato extends javax.swing.JFrame {
         return;
     }
 
-    javax.swing.JOptionPane.showMessageDialog(
-            this,
-            "Contato guardado com sucesso!",
-            "Sucesso",
-            javax.swing.JOptionPane.INFORMATION_MESSAGE
-    );
+    Contato contato = new Contato(nome, telefone, email, grupo);
+    ContatoDAO dao = new ContatoDAO();
 
-    limparCampos();
+    try {
+        dao.salvar(contato);
+
+        javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Contato guardado com sucesso!",
+                "Sucesso",
+                javax.swing.JOptionPane.INFORMATION_MESSAGE
+        );
+
+        limparCampos();
+
+    } catch (IOException e) {
+        javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Erro ao guardar contato: " + e.getMessage(),
+                "Erro",
+                javax.swing.JOptionPane.ERROR_MESSAGE
+        );
+    }
+
 
     }//GEN-LAST:event_btnGuardarActionPerformed
 
