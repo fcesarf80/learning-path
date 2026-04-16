@@ -18,6 +18,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     public TelaPrincipal() {
         initComponents();
         setLocationRelativeTo(null);
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/view/nota.ico")).getImage());
+
     }
 
     /**
@@ -29,6 +31,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -36,15 +39,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("AGENDA");
         setResizable(false);
         setSize(new java.awt.Dimension(600, 400));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/background-img.png"))); // NOI18N
+        jLabel1.setMaximumSize(new java.awt.Dimension(500, 293));
+        jLabel1.setMinimumSize(new java.awt.Dimension(400, 234));
+        jLabel1.setPreferredSize(new java.awt.Dimension(500, 293));
 
         jMenu1.setText("Ficheiro");
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Contatos");
 
-        jMenuItem1.setText("Novo");
+        jMenuItem1.setText("AGENDA");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -63,11 +72,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 377, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -103,6 +112,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

@@ -18,6 +18,7 @@ public class TelaNovoContato extends javax.swing.JFrame {
     public TelaNovoContato() {
         initComponents();
         setLocationRelativeTo(null);
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/view/nota.ico")).getImage());
     }
 
     private void limparCampos() {
