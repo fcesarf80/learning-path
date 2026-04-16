@@ -15,13 +15,15 @@ def mostrar_onde_vive(nome_escolhido):
     for nome, cidade in lista:
         if nome == nome_escolhido:
             print(f"A pessoa {nome} vive em {cidade}")
-            return        
+            return
+         
 def cidade_cheia():
     contador = {}
     for nome, cidade in lista:
         contador[cidade] = contador.get(cidade, 0) + 1
     vencedora = max(contador, key=contador.get)
     print(f"A cidade com mais gente é: {vencedora}")
+
 def calcular_percentagem(cidade_escolhida):
     total = len(lista)
     conta_cidade = 0
@@ -30,15 +32,18 @@ def calcular_percentagem(cidade_escolhida):
             conta_cidade += 1
     resultado = (conta_cidade / total) * 100
     print(f"A cidade {cidade_escolhida} representa {resultado}%")
+
 def remover_pessoa(nome_para_sair):
     lista_nova = []
     for nome, cidade in lista:
         if nome != nome_para_sair:
             lista_nova.append((nome, cidade))
     print(f"Nova lista: {lista_nova}")
+    
 nome_input = input("Digite um nome: ")
 mostrar_onde_vive(nome_input)
 cidade_cheia()
+
 cidade_input = input("Digite uma cidade: ")
 calcular_percentagem(cidade_input)
 remover = input("Quem quer remover? ")
