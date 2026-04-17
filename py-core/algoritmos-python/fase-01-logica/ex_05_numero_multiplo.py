@@ -2,8 +2,7 @@
 Exercício 05 - Multiplos de cinco?
 """
 num = int(input("Digite um número: "))
-if num % 5 == 0: 
-    res = "é"
+if num % 5 == 0:
+    print(f"{num} é múltiplo de 5")
 else:
-    res = "não é"
-print(f"{num} {res} multiplo de 5.")
+    print(f"{num} não é múltiplo de 5")
