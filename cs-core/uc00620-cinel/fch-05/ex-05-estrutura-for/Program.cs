@@ -1,5 +1,5 @@
 ﻿/*
-* ex-05-estrutura-for
+* ex 05 - estrutura for
 * Enunciado: "Escreva um programa que leia dois vetores
 * de 3 números e mostre a soma deles."
 */
