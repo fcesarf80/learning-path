@@ -1,4 +1,8 @@
-﻿using System;
+﻿/*
+ * exercício 01 - Média de valores
+ * Enunciado: Crie um vetor de 10 números inteiros introduzidos pelo utilizador e calcula a média.
+*/
+using System;
 
 namespace ex_01_media_valores
 {
@@ -11,7 +15,7 @@ namespace ex_01_media_valores
 
             for (int posicao = 0; posicao < 10; posicao++)
             {
-                Console.WriteLine($"Digite o número {posicao + 1}: ");
+                Console.Write($"Digite o número {posicao + 1}: ");
                 int numero = int.Parse(Console.ReadLine());
 
                 numeros[posicao] = numero;
