@@ -1,5 +1,5 @@
 ﻿/*
- * exercício 01 - Média de valores
+ * Exercício 01 - Média de valores
  * Enunciado: Crie um vetor de 10 números inteiros introduzidos pelo utilizador e calcula a média.
 */
 using System;
