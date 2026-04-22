@@ -14,7 +14,6 @@ else:
             primo = False
             break
         divisor += 2
-
 if primo:
     print(f"{numero} é primo")
 else:
