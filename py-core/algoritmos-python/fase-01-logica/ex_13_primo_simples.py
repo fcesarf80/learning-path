@@ -1,12 +1,10 @@
 """
-Exercicio 13 - Leia um número e diga se ele é primo (versão simples)
+Exercicio 13 - Verificação de número primo (Versão Generalista)
 """
 numero = int(input("Digite um número: "))
 primo = True
-if numero < 2 or (numero > 2 and numero % 2 == 0):
+if numero < 2 or (numero % 2 == 0 and numero != 2):
     primo = False
-elif numero == 2:
-    primo = True
 else:
     divisor = 3
     while divisor * divisor <= numero:
@@ -14,6 +12,7 @@ else:
             primo = False
             break
         divisor += 2
+
 if primo:
     print(f"{numero} é primo")
 else:
