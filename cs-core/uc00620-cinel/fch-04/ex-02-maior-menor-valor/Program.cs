@@ -1,6 +1,7 @@
 ﻿/*
-* exercício 01 - Média de valores
-Enunciado: Crie um vetor de 10 números inteiros introduzidos pelo utilizador e calcula a média.
+ * Exercício 02 - Maior e menor valor
+ * Enunciado: Leia 8 números para um vetor e mostra:
+ * → O maior valor → O menor valor → As respetivas posições no vetor
 */
 using System;
 
