@@ -9,8 +9,7 @@ ficheiro = open("numeros.txt", "r")
 soma = 0
 quantidade = 0
 for linha in ficheiro:
-    numero = float(linha)
-    
+    numero = float(linha)    
     soma = soma + numero
     quantidade += 1
 ficheiro.close()
