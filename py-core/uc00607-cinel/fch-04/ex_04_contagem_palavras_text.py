@@ -1,20 +1,8 @@
 """
 Exercício 04 - Contagem palavras texto
-Enunciado: Cria um programa que:
-• Leia um ficheiro de texto (qualquer)
-• Conte quantas vezes cada palavra aparece
-• Mostre as palavras e respetivas contagens
+Enunciado: Cria um programa que: leia um ficheiro de texto (qualquer), conte
+quantas vezes cada palavra aparece e mostre as palavras e respetivas contagens
 """
-ficheiro = open("texto.txt", "r")
-contagem = {}
-for linha in ficheiro:
-    palavras = linha.lower().split()
-    for p in palavras:
-        p = p.replace(",", "").replace(".", "")
-        if p in contagem:
-            contagem[p] += 1 # Atalho aplicado aqui
-        else:
-            contagem[p] = 1
-ficheiro.close()
-for p in contagem:
-    print(p, ":", contagem[p])
+from collections import Counter
+palavras = Counter(open('texto.txt').read().split())
+[print(f"{p}: {c}") for p, c in palavras.items()]
