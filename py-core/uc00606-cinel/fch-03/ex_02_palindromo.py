@@ -1,9 +1,9 @@
 """
-Exercicio 02  - Palindromo
-Enunciado: 2. Escreva uma função palíndromo(palavra) que, dada uma string palavra
-constituída por letras minúsculas, retorne Verdadeiro se a palavra for um palíndromo
-e Falso se não for. Restrições: Os seguintes limites são garantidos em todos os casos
-de teste que serão dados ao seu programa:1 ≤ |palavra| ≤ 100		--  tamanho da string de entrada
+Exercicio 02 - Palindromo
+Enunciado: Escreva uma função palíndromo(palavra) que, dada uma string palavra
+constituída por letras minúsculas, retorne True se a palavra for um palíndromo
+e False se não for. Restrições: os seguintes limites devem ser garantidos em
+todos os casos de teste, ao seu programa: 1 ≤ |palavra| ≤ 100
 """
 def palindrome(frase):
     if frase.lower() == frase[::-1].lower():
