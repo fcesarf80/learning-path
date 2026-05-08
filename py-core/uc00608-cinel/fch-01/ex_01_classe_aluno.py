@@ -7,8 +7,8 @@ class Aluno:
     def __init__(self, nome, sobrenome, numero, curso):
         self.nome, self.sobrenome = nome, sobrenome
         self.numero, self.curso = numero, curso
-    def exibir_dados(self):
+    def executar(self):
         print(f"Nome: {self.nome} {self.sobrenome} | "
               f"Nº: {self.numero} | Curso: {self.curso}")
 aluno1 = Aluno("Pato", "Donald", 313, "Marujo")
-aluno1.exibir_dados()
+aluno1.executar()
