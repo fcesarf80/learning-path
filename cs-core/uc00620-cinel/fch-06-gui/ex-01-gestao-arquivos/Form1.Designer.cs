@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.pnlBtn = new System.Windows.Forms.Panel();
             this.grpBtns = new System.Windows.Forms.GroupBox();
             this.pnlLytBtns = new System.Windows.Forms.TableLayoutPanel();
@@ -320,8 +321,9 @@
             this.Controls.Add(this.pnlGreey);
             this.Controls.Add(this.pnlInformacoes);
             this.Controls.Add(this.pnlBtn);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Ex-01 | Gestão de Arquivos";
             this.pnlBtn.ResumeLayout(false);
             this.grpBtns.ResumeLayout(false);
             this.pnlLytBtns.ResumeLayout(false);

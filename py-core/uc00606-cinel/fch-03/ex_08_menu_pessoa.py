@@ -1,5 +1,5 @@
 """
-exercicio 08 - Menu pessoasy
+exercicio 08 - Menu pessoa
 Enunciado: Considere a seguinte lista de tuplas: 
 [ (“Ana”,20,”F”), (“Rui”,17,”M”), (“Eva”,56,”F”), (“Kika”,10,”F”),
 (“Ze”,22,”M”),(“Xico”,34,”M”), (“Xana”,21,”F”), (“Bela”,33,”F”) ] 
