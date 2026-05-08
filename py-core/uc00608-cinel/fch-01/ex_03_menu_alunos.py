@@ -6,35 +6,42 @@ o programa deverá guardar a informação num ficheiro (alunos.csv) com estrutur
 csv (separador ;).
 """
 class Aluno:
-    def __init__(self,nome sobrenome,num,curso):
+    def __init__(self, nome, sobrenome, num, curso):
         self.nome, self.sobrenome = nome, sobrenome
         self.num, self.curso = num, self.curso
 
 #######################
-while True:
-    print("a) Adicionar aluno")
-    print("b) Remover aluno")
-    print("c) Atualizar aluno")
-    print("d) Mostrar dados de todos")
-    print("e) Sair")
+def adicionar():
+    nome = input("Qual o nome do aluno?")
+    sobrenome = input("Qual o sobrenome do aluno {nome}? ")
 
-    op = input("Escolha a sua opção: ")
+    num = input(f"Qual o nº do aluno {nome} {sobrenome} na turma? ")
+    while True:
+        print("\n\n\n\n")
+        print("a) Adicional aluno")
+        print("b) Remover aluno")
+        print("c) Atualizar aluno")
+        print("d) Mostrar dados de todos")
+        print("e) Sair")
 
-    match op:
-        case "a":
-            adicionar()
-        case "b":
-            remover()
-        case "c":
-            atualizar()
-        case "d":
-            mostrar()
-        case "e":
-            sair()
-            break
-        case _:
-            sair()
-            print("Opção invalida")
-            print("")
-            
-        
+        op = input("Escolha a sua opção: ").lower()
+        match op:
+            case "a":
+                adicionar()
+            case "b":
+                remover()
+            case "c":
+                atualizar()
+            case "d":
+                mostrar()
+            case "e":
+                sair()
+                break
+            case _:
+                sair()
+                print("Opção invalida")
+                print("")
+
+turma = [aluno_01, aluno_02,...]
+for aluno in turma:
+    if numero == aluno.num:
