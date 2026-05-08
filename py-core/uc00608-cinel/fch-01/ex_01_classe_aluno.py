@@ -10,5 +10,5 @@ class Aluno:
     def executar(self):
         print(f"Nome: {self.nome} {self.sobrenome} | "
               f"Nº: {self.numero} | Curso: {self.curso}")
-aluno1 = Aluno("Pato", "Donald", 313, "Marujo")
-aluno1.executar()
+aluno_01 = Aluno("Pato", "Donald", 313, "Marujo")
+aluno_01.executar()
