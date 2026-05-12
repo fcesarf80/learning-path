@@ -1,0 +1,345 @@
+﻿using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace FilmesApp
+{
+    public partial class Form1 : Form
+    {
+        BindingList<Filme> lFilmes;
+        List<TipoFilme> lTipoFilmes;
+        bool inserir = false;
+        MySqlConnection conexao;
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+        
+
+        private void PreencheCombo(MySqlConnection conn)
+        {
+            lTipoFilmes = new List<TipoFilme>();
+            string sql = "select * from TipoFilme";
+            using (MySqlCommand cmd = new MySqlCommand(sql, conn))
+            {
+                using(MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        TipoFilme tipo = new TipoFilme(reader.GetInt32("idTipoFilme"), reader.GetString("designacao"));
+                        
+                        lTipoFilmes.Add(tipo);
+                    }
+                }
+            }
+            cmbTipo.DisplayMember = "Desc";
+            cmbTipo.DataSource = lTipoFilmes;
+        }
+
+        private TipoFilme RetornaTipo(int idTipo)
+        {
+            foreach (TipoFilme tipo in lTipoFilmes)
+                if (tipo.IDTipoFilme == idTipo)
+                    return tipo;
+            return null;
+        }
+
+        private void ListaFilmes(MySqlConnection connection)
+        {
+
+            MySqlConnection conn = connection;
+
+            string query = "Select * from Filmes";
+            lFilmes = new BindingList<Filme>();
+            
+
+            using (MySqlCommand cmd = new MySqlCommand(query, conn))
+            {
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read()) {
+                        
+                        lFilmes.Add(new Filme(reader.GetInt32("idFilme"), 
+                                            reader.GetString("nome"), 
+                                            reader.GetString("realizador"), 
+                                            reader.GetInt32("duracao"), 
+                                            reader.GetInt32("ano"), 
+                                            RetornaTipo(reader.GetInt32("idTipo")),
+                                            reader.GetString("resumo"),
+                                            (byte[])reader["foto"]));
+                        
+                        
+                    }
+                        
+                } 
+            }
+
+            Preenchetabela(lFilmes);
+        }
+
+        private void Preenchetabela(BindingList<Filme> filmes)
+        {
+            if(this.InvokeRequired)
+            {
+                PreenchetabelaDelegate del = (p) => { Preenchetabela(p); };
+                this.Invoke(del, new object[] { filmes });
+            }
+            else
+            {
+                tabelaFilmes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                tabelaFilmes.EditMode = DataGridViewEditMode.EditProgrammatically;
+                tabelaFilmes.MultiSelect = false;
+                tabelaFilmes.DataSource = filmes;
+                tabelaFilmes.Columns[0].Visible = false;
+                tabelaFilmes.Columns[7].Visible = false;
+
+
+            }
+        }
+
+        delegate void PreenchetabelaDelegate(BindingList<Filme> contactos);
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                
+                string dataSource = txtDatasource.Text;
+                int porta = int.Parse(txtPorta.Text);
+                string utilizador = txtUtilizador.Text;
+                string password = txtPassword.Text;
+
+                string connectionInfo = "datasource=" + dataSource + ";port=" + porta + ";username=" + utilizador + ";password=" + password + ";database=Formacao_C#;SslMode = none";
+                conexao = new MySqlConnection(connectionInfo);
+                conexao.Open();
+
+                MessageBox.Show("Conexão efetuada com sucesso!");
+
+                PreencheCombo(conexao);
+                
+                ListaFilmes(conexao);
+              
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(null,ex.Message, "Erro",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
+        }
+
+      
+
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            if (tabelaFilmes.SelectedRows.Count > 0) { 
+                 Filme c = (Filme)tabelaFilmes.SelectedRows[0].DataBoundItem;
+            
+                txtNome.Text = c.Nome;
+                txtNomeRealizador.Text = c.NomeRealizador;
+                cmbTipo.SelectedItem = c.Tipo;
+                txtAno.Text = c.Ano.ToString();
+                txtDuracao.Text = c.Duracao.ToString();
+                txtResumo.Text = c.Resumo;
+                if (c.Foto != null)
+                    pictureBox1.Image = new Bitmap(new MemoryStream(c.Foto));
+                else
+                    pictureBox1.Image = null;
+                inserir = false;
+            }
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            txtNome.Text = "";
+            txtNomeRealizador.Text = "";
+            cmbTipo.SelectedIndex = -1;
+            txtAno.Text = "";
+            txtDuracao.Text = "";
+            txtResumo.Text = "";
+            pictureBox1.Image = null;
+            inserir = true;
+            
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            tabelaFilmes.Focus();
+            if (tabelaFilmes.SelectedRows.Count > 0) { 
+                int indexRow = tabelaFilmes.SelectedRows[0].Index;
+           
+                if (indexRow>0)
+                {
+                    tabelaFilmes.CurrentCell = tabelaFilmes.Rows[indexRow - 1].Cells[1];
+                    tabelaFilmes.Rows[indexRow - 1].Selected = true;           
+                }
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            
+            tabelaFilmes.Focus();
+            if (tabelaFilmes.SelectedRows.Count > 0)
+            {
+                int indexRow = tabelaFilmes.SelectedRows[0].Index;
+
+
+                if (lFilmes.Count > indexRow + 1)
+                {
+
+                    tabelaFilmes.Rows[indexRow + 1].Selected = true;
+                    tabelaFilmes.CurrentCell = tabelaFilmes.Rows[indexRow + 1].Cells[1];
+                }
+            }
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            tabelaFilmes.Focus();
+           
+            if (lFilmes.Count > 0)
+            {
+                tabelaFilmes.CurrentCell = tabelaFilmes.Rows[0].Cells[1];
+                tabelaFilmes.Rows[0].Selected = true;
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            tabelaFilmes.Focus();
+            
+            if (lFilmes.Count > 0)
+            {
+                tabelaFilmes.CurrentCell = tabelaFilmes.Rows[lFilmes.Count - 1].Cells[1];
+                tabelaFilmes.Rows[lFilmes.Count - 1].Selected = true;
+            }
+           
+        }
+
+        private void btnGravar_Click(object sender, EventArgs e)
+        {
+            try
+            { 
+                if (inserir)
+                {
+                    string sql = "insert into Filmes values (0,@nome,@realizador,@duracao,@ano,@resumo,@foto,@tipo)";
+                    using (MySqlCommand cmd = new MySqlCommand(sql, conexao)) { 
+                        cmd.Parameters.AddWithValue("@nome", txtNome.Text);
+                        cmd.Parameters.Add("@realizador", MySqlDbType.VarChar).Value = txtNomeRealizador.Text;
+                        cmd.Parameters.AddWithValue("@duracao", txtDuracao.Text);
+                        cmd.Parameters.AddWithValue("@ano", txtAno.Text);
+                        cmd.Parameters.AddWithValue("@tipo", ((TipoFilme)cmbTipo.SelectedItem).IDTipoFilme);
+                        cmd.Parameters.AddWithValue("@foto", File.ReadAllBytes(pictureBox1.ImageLocation));
+                        cmd.Parameters.AddWithValue("@resumo", txtResumo.Text);
+                        int nRegistos = cmd.ExecuteNonQuery();
+                     
+                        MessageBox.Show("Registos inseridos: " + nRegistos,"Informação");
+                        if (nRegistos > 0) { 
+                            lFilmes.Add(new Filme((int)cmd.LastInsertedId,txtNome.Text,txtNomeRealizador.Text,int.Parse(txtAno.Text) ,int.Parse(txtAno.Text),(TipoFilme)cmbTipo.SelectedItem,txtResumo.Text,File.ReadAllBytes(pictureBox1.ImageLocation)));
+                            tabelaFilmes.Refresh();
+                        }
+                        tabelaFilmes.Rows[tabelaFilmes.Rows.Count - 1].Selected = true;
+                    }
+                }
+                else
+                {
+                    if (tabelaFilmes.SelectedRows.Count > 0) { 
+                        Filme c = (Filme)tabelaFilmes.SelectedRows[0].DataBoundItem;
+                        string sql = "update Filmes set nome=@nome,realizador=@realizador,duracao=@duracao,ano=@ano,resumo=@resumo,idtipo=@tipo,foto=@foto where idFilme= @idFilme";
+                        using (MySqlCommand cmd = new MySqlCommand(sql, conexao)) { 
+                            cmd.Parameters.AddWithValue("@nome", txtNome.Text);
+                            cmd.Parameters.AddWithValue("@realizador", txtNomeRealizador.Text);
+                            cmd.Parameters.AddWithValue("@duracao", int.Parse(txtDuracao.Text));
+                            cmd.Parameters.AddWithValue("@ano", int.Parse(txtAno.Text));
+                            cmd.Parameters.AddWithValue("@tipo", ((TipoFilme)cmbTipo.SelectedItem).IDTipoFilme);
+                            cmd.Parameters.AddWithValue("@resumo", txtResumo.Text);
+                            cmd.Parameters.AddWithValue("@foto", File.ReadAllBytes(pictureBox1.ImageLocation));
+                            cmd.Parameters.AddWithValue("@idFilme", c.NumeroFilme);
+                            int nRegistos = cmd.ExecuteNonQuery();
+                    
+                            MessageBox.Show("Registos atualizados: " + nRegistos, "Informação");
+                            if (nRegistos > 0) {
+                            
+                                c.Nome = txtNome.Text;
+                                c.NomeRealizador = txtNomeRealizador.Text;
+                                c.Duracao = int.Parse(txtDuracao.Text);
+                                c.Ano = int.Parse(txtAno.Text);
+                                c.Tipo = (TipoFilme)cmbTipo.SelectedItem;
+                                c.Resumo = txtResumo.Text;
+                                c.Foto = File.ReadAllBytes(pictureBox1.ImageLocation);
+                                tabelaFilmes.Refresh();
+                            }
+                        }
+                    }
+                }
+            }catch(Exception ex)
+            {
+                MessageBox.Show( ex.Message, "Erro");
+            }
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (tabelaFilmes.SelectedRows.Count > 0)
+                {
+                    int nRow = tabelaFilmes.SelectedRows[0].Index;
+                    Filme c = (Filme)tabelaFilmes.SelectedRows[0].DataBoundItem;
+                    string sql = "delete from Filmes where idFilme = @idFilme";
+                    using (MySqlCommand cmd = new MySqlCommand(sql, conexao))
+                    {
+                        cmd.Parameters.AddWithValue("@idFilme", c.NumeroFilme);
+                        int nRegistos = cmd.ExecuteNonQuery();
+                        MessageBox.Show("Registos eliminados: " + nRegistos, "Informação");
+                        if (nRegistos == 1)
+                        {
+                            lFilmes.Remove(c);
+                            tabelaFilmes.Refresh();
+                        }
+                    }
+                    if(nRow>0)
+                        tabelaFilmes.Rows[nRow - 1].Selected = true;
+                        
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message,"Erro");
+            }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog foto = new OpenFileDialog();
+            //foto.InitialDirectory = Directory.GetCurrentDirectory;
+            
+            if(foto.ShowDialog() == DialogResult.OK)
+            {
+                
+                    Bitmap imagem = new Bitmap(foto.OpenFile());
+                    //((Filme)tabelaFilmes.SelectedRows[0].DataBoundItem).Foto = imagem;
+                    pictureBox1.Image = imagem;
+                    pictureBox1.ImageLocation = foto.FileName;
+
+                
+            }
+        }
+    }
+}

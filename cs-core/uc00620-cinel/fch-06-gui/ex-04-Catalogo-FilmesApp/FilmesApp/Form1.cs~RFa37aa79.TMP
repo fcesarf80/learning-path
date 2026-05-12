@@ -1,0 +1,245 @@
+﻿using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace ContactosApp
+{
+    public partial class Form1 : Form
+    {
+        BindingList<Contacto> lContactos;
+        bool inserir = false;
+        MySqlConnection conexao;
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+   
+
+        private BindingList<Contacto> ListaContactos(MySqlConnection conn)
+        {
+            string query = "Select * from Contactos";
+            lContactos = new BindingList<Contacto>();
+            using (MySqlCommand cmd = new MySqlCommand(query, conn))
+            {
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read()) {
+                        lContactos.Add(new Contacto(reader.GetInt32("id_contacto"), reader.GetString("primeiro_nome"), reader.GetString("ultimo_nome"), reader.GetString("sexo"), reader.GetString("data_nascimento"), reader.GetString("assunto")));
+                        Thread.Sleep(100);
+                    }
+                        
+                } 
+            }
+
+            return lContactos;
+            
+        }
+
+        private void Preenchetabela(BindingList<Contacto> contactos)
+        {
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.EditMode = DataGridViewEditMode.EditProgrammatically;
+            dataGridView1.MultiSelect = false;
+            dataGridView1.DataSource = contactos;
+            dataGridView1.Columns["PrimeiroNome"].HeaderText = "Primeiro Nome";
+    
+           
+        }
+
+
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                
+                string dataSource = txtDatasource.Text;
+                int porta = int.Parse(txtPorta.Text);
+                string utilizador = txtUtilizador.Text;
+                string password = txtPassword.Text;
+
+                string connectionInfo = "datasource=" + dataSource + ";port=" + porta + ";username=" + utilizador + ";password=" + password + ";database=formacao_php";
+                conexao = new MySqlConnection(connectionInfo);
+                conexao.Open();
+
+                //MessageBox.Show("Conexão efetuada com sucesso!");
+
+                BindingList<Contacto> lista = ListaContactos(conexao);
+
+                Preenchetabela(lista);
+             
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(null,ex.Message, "Erro",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
+        }
+
+      
+
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            
+            Contacto c = (Contacto)((DataGridView) sender).CurrentRow.DataBoundItem;
+            
+            txtPrimeiroNome.Text = c.PrimeiroNome;
+            txtUltimoNome.Text = c.UltimoNome;
+            if (c.Sexo == "Masculino")
+                radioMasculino.Select();
+            else
+                radioFeminino.Select();
+            dateTimePicker1.Text = c.DataNascimento;
+            txtAssunto.Text = c.Assunto;
+            inserir = false;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            txtPrimeiroNome.Text = "";
+            txtUltimoNome.Text = "";
+            dateTimePicker1.Text = "";
+            radioFeminino.Checked = false;
+            radioMasculino.Checked = false;
+            txtAssunto.Text = "";
+            inserir = true;
+            
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            dataGridView1.Focus();
+            int indexRow = dataGridView1.CurrentRow.Index;
+            if (indexRow>0)
+            {
+                
+                dataGridView1.Rows[indexRow - 1].Selected = true;
+                dataGridView1.CurrentCell = dataGridView1.Rows[indexRow - 1].Cells[0];
+            }
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            
+            dataGridView1.Focus();
+            int indexRow = dataGridView1.CurrentRow.Index;
+            if (lContactos.Count > indexRow + 1) { 
+              
+                dataGridView1.Rows[indexRow + 1].Selected = true;
+                dataGridView1.CurrentCell = dataGridView1.Rows[indexRow+1].Cells[0];
+               
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            dataGridView1.Focus();
+           
+            if (lContactos.Count > 0)
+            {
+                dataGridView1.Rows[0].Selected = true;
+                dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells[0];
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            dataGridView1.Focus();
+            
+            if (lContactos.Count > 0)
+            {
+                dataGridView1.Rows[lContactos.Count - 1].Selected = true;
+                dataGridView1.CurrentCell = dataGridView1.Rows[lContactos.Count - 1].Cells[0];
+            }
+        }
+
+        private void btnGravar_Click(object sender, EventArgs e)
+        {
+            try { 
+                if (inserir)
+                {
+                    string sql = "insert into Contactos values (0,@primeiroNome,@ultimoNome,@sexo,@dataNascimento,@assunto)";
+                    using (MySqlCommand cmd = new MySqlCommand(sql, conexao)) { 
+                        cmd.Parameters.AddWithValue("@primeiroNome", txtPrimeiroNome.Text);
+                        cmd.Parameters.Add("@ultimoNome", MySqlDbType.VarChar).Value = txtUltimoNome.Text;
+                         
+                        //cmd.Parameters.AddWithValue("@ultimoNome", txtUltimoNome.Text);
+                        cmd.Parameters.AddWithValue("@sexo", (radioFeminino.Checked) ? "Feminino" : "Masculino");
+                        cmd.Parameters.AddWithValue("@dataNascimento", dateTimePicker1.Text);
+                        cmd.Parameters.AddWithValue("@assunto", txtAssunto.Text);
+                        int nRegistos = cmd.ExecuteNonQuery();
+                        string sexo = (radioFeminino.Checked) ? "Feminino" : "Masculino";
+                        MessageBox.Show("Registos inseridos: " + nRegistos,"Informação");
+                        lContactos.Add(new Contacto((int)cmd.LastInsertedId,txtPrimeiroNome.Text,txtUltimoNome.Text,sexo ,dateTimePicker1.Text,txtAssunto.Text));
+                        dataGridView1.Refresh();
+                    }
+                }
+                else
+                {
+
+                    Contacto c = (Contacto)dataGridView1.CurrentRow.DataBoundItem;
+                    string sql = "update Contactos set primeiro_nome=@primeiroNome,ultimo_nome=@ultimoNome,sexo=@sexo,data_nascimento=@dataNascimento,assunto=@assunto where id_contacto= @idContacto";
+                    using (MySqlCommand cmd = new MySqlCommand(sql, conexao)) { 
+                        cmd.Parameters.AddWithValue("@primeiroNome", txtPrimeiroNome.Text);
+                        cmd.Parameters.AddWithValue("@ultimoNome", txtUltimoNome.Text);
+                        cmd.Parameters.AddWithValue("@sexo", (radioFeminino.Checked) ? "Feminino" : "Masculino");
+                        cmd.Parameters.AddWithValue("@dataNascimento", dateTimePicker1.Value.ToString("yyyy-MM-dd"));
+                        cmd.Parameters.AddWithValue("@assunto", txtAssunto.Text);
+                        cmd.Parameters.AddWithValue("@idContacto", c.NumeroContacto);
+                    
+                        int nRegistos = cmd.ExecuteNonQuery();
+                    
+                        MessageBox.Show("Registos atualizados: " + nRegistos, "Informação");
+                        string sexo = (radioFeminino.Checked) ? "Feminino" : "Masculino";
+                        c.PrimeiroNome = txtPrimeiroNome.Text;
+                        c.UltimoNome = txtUltimoNome.Text;
+                        c.Sexo = sexo;
+                        c.DataNascimento = dateTimePicker1.Value.ToString("dd-MM-yyyy");
+                        c.Assunto = txtAssunto.Text;
+                        dataGridView1.Refresh();
+                    }
+                }
+            }catch(Exception ex)
+            {
+                MessageBox.Show( ex.Message, "Erro");
+            }
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Contacto c = (Contacto)dataGridView1.CurrentRow.DataBoundItem;
+                string sql = "delete from Contactos where id_contacto= @idContacto";
+                using (MySqlCommand cmd = new MySqlCommand(sql, conexao))
+                {
+                    cmd.Parameters.AddWithValue("@idContacto", c.NumeroContacto);
+                    int nRegistos = cmd.ExecuteNonQuery();
+                    MessageBox.Show("Registos eliminados: " + nRegistos, "Informação");
+                    lContactos.Remove(c);
+                    dataGridView1.Refresh();
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message,"Erro");
+            }
+        }
+    }
+}

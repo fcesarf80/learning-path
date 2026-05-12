@@ -8,6 +8,8 @@ namespace ex_01_windows_forms_app01
 {
     public partial class Form1 : Form
     {
+        private string acaoSelecionada = "";
+
         public Form1()
         {
             InitializeComponent();
@@ -102,11 +104,17 @@ namespace ex_01_windows_forms_app01
 
         private void ConfigurarListView()
         {
-            lstvResultados.View = View.List;
+            lstvResultados.View = View.Details;
             lstvResultados.FullRowSelect = true;
+            lstvResultados.GridLines = true;
             lstvResultados.Font = new Font("Segoe UI", 10);
             lstvResultados.BackColor = Color.White;
             lstvResultados.ForeColor = Color.Black;
+
+            lstvResultados.Columns.Clear();
+            lstvResultados.Columns.Add("Nome", 250);
+            lstvResultados.Columns.Add("Tipo", 100);
+            lstvResultados.Columns.Add("Tamanho", 100);
         }
 
         private void btnIconlocalizarPastaRaiz_Click(object sender, EventArgs e)
@@ -154,10 +162,36 @@ namespace ex_01_windows_forms_app01
             foreach (string arquivo in arquivos)
             {
                 FileInfo info = new FileInfo(arquivo);
-                lstvResultados.Items.Add(info.Name);
+
+                ListViewItem item = new ListViewItem(info.Name);
+                item.SubItems.Add(info.Extension);
+                item.SubItems.Add((info.Length / 1024) + " KB");
+
+                lstvResultados.Items.Add(item);
             }
 
             MessageBox.Show("Arquivos listados com sucesso.");
         }
+
+        private void btnIconMover_Click(object sender, EventArgs e)
+        {
+            acaoSelecionada = "mover";
+
+            btnIconMover.BackColor = Color.FromArgb(180, 220, 255);
+            btnIconCopiar.BackColor = Color.FromArgb(235, 250, 235);
+
+            MessageBox.Show("Modo mover selecionado.");
+        }
+
+        private void btnIconCopiar_Click(object sender, EventArgs e)
+        {
+            acaoSelecionada = "copiar";
+
+            btnIconCopiar.BackColor = Color.FromArgb(180, 255, 180);
+            btnIconMover.BackColor = Color.FromArgb(230, 243, 255);
+
+            MessageBox.Show("Modo copiar selecionado.");
+        }
+
     }
 }

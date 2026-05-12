@@ -126,6 +126,7 @@
             this.btnIconCopiar.Text = "Copiar";
             this.btnIconCopiar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnIconCopiar.UseVisualStyleBackColor = true;
+            this.btnIconCopiar.Click += new System.EventHandler(this.btnIconCopiar_Click);
             // 
             // btnIconMover
             // 
@@ -139,6 +140,7 @@
             this.btnIconMover.Text = "Mover";
             this.btnIconMover.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnIconMover.UseVisualStyleBackColor = true;
+            this.btnIconMover.Click += new System.EventHandler(this.btnIconMover_Click);
             // 
             // btnIconExcluir
             // 
