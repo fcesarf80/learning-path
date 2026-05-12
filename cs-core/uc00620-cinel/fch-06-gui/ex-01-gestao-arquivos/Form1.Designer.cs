@@ -112,6 +112,7 @@
             this.btnIconListarArq.Text = "Listar Arquivos";
             this.btnIconListarArq.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnIconListarArq.UseVisualStyleBackColor = true;
+            this.btnIconListarArq.Click += new System.EventHandler(this.btnIconListarArq_Click);
             // 
             // btnIconCopiar
             // 
@@ -214,6 +215,7 @@
             this.btnIconlocalizarPastaRaiz.Size = new System.Drawing.Size(55, 38);
             this.btnIconlocalizarPastaRaiz.TabIndex = 2;
             this.btnIconlocalizarPastaRaiz.UseVisualStyleBackColor = true;
+            this.btnIconlocalizarPastaRaiz.Click += new System.EventHandler(this.btnIconlocalizarPastaRaiz_Click);
             // 
             // btnIconlocalizarPastaDestino
             // 
@@ -225,6 +227,7 @@
             this.btnIconlocalizarPastaDestino.Size = new System.Drawing.Size(55, 39);
             this.btnIconlocalizarPastaDestino.TabIndex = 3;
             this.btnIconlocalizarPastaDestino.UseVisualStyleBackColor = true;
+            this.btnIconlocalizarPastaDestino.Click += new System.EventHandler(this.btnIconlocalizarPastaDestino_Click);
             // 
             // lblRaiz
             // 
