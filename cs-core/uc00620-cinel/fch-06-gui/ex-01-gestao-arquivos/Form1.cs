@@ -106,6 +106,7 @@ namespace ex_01_windows_forms_app01
         {
             lstvResultados.View = View.Details;
             lstvResultados.FullRowSelect = true;
+            lstvResultados.MultiSelect = false;
             lstvResultados.GridLines = true;
             lstvResultados.Font = new Font("Segoe UI", 10);
             lstvResultados.BackColor = Color.White;
@@ -115,6 +116,7 @@ namespace ex_01_windows_forms_app01
             lstvResultados.Columns.Add("Nome", 250);
             lstvResultados.Columns.Add("Tipo", 100);
             lstvResultados.Columns.Add("Tamanho", 100);
+
         }
 
         private void btnIconlocalizarPastaRaiz_Click(object sender, EventArgs e)
@@ -175,23 +177,170 @@ namespace ex_01_windows_forms_app01
 
         private void btnIconMover_Click(object sender, EventArgs e)
         {
+            ResetarBotoesAcao();
+
             acaoSelecionada = "mover";
 
-            btnIconMover.BackColor = Color.FromArgb(180, 220, 255);
-            btnIconCopiar.BackColor = Color.FromArgb(235, 250, 235);
+            btnIconMover.BackColor =
+                Color.FromArgb(180, 220, 255);
 
-            MessageBox.Show("Modo mover selecionado.");
+            MessageBox.Show(
+                "Modo mover selecionado.",
+                "Informação",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+            );
         }
 
         private void btnIconCopiar_Click(object sender, EventArgs e)
         {
+            ResetarBotoesAcao();
+
             acaoSelecionada = "copiar";
 
-            btnIconCopiar.BackColor = Color.FromArgb(180, 255, 180);
-            btnIconMover.BackColor = Color.FromArgb(230, 243, 255);
+            btnIconCopiar.BackColor =
+                Color.FromArgb(180, 255, 180);
 
-            MessageBox.Show("Modo copiar selecionado.");
+            MessageBox.Show(
+                "Modo copiar selecionado.",
+                "Informação",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+            );
         }
 
+        private void btnIconIniciar_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(acaoSelecionada))
+            {
+                MessageBox.Show(
+                    "Selecione uma ação.",
+                    "Aviso",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+                return;
+            }
+
+            if (lstvResultados.SelectedItems.Count == 0)
+            {
+                MessageBox.Show(
+                    "Selecione um arquivo.",
+                    "Aviso",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+                return;
+            }
+
+            string origem = txtCaminhoRaiz.Text;
+            string destino = txtCaminhoDestino.Text;
+
+            if (!Directory.Exists(origem))
+            {
+                MessageBox.Show("Diretório raiz inválido.");
+                return;
+            }
+
+            if (!Directory.Exists(destino))
+            {
+                MessageBox.Show("Diretório destino inválido.");
+                return;
+            }
+
+            try
+            {
+                string nomeArquivo =
+                    lstvResultados.SelectedItems[0].Text;
+
+                string caminhoOrigem =
+                    Path.Combine(origem, nomeArquivo);
+
+                string caminhoDestino =
+                    Path.Combine(destino, nomeArquivo);
+
+                if (acaoSelecionada == "copiar")
+                {
+                    File.Copy(caminhoOrigem, caminhoDestino, true);
+
+                    MessageBox.Show("Arquivo copiado com sucesso.");
+                    MessageBox.Show("Arquivo copiado com sucesso.",
+                    "Sucesso",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                    );
+                }
+                else if (acaoSelecionada == "mover")
+                {
+                    File.Move(caminhoOrigem, caminhoDestino);
+
+                    MessageBox.Show("Arquivo movido com sucesso.",
+                    "Sucesso",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                    );
+                }
+
+                btnIconListarArq_Click(sender, e);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Erro ao executar operação:\n" + ex.Message
+                );
+            }
+        }
+
+        private void ResetarBotoesAcao()
+        {
+            btnIconMover.BackColor =
+                Color.FromArgb(230, 243, 255);
+
+            btnIconCopiar.BackColor =
+                Color.FromArgb(235, 250, 235);
+        }
+
+        private void btnIconExcluir_Click(object sender, EventArgs e)
+        {
+            if (lstvResultados.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Selecione um arquivo para excluir.");
+                return;
+            }
+
+            DialogResult resposta = MessageBox.Show(
+                "Deseja realmente excluir o arquivo selecionado?",
+                "Confirmar exclusão",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning
+            );
+
+            if (resposta == DialogResult.No)
+            {
+                return;
+            }
+
+            string diretorio = txtCaminhoRaiz.Text;
+            string nomeArquivo = lstvResultados.SelectedItems[0].Text;
+            string caminhoCompleto = Path.Combine(diretorio, nomeArquivo);
+
+            if (File.Exists(caminhoCompleto))
+            {
+                File.Delete(caminhoCompleto);
+
+                MessageBox.Show("Arquivo excluído com sucesso.");
+
+                btnIconListarArq_Click(sender, e);
+            }
+            else
+            {
+                MessageBox.Show("Arquivo não encontrado.");
+            }
+        }
+
+        private void txtCaminhoRaiz_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

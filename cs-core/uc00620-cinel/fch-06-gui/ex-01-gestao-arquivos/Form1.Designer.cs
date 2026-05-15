@@ -154,6 +154,7 @@
             this.btnIconExcluir.Text = "Excluir Arquivos";
             this.btnIconExcluir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnIconExcluir.UseVisualStyleBackColor = true;
+            this.btnIconExcluir.Click += new System.EventHandler(this.btnIconExcluir_Click);
             // 
             // pnlInformacoes
             // 
@@ -206,6 +207,7 @@
             this.txtCaminhoRaiz.Name = "txtCaminhoRaiz";
             this.txtCaminhoRaiz.Size = new System.Drawing.Size(515, 30);
             this.txtCaminhoRaiz.TabIndex = 0;
+            this.txtCaminhoRaiz.TextChanged += new System.EventHandler(this.txtCaminhoRaiz_TextChanged);
             // 
             // btnIconlocalizarPastaRaiz
             // 
@@ -307,6 +309,7 @@
             this.btnIconIniciar.TabIndex = 1;
             this.btnIconIniciar.Text = "Iniciar";
             this.btnIconIniciar.UseVisualStyleBackColor = true;
+            this.btnIconIniciar.Click += new System.EventHandler(this.btnIconIniciar_Click);
             // 
             // lstvResultados
             // 
