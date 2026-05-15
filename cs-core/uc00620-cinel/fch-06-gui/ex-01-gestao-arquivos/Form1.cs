@@ -19,6 +19,8 @@ namespace ex_01_windows_forms_app01
             ConfigurarListView();
         }
 
+        #region Configuração da Interface
+
         private void ConfigurarTela()
         {
             this.BackColor = Color.White;
@@ -119,6 +121,10 @@ namespace ex_01_windows_forms_app01
 
         }
 
+        #endregion
+
+        #region Eventos dos Botões
+
         private void btnIconlocalizarPastaRaiz_Click(object sender, EventArgs e)
         {
             using (FolderBrowserDialog folder = new FolderBrowserDialog())
@@ -147,13 +153,13 @@ namespace ex_01_windows_forms_app01
 
             if (string.IsNullOrWhiteSpace(caminhoRaiz))
             {
-                MessageBox.Show("Informe o diretório raiz.");
+                MostrarAviso("Informe o diretório raiz.");
                 return;
             }
 
             if (!Directory.Exists(caminhoRaiz))
             {
-                MessageBox.Show("O diretório raiz não existe.");
+                MostrarAviso("O diretório raiz não existe.");
                 return;
             }
 
@@ -172,7 +178,7 @@ namespace ex_01_windows_forms_app01
                 lstvResultados.Items.Add(item);
             }
 
-            MessageBox.Show("Arquivos listados com sucesso.");
+            MostrarSucesso("Arquivos listados com sucesso.");
         }
 
         private void btnIconMover_Click(object sender, EventArgs e)
@@ -184,12 +190,7 @@ namespace ex_01_windows_forms_app01
             btnIconMover.BackColor =
                 Color.FromArgb(180, 220, 255);
 
-            MessageBox.Show(
-                "Modo mover selecionado.",
-                "Informação",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-            );
+            MostrarSucesso("Modo mover selecionado.");
         }
 
         private void btnIconCopiar_Click(object sender, EventArgs e)
@@ -201,35 +202,20 @@ namespace ex_01_windows_forms_app01
             btnIconCopiar.BackColor =
                 Color.FromArgb(180, 255, 180);
 
-            MessageBox.Show(
-                "Modo copiar selecionado.",
-                "Informação",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-            );
+            MostrarSucesso("Modo copiar selecionado.");
         }
 
         private void btnIconIniciar_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(acaoSelecionada))
             {
-                MessageBox.Show(
-                    "Selecione uma ação.",
-                    "Aviso",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                );
+                MostrarAviso("Selecione uma ação.");
                 return;
             }
 
             if (lstvResultados.SelectedItems.Count == 0)
             {
-                MessageBox.Show(
-                    "Selecione um arquivo.",
-                    "Aviso",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                );
+                MostrarAviso("Selecione um arquivo."); 
                 return;
             }
 
@@ -238,13 +224,14 @@ namespace ex_01_windows_forms_app01
 
             if (!Directory.Exists(origem))
             {
-                MessageBox.Show("Diretório raiz inválido.");
+                MostrarAviso("Diretório raiz inválido.");
                 return;
+
             }
 
             if (!Directory.Exists(destino))
             {
-                MessageBox.Show("Diretório destino inválido.");
+                MostrarAviso("Diretório destino inválido.");
                 return;
             }
 
@@ -259,52 +246,40 @@ namespace ex_01_windows_forms_app01
                 string caminhoDestino =
                     Path.Combine(destino, nomeArquivo);
 
+                if (File.Exists(caminhoDestino))
+                {
+                    MostrarAviso(
+                        "Já existe um arquivo com este nome no diretório destino."
+                    );
+                    return;
+                }
+
                 if (acaoSelecionada == "copiar")
                 {
-                    File.Copy(caminhoOrigem, caminhoDestino, true);
+                    File.Copy(caminhoOrigem, caminhoDestino);
 
-                    MessageBox.Show("Arquivo copiado com sucesso.");
-                    MessageBox.Show("Arquivo copiado com sucesso.",
-                    "Sucesso",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information
-                    );
+                    MostrarSucesso("Arquivo copiado com sucesso.");
                 }
                 else if (acaoSelecionada == "mover")
                 {
                     File.Move(caminhoOrigem, caminhoDestino);
 
-                    MessageBox.Show("Arquivo movido com sucesso.",
-                    "Sucesso",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information
-                    );
+                    MostrarSucesso("Arquivo movido com sucesso.");
                 }
 
                 btnIconListarArq_Click(sender, e);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    "Erro ao executar operação:\n" + ex.Message
-                );
+                MostrarErro("Erro ao executar operação:\n" + ex.Message);
             }
-        }
-
-        private void ResetarBotoesAcao()
-        {
-            btnIconMover.BackColor =
-                Color.FromArgb(230, 243, 255);
-
-            btnIconCopiar.BackColor =
-                Color.FromArgb(235, 250, 235);
         }
 
         private void btnIconExcluir_Click(object sender, EventArgs e)
         {
             if (lstvResultados.SelectedItems.Count == 0)
             {
-                MessageBox.Show("Selecione um arquivo para excluir.");
+                MostrarAviso("Selecione um arquivo para excluir.");
                 return;
             }
 
@@ -328,19 +303,67 @@ namespace ex_01_windows_forms_app01
             {
                 File.Delete(caminhoCompleto);
 
-                MessageBox.Show("Arquivo excluído com sucesso.");
+                MostrarSucesso("Arquivo excluído com sucesso.");
 
                 btnIconListarArq_Click(sender, e);
             }
             else
             {
-                MessageBox.Show("Arquivo não encontrado.");
+                MostrarErro("Arquivo não encontrado.");
             }
+        }
+
+
+        #endregion
+
+        #region Métodos Auxiliares
+
+        private void ResetarBotoesAcao()
+        {
+            btnIconMover.BackColor =
+                Color.FromArgb(230, 243, 255);
+
+            btnIconCopiar.BackColor =
+                Color.FromArgb(235, 250, 235);
         }
 
         private void txtCaminhoRaiz_TextChanged(object sender, EventArgs e)
         {
 
         }
+
+        private void MostrarAviso(string mensagem)
+        {
+            MessageBox.Show(
+                mensagem,
+                "Aviso",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning
+            );
+        }
+
+        private void MostrarErro(string mensagem)
+        {
+            MessageBox.Show(
+                mensagem,
+                "Erro",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error
+            );
+        }
+
+        private void MostrarSucesso(string mensagem)
+        {
+            MessageBox.Show(
+                mensagem,
+                "Sucesso",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+            );
+        }
+
+        #endregion
+
     }
+
 }

@@ -8,13 +8,13 @@ namespace FilmesApp
     {
         MySqlConnection conexao;
 
+        List<Categoria> LTipoFilmes;
+
+        BindingList<Filme>
+
         public FormFilmes()
         {
             InitializeComponent();
-        }
-
-        private void FormFilmes_Load(object sender, EventArgs e)
-        {
         }
 
         private void btnConectar_Click(object sender, EventArgs e)
@@ -31,22 +31,20 @@ namespace FilmesApp
                     return;
                 }
 
-                string connectionInfo = $"server={dataSource};port={porta};user={utilizador};password={password};database=catalogo_filmesapp;";
+                // Certifique-se que o nome da base de dados 'catalogo_filmesapp' existe no seu MySQL
+                string strConexao = $"server={dataSource};port={porta};user={utilizador};password={password};database=catalogo_filmesapp;";
 
-
-                conexao = new MySqlConnection(connectionInfo);
+                conexao = new MySqlConnection(strConexao);
                 conexao.Open();
 
                 MessageBox.Show("Conexão realizada com sucesso!");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro: " + ex.Message);
+                MessageBox.Show("Erro ao conectar: " + ex.Message);
             }
-        } // Fecha o btnConectar_Click
-
-        private void txtPassword_TextChanged(object sender, EventArgs e)
-        {
         }
-    } // Fecha a classe FormFilmes
-} // Fecha o namespace
+
+        private void FormFilmes_Load(object sender, EventArgs e) { }
+    }
+}
