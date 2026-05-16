@@ -167,6 +167,12 @@ namespace ex_01_windows_forms_app01
 
             string[] arquivos = Directory.GetFiles(caminhoRaiz);
 
+            if (arquivos.Length == 0)
+            {
+                MostrarAviso("Nenhum arquivo encontrado no diretório.");
+                return;
+            }
+
             foreach (string arquivo in arquivos)
             {
                 FileInfo info = new FileInfo(arquivo);
@@ -190,6 +196,9 @@ namespace ex_01_windows_forms_app01
             btnIconMover.BackColor =
                 Color.FromArgb(180, 220, 255);
 
+            btnIconMover.ForeColor =
+                Color.FromArgb(0, 102, 204);
+
             MostrarSucesso("Modo mover selecionado.");
         }
 
@@ -201,6 +210,9 @@ namespace ex_01_windows_forms_app01
 
             btnIconCopiar.BackColor =
                 Color.FromArgb(180, 255, 180);
+
+            btnIconCopiar.ForeColor =
+                Color.FromArgb(0, 130, 0);
 
             MostrarSucesso("Modo copiar selecionado.");
         }
@@ -323,8 +335,14 @@ namespace ex_01_windows_forms_app01
             btnIconMover.BackColor =
                 Color.FromArgb(230, 243, 255);
 
+            btnIconMover.ForeColor =
+                Color.FromArgb(0, 102, 204);
+
             btnIconCopiar.BackColor =
                 Color.FromArgb(235, 250, 235);
+
+            btnIconCopiar.ForeColor =
+                Color.FromArgb(0, 130, 0);
         }
 
         private void txtCaminhoRaiz_TextChanged(object sender, EventArgs e)
