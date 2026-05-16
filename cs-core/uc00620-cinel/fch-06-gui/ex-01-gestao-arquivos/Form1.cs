@@ -184,7 +184,9 @@ namespace ex_01_windows_forms_app01
                 lstvResultados.Items.Add(item);
             }
 
-            MostrarSucesso("Arquivos listados com sucesso.");
+            MostrarSucesso(
+                arquivos.Length + " arquivo(s) encontrado(s)."
+            );
         }
 
         private void btnIconMover_Click(object sender, EventArgs e)
@@ -199,7 +201,7 @@ namespace ex_01_windows_forms_app01
             btnIconMover.ForeColor =
                 Color.FromArgb(0, 102, 204);
 
-            MostrarSucesso("Modo mover selecionado.");
+            MostrarInformacao("Modo mover selecionado.");
         }
 
         private void btnIconCopiar_Click(object sender, EventArgs e)
@@ -214,7 +216,7 @@ namespace ex_01_windows_forms_app01
             btnIconCopiar.ForeColor =
                 Color.FromArgb(0, 130, 0);
 
-            MostrarSucesso("Modo copiar selecionado.");
+            MostrarInformacao("Modo copiar selecionado.");
         }
 
         private void btnIconIniciar_Click(object sender, EventArgs e)
@@ -279,7 +281,7 @@ namespace ex_01_windows_forms_app01
                     MostrarSucesso("Arquivo movido com sucesso.");
                 }
 
-                btnIconListarArq_Click(sender, e);
+                AtualizarListaArquivos();
             }
             catch (Exception ex)
             {
@@ -317,7 +319,7 @@ namespace ex_01_windows_forms_app01
 
                 MostrarSucesso("Arquivo excluído com sucesso.");
 
-                btnIconListarArq_Click(sender, e);
+                AtualizarListaArquivos();
             }
             else
             {
@@ -375,6 +377,41 @@ namespace ex_01_windows_forms_app01
             MessageBox.Show(
                 mensagem,
                 "Sucesso",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+            );
+        }
+
+        private void AtualizarListaArquivos()
+        {
+            string caminhoRaiz = txtCaminhoRaiz.Text;
+
+            lstvResultados.Items.Clear();
+
+            string[] arquivos = Directory.GetFiles(caminhoRaiz);
+
+            foreach (string arquivo in arquivos)
+            {
+                FileInfo info = new FileInfo(arquivo);
+
+                ListViewItem item =
+                    new ListViewItem(info.Name);
+
+                item.SubItems.Add(info.Extension);
+
+                item.SubItems.Add(
+                    (info.Length / 1024) + " KB"
+                );
+
+                lstvResultados.Items.Add(item);
+            }
+        }
+
+        private void MostrarInformacao(string mensagem)
+        {
+            MessageBox.Show(
+                mensagem,
+                "Informação",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information
             );
