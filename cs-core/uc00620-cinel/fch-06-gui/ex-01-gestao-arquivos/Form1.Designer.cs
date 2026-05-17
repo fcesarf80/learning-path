@@ -279,6 +279,7 @@
             this.grpBxResultados.TabIndex = 0;
             this.grpBxResultados.TabStop = false;
             this.grpBxResultados.Text = "Resultados";
+            this.grpBxResultados.Enter += new System.EventHandler(this.grpBxResultados_Enter);
             // 
             // tlpFinalTela
             // 
@@ -319,6 +320,8 @@
             this.lstvResultados.Size = new System.Drawing.Size(520, 121);
             this.lstvResultados.TabIndex = 0;
             this.lstvResultados.UseCompatibleStateImageBehavior = false;
+            this.lstvResultados.SelectedIndexChanged += new System.EventHandler(this.lstvResultados_SelectedIndexChanged);
+            this.lstvResultados.DoubleClick += new System.EventHandler(this.lstvResultados_DoubleClick);
             // 
             // Form1
             // 

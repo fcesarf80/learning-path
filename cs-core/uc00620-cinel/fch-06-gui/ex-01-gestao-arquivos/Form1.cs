@@ -109,6 +109,7 @@ namespace ex_01_windows_forms_app01
             lstvResultados.View = View.Details;
             lstvResultados.FullRowSelect = true;
             lstvResultados.MultiSelect = false;
+            lstvResultados.HideSelection = false;
             lstvResultados.GridLines = true;
             lstvResultados.Font = new Font("Segoe UI", 10);
             lstvResultados.BackColor = Color.White;
@@ -118,6 +119,7 @@ namespace ex_01_windows_forms_app01
             lstvResultados.Columns.Add("Nome", 250);
             lstvResultados.Columns.Add("Tipo", 100);
             lstvResultados.Columns.Add("Tamanho", 100);
+            lstvResultados.Columns.Add("Modificado", 150);
 
         }
 
@@ -180,6 +182,10 @@ namespace ex_01_windows_forms_app01
                 ListViewItem item = new ListViewItem(info.Name);
                 item.SubItems.Add(info.Extension);
                 item.SubItems.Add((info.Length / 1024) + " KB");
+
+                item.SubItems.Add(
+                    info.LastWriteTime.ToString("dd/MM/yyyy HH:mm")
+                );
 
                 lstvResultados.Items.Add(item);
             }
@@ -282,6 +288,12 @@ namespace ex_01_windows_forms_app01
                 }
 
                 AtualizarListaArquivos();
+
+                lstvResultados.SelectedItems.Clear();
+
+                acaoSelecionada = "";
+                ResetarBotoesAcao();
+
             }
             catch (Exception ex)
             {
@@ -320,6 +332,8 @@ namespace ex_01_windows_forms_app01
                 MostrarSucesso("Arquivo excluído com sucesso.");
 
                 AtualizarListaArquivos();
+
+                lstvResultados.SelectedItems.Clear();
             }
             else
             {
@@ -419,6 +433,48 @@ namespace ex_01_windows_forms_app01
 
         #endregion
 
+        private void grpBxResultados_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lstvResultados_DoubleClick(object sender, EventArgs e)
+        {
+            
+            if (lstvResultados.SelectedItems.Count == 0)
+            {
+                return;
+            }
+
+            string diretorio = txtCaminhoRaiz.Text;
+
+            string nomeArquivo =
+                lstvResultados.SelectedItems[0].Text;
+
+            string caminhoCompleto =
+                Path.Combine(diretorio, nomeArquivo);
+
+            if (File.Exists(caminhoCompleto))
+            {
+                System.Diagnostics.Process.Start(
+                    new System.Diagnostics.ProcessStartInfo()
+                    {
+                        FileName = caminhoCompleto,
+                        UseShellExecute = true
+                    }
+                );
+            }
+            else
+            {
+                MostrarErro("Arquivo não encontrado.");
+            }        
+
+        }
+
+        private void lstvResultados_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }

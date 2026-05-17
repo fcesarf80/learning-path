@@ -8,23 +8,29 @@ O projeto foi criado com objetivo de praticar:
 - organização de interface gráfica
 - tratamento de exceções
 - validações
-- estruturação de código
+- refatoração
+- experiência do utilizador (UX)
+- estruturação e modularização de código
 - documentação técnica
 
 ---
 
 # 🚀 Funcionalidades
 
-✔ Listar arquivos de um diretório  
-✔ Copiar arquivos  
-✔ Mover arquivos  
-✔ Excluir arquivos  
-✔ Seleção visual de ações  
-✔ Atualização automática da lista  
-✔ Validação de diretórios  
-✔ Prevenção de duplicação de ficheiros  
-✔ Mensagens padronizadas  
+✔ Listar arquivos de um diretório
+✔ Copiar arquivos
+✔ Mover arquivos
+✔ Excluir arquivos
+✔ Abrir arquivos com duplo clique
+✔ Seleção visual de ações
+✔ Atualização automática da lista
+✔ Limpeza automática de seleção
+✔ Reset visual dos botões de ação
+✔ Validação de diretórios
+✔ Prevenção de duplicação de ficheiros
+✔ Mensagens padronizadas
 ✔ Tratamento de exceções com try/catch
+✔ Organização do código por regiões
 
 ---
 
@@ -46,10 +52,12 @@ A interface foi organizada em três áreas principais:
 
 ## Resultados
 
-- ListView com:
-  - nome
-  - tipo
-  - tamanho do ficheiro
+ListView contendo:
+
+- nome
+- tipo
+- tamanho
+- data de modificação
 
 ---
 
@@ -74,10 +82,12 @@ O código foi reorganizado utilizando regiões:
 - btnIconCopiar_Click
 - btnIconIniciar_Click
 - btnIconExcluir_Click
+- lstvResultados_DoubleClick
 
 ## Métodos Auxiliares
 
 - ResetarBotoesAcao
+- AtualizarListaArquivos
 - MostrarAviso
 - MostrarErro
 - MostrarSucesso
@@ -90,6 +100,7 @@ O código foi reorganizado utilizando regiões:
 - Windows Forms
 - .NET
 - FontAwesome.Sharp
+- System.IO
 
 ---
 
@@ -98,17 +109,21 @@ O código foi reorganizado utilizando regiões:
 Durante o desenvolvimento foram praticados:
 
 - eventos
-- métodos
+- métodos auxiliares
 - manipulação de caminhos
 - File.Copy()
 - File.Move()
 - File.Delete()
 - Directory.GetFiles()
 - FileInfo
+- Path.Combine()
 - ListView
+- ListViewItem
 - validações preventivas
 - tratamento de exceções
-- organização e refatoração de código
+- refatoração
+- organização de código
+- UX básica
 
 ---
 
@@ -121,13 +136,27 @@ O projeto possui documentação técnica manuscrita contendo:
 - implementação
 - testes realizados
 - problemas encontrados
-- refatoração
 - validações
-- melhorias aplicadas
+- tratamento de erros
+- melhorias de UX
+- refatoração
+- organização por regiões
+- melhorias futuras
+- conclusão final
+
+---
+
+# 🎯 Objetivo Académico
+
+Este projeto foi desenvolvido como exercício prático da unidade curricular:
+
+UC00620 — Desenvolver Aplicações em C#
+
+CINEL — CET.TPSI.D.P.32
 
 ---
 
 # 👨‍💻 Autor
 
-Fernando Cesar Ferreira Farias  
-CINEL — CET.TPSI.N32
+Fernando Cesar Ferreira Farias
+CINEL — CET.TPSI.D.P.32

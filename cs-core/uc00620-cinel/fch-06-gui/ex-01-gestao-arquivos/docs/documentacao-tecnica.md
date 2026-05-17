@@ -205,3 +205,110 @@ A interface altera visualmente o botão selecionado através da propriedade Back
 A aplicação consegue identificar a operação selecionada pelo utilizador.
 
 ---
+
+# 6. Execução das Operações
+
+## 6.1 Fluxo Lógico do Utilizador
+
+Sequência de utilização da aplicação:
+
+- selecionar ação
+- selecionar diretórios
+- listar arquivos
+- selecionar arquivo
+- executar operação
+
+---
+
+# 7. Observações de Teste
+
+Durante os testes foram identificados comportamentos inesperados relacionados com:
+
+- movimentação de múltiplos ficheiros
+- duplicação de ficheiros
+- atualização da ListView
+- mensagens repetidas
+- manutenção do estado visual dos botões
+
+Os problemas foram analisados e corrigidos através de refatoração incremental.
+
+---
+
+# 8. Tratamento de Exceções
+
+Foi utilizada a estrutura try/catch para evitar encerramentos inesperados da aplicação durante operações de ficheiros.
+
+Exemplos tratados:
+
+- ficheiro já existente
+- diretório inválido
+- ficheiro não encontrado
+
+---
+
+# 9. Refatoração e Organização do Código
+
+O código foi reorganizado utilizando:
+
+- regiões (#region)
+- métodos auxiliares
+- separação de responsabilidades
+- padronização de mensagens
+
+Estrutura aplicada:
+
+## Configuração da Interface
+
+## Eventos dos Botões
+
+## Métodos Auxiliares
+
+---
+
+# 10. Melhorias de Interface e Experiência do Utilizador
+
+Melhorias implementadas:
+
+- atualização automática da ListView
+- limpeza automática da seleção
+- reset visual das ações
+- mensagens padronizadas
+- prevenção de duplicação
+- abertura de ficheiros com duplo clique
+- coluna de data de modificação
+
+---
+
+# 11. Encerramento do Projeto
+
+O projeto permitiu consolidar conhecimentos fundamentais de programação desktop com C# Windows Forms.
+
+Durante o desenvolvimento foram aplicados conceitos de:
+
+- organização de código
+- eventos
+- manipulação de ficheiros
+- tratamento de exceções
+- refatoração
+- UX
+- documentação técnica
+
+---
+
+# 12. Melhorias Futuras
+
+Possíveis melhorias:
+
+- pesquisa por nome
+- múltipla seleção
+- barra de progresso
+- histórico de operações
+- tema escuro
+- atalhos de teclado
+- exportação de relatórios
+
+---
+
+# 13. Conclusão Final
+
+O projeto serviu como laboratório de aprendizagem prática, permitindo desenvolver competências técnicas e melhorar a organização do raciocínio lógico através de desenvolvimento incremental, testes, documentação e refatoração contínua.
