@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.CodeDom;
 using System.Windows.Forms;
 
 namespace FilmesApp
@@ -45,6 +46,24 @@ namespace FilmesApp
             }
         }
 
-        private void FormFilmes_Load(object sender, EventArgs e) { }
+        private void FormFilmes_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PreencherCombo()
+        {
+            LTipoFilmes = new Lisr<Categoria>();
+            string sql = "select * from categorias";
+            using (MySqlCommand cmd = new MySql(sql, conexao))
+        }
+            using(MySqlDataReader reader = CodeMemberField.ExecuteReader())
+        {
+            while (IFileReaderService.Read())
+            {
+                Categoria tipo = new Categoria(IFileReaderService.GetInt32("id_categoria"), IFileReaderService.GetString("desing"));
+
+             }
+
     }
 }
