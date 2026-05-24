@@ -70,7 +70,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1081, 69);
+            this.panel1.Size = new System.Drawing.Size(1006, 69);
             this.panel1.TabIndex = 0;
             // 
             // label1
@@ -156,7 +156,7 @@
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(523, 258);
+            this.groupBox2.Size = new System.Drawing.Size(470, 258);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Fotografia do Artista";
@@ -168,7 +168,7 @@
             this.groupBox3.ForeColor = System.Drawing.Color.MidnightBlue;
             this.groupBox3.Location = new System.Drawing.Point(0, 342);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1059, 192);
+            this.groupBox3.Size = new System.Drawing.Size(994, 192);
             this.groupBox3.TabIndex = 5;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Lista de Artistas";
@@ -182,11 +182,11 @@
             this.colNome,
             this.colCategoria,
             this.ColFoto});
-            this.dataGridView1.Location = new System.Drawing.Point(12, 27);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 26);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(1041, 150);
+            this.dataGridView1.Size = new System.Drawing.Size(961, 150);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.AutoSizeColumnsModeChanged += new System.Windows.Forms.DataGridViewAutoSizeColumnsModeEventHandler(this.dataGridView1_AutoSizeColumnsModeChanged);
             // 
@@ -219,7 +219,7 @@
             this.button4.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button4.ForeColor = System.Drawing.Color.Black;
             this.button4.Image = global::ex_05_gestao_elenco_booking.Properties.Resources.bin;
-            this.button4.Location = new System.Drawing.Point(919, 540);
+            this.button4.Location = new System.Drawing.Point(836, 540);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(134, 39);
             this.button4.TabIndex = 11;
@@ -233,7 +233,7 @@
             this.button3.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.ForeColor = System.Drawing.Color.Black;
             this.button3.Image = global::ex_05_gestao_elenco_booking.Properties.Resources.edit;
-            this.button3.Location = new System.Drawing.Point(779, 540);
+            this.button3.Location = new System.Drawing.Point(696, 540);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(134, 39);
             this.button3.TabIndex = 10;
@@ -247,7 +247,7 @@
             this.button2.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.Color.Black;
             this.button2.Image = global::ex_05_gestao_elenco_booking.Properties.Resources.insert;
-            this.button2.Location = new System.Drawing.Point(639, 540);
+            this.button2.Location = new System.Drawing.Point(556, 540);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(134, 39);
             this.button2.TabIndex = 9;
@@ -259,7 +259,7 @@
             // pictureBox3
             // 
             this.pictureBox3.Image = global::ex_05_gestao_elenco_booking.Properties.Resources.fototmsg;
-            this.pictureBox3.Location = new System.Drawing.Point(148, 46);
+            this.pictureBox3.Location = new System.Drawing.Point(110, 46);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(245, 145);
             this.pictureBox3.TabIndex = 7;
@@ -270,7 +270,7 @@
             // 
             this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Image = global::ex_05_gestao_elenco_booking.Properties.Resources.imgicon24;
-            this.button1.Location = new System.Drawing.Point(188, 197);
+            this.button1.Location = new System.Drawing.Point(148, 197);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(167, 39);
             this.button1.TabIndex = 8;
@@ -281,9 +281,9 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(11, 25);
+            this.pictureBox2.Location = new System.Drawing.Point(0, 25);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(512, 218);
+            this.pictureBox2.Size = new System.Drawing.Size(458, 218);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 5;
             this.pictureBox2.TabStop = false;
@@ -303,7 +303,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1081, 604);
+            this.ClientSize = new System.Drawing.Size(1006, 610);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.button3);
@@ -313,7 +313,10 @@
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.MaximumSize = new System.Drawing.Size(1024, 657);
+            this.MinimumSize = new System.Drawing.Size(1024, 657);
             this.Name = "Form1";
             this.Text = "Form1";
             this.panel1.ResumeLayout(false);
