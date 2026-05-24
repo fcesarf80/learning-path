@@ -95,7 +95,6 @@
             this.label1.Size = new System.Drawing.Size(281, 38);
             this.label1.TabIndex = 0;
             this.label1.Text = "Cadastro de Artistas";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // gbDadosArtista
             // 
@@ -143,7 +142,6 @@
             this.lblCategoria.Size = new System.Drawing.Size(96, 25);
             this.lblCategoria.TabIndex = 1;
             this.lblCategoria.Text = "Categoria:";
-            this.lblCategoria.Click += new System.EventHandler(this.label3_Click);
             // 
             // lblNomeArtistico
             // 
@@ -180,7 +178,7 @@
             this.picFotografia.Size = new System.Drawing.Size(245, 145);
             this.picFotografia.TabIndex = 7;
             this.picFotografia.TabStop = false;
-            this.picFotografia.Click += new System.EventHandler(this.pictureBox3_Click);
+            
             // 
             // btnCarregarFoto
             // 
@@ -231,7 +229,6 @@
             this.dgvArtistas.RowTemplate.Height = 24;
             this.dgvArtistas.Size = new System.Drawing.Size(961, 150);
             this.dgvArtistas.TabIndex = 0;
-            this.dgvArtistas.AutoSizeColumnsModeChanged += new System.Windows.Forms.DataGridViewAutoSizeColumnsModeEventHandler(this.dataGridView1_AutoSizeColumnsModeChanged);
             // 
             // colID
             // 

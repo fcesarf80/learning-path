@@ -1,19 +1,15 @@
-﻿using MySql.Data.MySqlClient;
-using System;
+﻿using System;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 namespace ex_05_gestao_elenco_booking
 {
     public partial class Form1 : Form
     {
-        #region Inicialização e Variáveis Globais
-
-        // Definição dos parâmetros de ligação à base de dados relacional
-        private string stringConexao = "Server=localhost;Database=booking_artistico;Uid=root;Pwd=SUA_SENHA_AQUI;";
+        private string stringConexao = "Server=localhost;Database=booking_artistico;Uid=root;Pwd=root;";
         private string caminhoImagemSelecionada = "";
 
         public Form1()
@@ -23,38 +19,34 @@ namespace ex_05_gestao_elenco_booking
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // Configurações estáticas de dimensionamento do ecrã (1024x768)
-            this.Size = new Size(1024, 768);
-            this.MinimumSize = new Size(1024, 768);
-            this.MaximumSize = new Size(1024, 768);
+            this.Size = new Size(1024, 657);
+            this.MinimumSize = new Size(1024, 657);
+            this.MaximumSize = new Size(1024, 657);
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
 
-            // Restrição de tamanho máximo de caracteres conforme o VARCHAR da base de dados
             txtNomeArtistico.MaxLength = 100;
 
-            // Bloqueio de redimensionamento manual das colunas da grelha de dados
             dgvArtistas.AllowUserToResizeColumns = false;
             dgvArtistas.AllowUserToResizeRows = false;
+            dgvArtistas.AutoGenerateColumns = false;
 
-            // Associação manual dos eventos para evitar quebra no Designer
-            this.Load += new System.EventHandler(this.Form1_Load);
+            colID.DataPropertyName = "id_artista";
+            colNome.DataPropertyName = "nome_artistico";
+            colCategoria.DataPropertyName = "nome_categoria";
+            ColFoto.DataPropertyName = "caminho_foto";
+
             this.btnCarregarFoto.Click += new System.EventHandler(this.btnCarregarFoto_Click);
             this.btnInserir.Click += new System.EventHandler(this.btnInserir_Click);
             this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             this.dgvArtistas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvArtistas_CellClick);
 
-            // Operações iniciais de conectividade e leitura
-            CarregarCategorias();
+            CarregarCategories();
             AtualizarGrelha();
         }
 
-        #endregion
-
-        #region Métodos de Base de Dados (Leitura)
-
-        private void CarregarCategorias()
+        private void CarregarCategories()
         {
             try
             {
@@ -69,14 +61,18 @@ namespace ex_05_gestao_elenco_booking
                     cmbCategoria.DataSource = dt;
                     cmbCategoria.DisplayMember = "nome_categoria";
                     cmbCategoria.ValueMember = "id_categoria";
-                    cmbCategoria.SelectedIndex = -1; // Inicia sem nenhuma categoria pré-selecionada
+                    cmbCategoria.SelectedIndex = -1;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao carregar categorias: " + ex.Message, "Erro de Ligação", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Erro ao carregar categorias: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void AzureGrelha() { AtualizarGrelha(); }
+
+        private void AktualizarGrelha() { AtualizarGrelha(); }
 
         private void AtualizarGrelha()
         {
@@ -85,59 +81,133 @@ namespace ex_05_gestao_elenco_booking
                 using (MySqlConnection conn = new MySqlConnection(stringConexao))
                 {
                     conn.Open();
-                    string query = @"SELECT a.id_artista AS 'ID', 
-                                            a.nome_artistico AS 'Nome Artístico', 
-                                            c.nome_categoria AS 'Categoria', 
-                                            a.caminho_foto AS 'Caminho da Foto' 
-                                     FROM artista a 
-                                     INNER JOIN categoria c ON a.fk_categoria = c.id_categoria";
-
+                    string query = "SELECT a.id_artista, a.nome_artistico, c.nome_categoria, a.caminho_foto FROM artista a INNER JOIN categoria c ON a.fk_categoria = c.id_categoria";
                     MySqlDataAdapter da = new MySqlDataAdapter(query, conn);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
-
                     dgvArtistas.DataSource = dt;
                 }
                 LimparFormulario();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao atualizar dados da grelha: " + ex.Message, "Erro de Consulta", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Erro ao atualizar grelha: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        #endregion
-
-        #region Eventos dos Botões (Esboços para os próximos Commits)
-
         private void btnCarregarFoto_Click(object sender, EventArgs e)
         {
-            // Será implementado no Commit 4
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                ofd.Filter = "Imagens|*.jpg;*.jpeg;*.png;*.bmp";
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    caminhoImagemSelecionada = ofd.FileName;
+                    picFotografia.Image = Image.FromFile(caminhoImagemSelecionada);
+                }
+            }
         }
 
         private void btnInserir_Click(object sender, EventArgs e)
         {
-            // Será implementado no Commit 5
+            if (!ValidarCampos()) return;
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(stringConexao))
+                {
+                    conn.Open();
+                    string query = "INSERT INTO artista (nome_artistico, caminho_foto, fk_categoria) VALUES (@nome, @foto, @categoria)";
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@nome", txtNomeArtistico.Text.Trim());
+                        cmd.Parameters.AddWithValue("@foto", caminhoImagemSelecionada);
+                        cmd.Parameters.AddWithValue("@categoria", cmbCategoria.SelectedValue);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                MessageBox.Show("Inserido com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                AtualizarGrelha();
+            }
+            catch (Exception ex) { MessageBox.Show("Erro: " + ex.Message); }
         }
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            // Será implementado no Commit 5
+            if (dgvArtistas.CurrentRow == null) return;
+            if (!ValidarCampos()) return;
+            try
+            {
+                int id = Convert.ToInt32(dgvArtistas.CurrentRow.Cells[0].Value);
+                using (MySqlConnection conn = new MySqlConnection(stringConexao))
+                {
+                    conn.Open();
+                    string query = "UPDATE artista SET nome_artistico=@nome, caminho_foto=@foto, fk_categoria=@categoria WHERE id_artista=@id";
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@nome", txtNomeArtistico.Text.Trim());
+                        cmd.Parameters.AddWithValue("@foto", caminhoImagemSelecionada);
+                        cmd.Parameters.AddWithValue("@categoria", cmbCategoria.SelectedValue);
+                        cmd.Parameters.AddWithValue("@id", id);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                MessageBox.Show("Atualizado com sucesso!");
+                AtualizarGrelha();
+            }
+            catch (Exception ex) { MessageBox.Show("Erro: " + ex.Message); }
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            // Será implementado no Commit 5
+            if (dgvArtistas.CurrentRow == null) return;
+            var res = MessageBox.Show("Deseja eliminar?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (res == DialogResult.No) return;
+            try
+            {
+                int id = Convert.ToInt32(dgvArtistas.CurrentRow.Cells[0].Value);
+                using (MySqlConnection conn = new MySqlConnection(stringConexao))
+                {
+                    conn.Open();
+                    string query = "DELETE FROM artista WHERE id_artista = @id";
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@id", id);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                AtualizarGrelha();
+            }
+            catch (Exception ex) { MessageBox.Show("Erro: " + ex.Message); }
         }
 
         private void dgvArtistas_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Será implementado no Commit 5
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow linha = dgvArtistas.Rows[e.RowIndex];
+                txtNomeArtistico.Text = linha.Cells[1].Value?.ToString() ?? "";
+                cmbCategoria.Text = linha.Cells[2].Value?.ToString() ?? "";
+                caminhoImagemSelecionada = linha.Cells[3].Value?.ToString() ?? "";
+                try
+                {
+                    if (!string.IsNullOrEmpty(caminhoImagemSelecionada) && File.Exists(caminhoImagemSelecionada))
+                        picFotografia.Image = Image.FromFile(caminhoImagemSelecionada);
+                    else
+                        picFotografia.Image = null;
+                }
+                catch { picFotografia.Image = null; }
+            }
         }
 
-        #endregion
-
-        #region Métodos Auxiliares e Métodos Vazios do Designer
+        private bool ValidarCampos()
+        {
+            if (string.IsNullOrWhiteSpace(txtNomeArtistico.Text) || cmbCategoria.SelectedIndex == -1)
+            {
+                MessageBox.Show("Preencha todos os campos!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            return true;
+        }
 
         private void LimparFormulario()
         {
@@ -147,12 +217,9 @@ namespace ex_05_gestao_elenco_booking
             caminhoImagemSelecionada = "";
         }
 
-        // Mantidos para evitar que o Designer acuse falta de referências antigas
         private void label1_Click(object sender, EventArgs e) { }
         private void label3_Click(object sender, EventArgs e) { }
         private void pictureBox3_Click(object sender, EventArgs e) { }
         private void dataGridView1_AutoSizeColumnsModeChanged(object sender, DataGridViewAutoSizeColumnsModeEventArgs e) { }
-
-        #endregion
     }
 }
