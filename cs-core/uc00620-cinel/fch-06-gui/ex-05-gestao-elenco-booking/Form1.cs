@@ -9,7 +9,7 @@ namespace ex_05_gestao_elenco_booking
 {
     public partial class Form1 : Form
     {
-        private string stringConexao = "Server=localhost;Database=booking_artistico;Uid=root;Pwd=root;";
+        private string stringConexao = "Server=127.0.0.1;Port=3306;Database=booking_artistico;Uid=root;Pwd=;";
         private string caminhoImagemSelecionada = "";
 
         public Form1()
@@ -44,6 +44,21 @@ namespace ex_05_gestao_elenco_booking
 
             CarregarCategories();
             AtualizarGrelha();
+
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(stringConexao))
+                {
+                    conn.Open();
+
+                    MessageBox.Show("Ligação OK!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
         private void CarregarCategories()
@@ -66,13 +81,9 @@ namespace ex_05_gestao_elenco_booking
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao carregar categorias: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Erro: " + ex.Message);
             }
         }
-
-        private void AzureGrelha() { AtualizarGrelha(); }
-
-        private void AktualizarGrelha() { AtualizarGrelha(); }
 
         private void AtualizarGrelha()
         {
@@ -95,15 +106,41 @@ namespace ex_05_gestao_elenco_booking
             }
         }
 
+        private void CarregarImagem(string caminho)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(caminho) && File.Exists(caminho))
+                {
+                    byte[] bytes = File.ReadAllBytes(caminho);
+
+                    using (MemoryStream ms = new MemoryStream(bytes))
+                    {
+                        picFotografia.Image = Image.FromStream(ms);
+                    }
+                }
+                else
+                {
+                    picFotografia.Image = null;
+                }
+            }
+            catch
+            {
+                picFotografia.Image = null;
+            }
+        }
+
         private void btnCarregarFoto_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
                 ofd.Filter = "Imagens|*.jpg;*.jpeg;*.png;*.bmp";
+
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
                     caminhoImagemSelecionada = ofd.FileName;
-                    picFotografia.Image = Image.FromFile(caminhoImagemSelecionada);
+
+                    CarregarImagem(caminhoImagemSelecionada);
                 }
             }
         }
@@ -111,24 +148,48 @@ namespace ex_05_gestao_elenco_booking
         private void btnInserir_Click(object sender, EventArgs e)
         {
             if (!ValidarCampos()) return;
+
             try
             {
                 using (MySqlConnection conn = new MySqlConnection(stringConexao))
                 {
                     conn.Open();
+
+                    string verificar = "SELECT COUNT(*) FROM artista WHERE nome_artistico = @nome";
+
+                    using (MySqlCommand verificarCmd = new MySqlCommand(verificar, conn))
+                    {
+                        verificarCmd.Parameters.AddWithValue("@nome", txtNomeArtistico.Text.Trim());
+
+                        int existe = Convert.ToInt32(verificarCmd.ExecuteScalar());
+
+                        if (existe > 0)
+                        {
+                            MessageBox.Show("Artista já registado!");
+                            return;
+                        }
+                    }
+
                     string query = "INSERT INTO artista (nome_artistico, caminho_foto, fk_categoria) VALUES (@nome, @foto, @categoria)";
+
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@nome", txtNomeArtistico.Text.Trim());
                         cmd.Parameters.AddWithValue("@foto", caminhoImagemSelecionada);
                         cmd.Parameters.AddWithValue("@categoria", cmbCategoria.SelectedValue);
+
                         cmd.ExecuteNonQuery();
                     }
                 }
-                MessageBox.Show("Inserido com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                MessageBox.Show("Inserido com sucesso!");
+
                 AtualizarGrelha();
             }
-            catch (Exception ex) { MessageBox.Show("Erro: " + ex.Message); }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro: " + ex.Message);
+            }
         }
 
         private void btnEditar_Click(object sender, EventArgs e)
@@ -185,17 +246,16 @@ namespace ex_05_gestao_elenco_booking
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow linha = dgvArtistas.Rows[e.RowIndex];
-                txtNomeArtistico.Text = linha.Cells[1].Value?.ToString() ?? "";
-                cmbCategoria.Text = linha.Cells[2].Value?.ToString() ?? "";
-                caminhoImagemSelecionada = linha.Cells[3].Value?.ToString() ?? "";
-                try
-                {
-                    if (!string.IsNullOrEmpty(caminhoImagemSelecionada) && File.Exists(caminhoImagemSelecionada))
-                        picFotografia.Image = Image.FromFile(caminhoImagemSelecionada);
-                    else
-                        picFotografia.Image = null;
-                }
-                catch { picFotografia.Image = null; }
+
+               
+                // Substitua o índice numérico pelo nome real da propriedade Name da coluna
+                txtNomeArtistico.Text = linha.Cells["colNome"].Value?.ToString() ?? "";
+                cmbCategoria.Text = linha.Cells["colCategoria"].Value?.ToString() ?? "";
+                caminhoImagemSelecionada = linha.Cells["ColFoto"].Value?.ToString() ?? "";
+
+
+
+                CarregarImagem(caminhoImagemSelecionada);
             }
         }
 
@@ -221,5 +281,11 @@ namespace ex_05_gestao_elenco_booking
         private void label3_Click(object sender, EventArgs e) { }
         private void pictureBox3_Click(object sender, EventArgs e) { }
         private void dataGridView1_AutoSizeColumnsModeChanged(object sender, DataGridViewAutoSizeColumnsModeEventArgs e) { }
+
+        private void btnInserir_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
+

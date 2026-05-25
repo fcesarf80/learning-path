@@ -75,6 +75,7 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.ErrorImage")));
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(10, 5);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
@@ -172,18 +173,18 @@
             // 
             // picFotografia
             // 
-            this.picFotografia.Image = global::ex_05_gestao_elenco_booking.Properties.Resources.fototmsg;
-            this.picFotografia.Location = new System.Drawing.Point(110, 46);
+            this.picFotografia.ErrorImage = ((System.Drawing.Image)(resources.GetObject("picFotografia.ErrorImage")));
+            this.picFotografia.Image = ((System.Drawing.Image)(resources.GetObject("picFotografia.Image")));
+            this.picFotografia.Location = new System.Drawing.Point(109, 46);
             this.picFotografia.Name = "picFotografia";
             this.picFotografia.Size = new System.Drawing.Size(245, 145);
             this.picFotografia.TabIndex = 7;
             this.picFotografia.TabStop = false;
-            
             // 
             // btnCarregarFoto
             // 
             this.btnCarregarFoto.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCarregarFoto.Image = global::ex_05_gestao_elenco_booking.Properties.Resources.imgicon24;
+            this.btnCarregarFoto.Image = ((System.Drawing.Image)(resources.GetObject("btnCarregarFoto.Image")));
             this.btnCarregarFoto.Location = new System.Drawing.Point(148, 197);
             this.btnCarregarFoto.Name = "btnCarregarFoto";
             this.btnCarregarFoto.Size = new System.Drawing.Size(167, 39);
@@ -257,8 +258,9 @@
             // btnEliminar
             // 
             this.btnEliminar.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEliminar.ForeColor = System.Drawing.Color.Black;
-            this.btnEliminar.Image = global::ex_05_gestao_elenco_booking.Properties.Resources.bin;
+            this.btnEliminar.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.btnEliminar.Image = ((System.Drawing.Image)(resources.GetObject("btnEliminar.Image")));
+            this.btnEliminar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnEliminar.Location = new System.Drawing.Point(836, 540);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(134, 39);
@@ -271,8 +273,8 @@
             // btnEditar
             // 
             this.btnEditar.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditar.ForeColor = System.Drawing.Color.Black;
-            this.btnEditar.Image = global::ex_05_gestao_elenco_booking.Properties.Resources.edit;
+            this.btnEditar.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.btnEditar.Image = ((System.Drawing.Image)(resources.GetObject("btnEditar.Image")));
             this.btnEditar.Location = new System.Drawing.Point(696, 540);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(134, 39);
@@ -285,8 +287,8 @@
             // btnInserir
             // 
             this.btnInserir.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInserir.ForeColor = System.Drawing.Color.Black;
-            this.btnInserir.Image = global::ex_05_gestao_elenco_booking.Properties.Resources.insert;
+            this.btnInserir.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.btnInserir.Image = ((System.Drawing.Image)(resources.GetObject("btnInserir.Image")));
             this.btnInserir.Location = new System.Drawing.Point(556, 540);
             this.btnInserir.Name = "btnInserir";
             this.btnInserir.Size = new System.Drawing.Size(134, 39);
@@ -295,6 +297,7 @@
             this.btnInserir.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnInserir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnInserir.UseVisualStyleBackColor = true;
+            this.btnInserir.Click += new System.EventHandler(this.btnInserir_Click);
             // 
             // Form1
             // 
@@ -317,6 +320,7 @@
             this.MinimumSize = new System.Drawing.Size(1024, 657);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
