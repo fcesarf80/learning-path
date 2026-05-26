@@ -8,14 +8,10 @@ csv (separador ;).
 
 import os
 
-
 class Aluno:
     def __init__(self, nome, sobrenome, num, curso):
-        self.nome = nome
-        self.sobrenome = sobrenome
-        self.num = num
-        self.curso = curso
-
+        self.nome, self.sobrenome = nome, sobrenome
+        self.num, self.curso = num, curso
 
 lista_alunos = []
 ARQUIVO = "alunos.csv"
@@ -25,9 +21,7 @@ if os.path.exists(ARQUIVO):
         for linha in f:
             dados = linha.strip().split(";")
             if len(dados) == 4:
-
-                novo_aluno = Aluno(dados[0], dados[1], dados[2], dados[3])
-                lista_alunos.append(novo_aluno)
+                lista_alunos.append(Aluno(*dados))
     print(f"Sucesso: {len(lista_alunos)} alunos carregados do arquivo.")
 
 while True:
@@ -37,11 +31,7 @@ while True:
     opcao = input("\nEscolha uma opção: ").lower()
 
     if opcao == "a":
-        nome = input("Nome: ")
-        sobrenome = input("Sobrenome: ")
-        num = input("Nº: ")
-        curso = input("Curso: ")
-        lista_alunos.append(Aluno(nome, sobrenome, num, curso))
+        lista_alunos.append(Aluno(input("Nome: "), input("Sobrenome: "), input("Nº: "), input("Curso: ")))
         print("Adicionado!")
 
     elif opcao == "b":
@@ -58,6 +48,8 @@ while True:
                 a.curso = input(f"Novo Curso [{a.curso}]: ") or a.curso
                 print("Atualizado!")
                 break
+        else:
+            print("Aluno não encontrado.")
 
     elif opcao == "l":
         print("\n--- LISTA DE ALUNOS ---")
