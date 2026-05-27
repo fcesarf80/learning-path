@@ -31,6 +31,13 @@ namespace ex_05_gestao_elenco_booking
             dgvArtistas.AllowUserToResizeRows = false;
             dgvArtistas.AutoGenerateColumns = false;
 
+            dgvArtistas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvArtistas.MultiSelect = false;
+            dgvArtistas.ReadOnly = true;
+
+            dgvArtistas.RowHeadersVisible = false;
+            dgvArtistas.AllowUserToAddRows = false;
+
             colID.DataPropertyName = "id_artista";
             colNome.DataPropertyName = "nome_artistico";
             colCategoria.DataPropertyName = "nome_categoria";
@@ -44,21 +51,7 @@ namespace ex_05_gestao_elenco_booking
 
             CarregarCategories();
             AtualizarGrelha();
-
-            try
-            {
-                using (MySqlConnection conn = new MySqlConnection(stringConexao))
-                {
-                    conn.Open();
-
-                    MessageBox.Show("Ligação OK!");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
+                        
         }
 
         private void CarregarCategories()
@@ -247,13 +240,11 @@ namespace ex_05_gestao_elenco_booking
             {
                 DataGridViewRow linha = dgvArtistas.Rows[e.RowIndex];
 
-               
-                // Substitua o índice numérico pelo nome real da propriedade Name da coluna
-                txtNomeArtistico.Text = linha.Cells["colNome"].Value?.ToString() ?? "";
-                cmbCategoria.Text = linha.Cells["colCategoria"].Value?.ToString() ?? "";
-                caminhoImagemSelecionada = linha.Cells["ColFoto"].Value?.ToString() ?? "";
+                txtNomeArtistico.Text = linha.Cells[1].Value?.ToString() ?? "";
 
+                cmbCategoria.Text = linha.Cells[2].Value?.ToString() ?? "";
 
+                caminhoImagemSelecionada = linha.Cells[3].Value?.ToString() ?? "";
 
                 CarregarImagem(caminhoImagemSelecionada);
             }
@@ -283,6 +274,11 @@ namespace ex_05_gestao_elenco_booking
         private void dataGridView1_AutoSizeColumnsModeChanged(object sender, DataGridViewAutoSizeColumnsModeEventArgs e) { }
 
         private void btnInserir_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void picFotografia_Click(object sender, EventArgs e)
         {
 
         }

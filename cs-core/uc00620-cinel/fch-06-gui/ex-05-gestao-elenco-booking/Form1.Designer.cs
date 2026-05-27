@@ -175,11 +175,13 @@
             // 
             this.picFotografia.ErrorImage = ((System.Drawing.Image)(resources.GetObject("picFotografia.ErrorImage")));
             this.picFotografia.Image = ((System.Drawing.Image)(resources.GetObject("picFotografia.Image")));
-            this.picFotografia.Location = new System.Drawing.Point(109, 46);
+            this.picFotografia.Location = new System.Drawing.Point(4, 35);
             this.picFotografia.Name = "picFotografia";
-            this.picFotografia.Size = new System.Drawing.Size(245, 145);
+            this.picFotografia.Size = new System.Drawing.Size(453, 147);
+            this.picFotografia.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picFotografia.TabIndex = 7;
             this.picFotografia.TabStop = false;
+            this.picFotografia.Click += new System.EventHandler(this.picFotografia_Click);
             // 
             // btnCarregarFoto
             // 
@@ -230,6 +232,7 @@
             this.dgvArtistas.RowTemplate.Height = 24;
             this.dgvArtistas.Size = new System.Drawing.Size(961, 150);
             this.dgvArtistas.TabIndex = 0;
+            this.dgvArtistas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvArtistas_CellClick);
             // 
             // colID
             // 
@@ -283,6 +286,7 @@
             this.btnEditar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnEditar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnEditar.UseVisualStyleBackColor = true;
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
             // btnInserir
             // 
@@ -319,7 +323,7 @@
             this.MaximumSize = new System.Drawing.Size(1024, 657);
             this.MinimumSize = new System.Drawing.Size(1024, 657);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Gestão de Elenco e Booking Artístico";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

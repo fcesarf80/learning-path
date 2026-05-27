@@ -122,9 +122,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="img\fotoicone.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="img\fototmsg.png" />
   </ItemGroup>
   <ItemGroup>
