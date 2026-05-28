@@ -8,10 +8,12 @@ csv (separador ;).
 
 import os
 
+
 class Aluno:
     def __init__(self, nome, sobrenome, num, curso):
         self.nome, self.sobrenome = nome, sobrenome
         self.num, self.curso = num, curso
+
 
 lista_alunos = []
 ARQUIVO = "alunos.csv"
@@ -31,7 +33,11 @@ while True:
     opcao = input("\nEscolha uma opção: ").lower()
 
     if opcao == "a":
-        lista_alunos.append(Aluno(input("Nome: "), input("Sobrenome: "), input("Nº: "), input("Curso: ")))
+        lista_alunos.append(
+            Aluno(
+                input("Nome: "), input("Sobrenome: "), input("Nº: "), input("Curso: ")
+            )
+        )
         print("Adicionado!")
 
     elif opcao == "b":
