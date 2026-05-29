@@ -181,7 +181,6 @@
             this.picFotografia.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picFotografia.TabIndex = 7;
             this.picFotografia.TabStop = false;
-            this.picFotografia.Click += new System.EventHandler(this.picFotografia_Click);
             // 
             // btnCarregarFoto
             // 

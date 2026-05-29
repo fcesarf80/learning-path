@@ -268,20 +268,6 @@ namespace ex_05_gestao_elenco_booking
             caminhoImagemSelecionada = "";
         }
 
-        private void label1_Click(object sender, EventArgs e) { }
-        private void label3_Click(object sender, EventArgs e) { }
-        private void pictureBox3_Click(object sender, EventArgs e) { }
-        private void dataGridView1_AutoSizeColumnsModeChanged(object sender, DataGridViewAutoSizeColumnsModeEventArgs e) { }
-
-        private void btnInserir_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void picFotografia_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
 
