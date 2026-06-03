@@ -460,6 +460,17 @@ namespace ex_05_gestao_elenco_booking
 
                                 txtObservacoes.Text = reader["observacoes"]?.ToString() ?? "";
                             }
+
+                            else
+                            {
+                                txtNomeEvento.Clear();
+                                txtCache.Clear();
+                                txtData.Clear();
+                                txtHora.Clear();
+                                txtLocal.Clear();
+                                txtObservacoes.Clear();
+                            }
+
                         }
                     }
                 }
@@ -494,7 +505,6 @@ namespace ex_05_gestao_elenco_booking
             txtNomeArtistico.Clear();
             cmbCategoria.SelectedIndex = -1;
             picFotografia.Image = Properties.Resources.fototmsg;
-           // picFotografia.Image = null;
             caminhoImagemSelecionada = "";
         }
 
@@ -504,4 +514,3 @@ namespace ex_05_gestao_elenco_booking
         }
     }
 }
-
