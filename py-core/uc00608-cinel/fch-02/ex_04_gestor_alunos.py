@@ -5,3 +5,12 @@ a. Adicionar um novo aluno          d. Listar alunos ordenados pela maior média
 b. Listar todos os alunos           e. Remover aluno
 c. Procurar um aluno pelo nome      f. Sair do programa
 """
+class Aluno:
+
+    def __init__(self, numero, nome, sobrenome, idade, curso, media):
+        self.nome, self.sobrenome = nome, sobrenome
+        self.idade, self.numero = idade, numero
+        self.curso, self.media = curso, media
+    
+print("Programa iniciado")
+        
