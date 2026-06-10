@@ -553,3 +553,52 @@ Aprendi a encapsular operações de remoção em funções independentes, tornan
 ### Estado
 
 Refatoração concluída sem alteração de comportamento.
+
+## Refatoração R5 - Função ordenar_por_media
+
+### Objetivo
+
+Separar a lógica de ordenação por média do menu principal.
+
+### Implementação
+
+Foi criada a função ordenar_por_media() contendo toda a lógica de ordenação e apresentação dos alunos.
+
+### Conteúdos Trabalhados
+
+* Funções
+* sorted()
+* lambda
+* Organização de código
+
+### Aprendizagem
+
+Aprendi a encapsular processos de ordenação em funções independentes, facilitando a reutilização e manutenção.
+
+### Estado
+
+Refatoração concluída sem alteração de comportamento.
+
+## Refatoração R6 - Função media_da_turma
+
+### Objetivo
+
+Separar a lógica de cálculo da média da turma do menu principal.
+
+### Implementação
+
+Foi criada a função media_da_turma() contendo toda a lógica de cálculo e apresentação da média geral.
+
+### Conteúdos Trabalhados
+
+* Funções
+* Acumuladores
+* Organização de código
+
+### Aprendizagem
+
+Aprendi a encapsular cálculos em funções específicas, tornando o programa mais organizado e legível.
+
+### Estado
+
+Refatoração concluída sem alteração de comportamento.

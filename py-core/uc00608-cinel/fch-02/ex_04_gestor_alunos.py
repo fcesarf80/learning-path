@@ -177,6 +177,40 @@ def ordenar_por_media():
             f"Média: {aluno.media}"
         )
 
+def media_da_turma():
+
+    if len(lista_alunos) == 0:
+
+        print("\nNão existem alunos cadastrados.")
+
+    else:
+
+        soma_medias = 0
+
+        for aluno in lista_alunos:
+            soma_medias += aluno.media
+
+        media_turma = soma_medias / len(lista_alunos)
+
+        print("\n=== MÉDIA DA TURMA ===")
+        print(f"Média geral: {media_turma:.2f}")
+
+def ordenar_por_nome():
+
+    print("\n=== ALUNOS ORDENADOS POR NOME ===\n")
+
+    alunos_ordenados = sorted(
+        lista_alunos,
+        key=lambda aluno: aluno.nome
+    )
+
+    for aluno in alunos_ordenados:
+
+        print(
+            f"Nº: {aluno.numero} | "
+            f"{aluno.nome} {aluno.sobrenome}"
+        )
+
 
 while True:
 
@@ -211,39 +245,11 @@ while True:
         remover_aluno()
 
     elif opcao == "6":
-
-        if len(lista_alunos) == 0:
-
-            print("\nNão existem alunos cadastrados.")
-
-        else:
-
-            soma_medias = 0
-
-            for aluno in lista_alunos:
-                soma_medias += aluno.media
-
-            media_turma = soma_medias / len(lista_alunos)
-
-            print("\n=== MÉDIA DA TURMA ===")
-            print(f"Média geral: {media_turma:.2f}")
+        media_da_turma()
     
     elif opcao == "7":
-
-        print("\n=== ALUNOS ORDENADOS POR NOME ===\n")
-
-        alunos_ordenados = sorted(
-            lista_alunos,
-            key=lambda aluno: aluno.nome
-        )
-
-        for aluno in alunos_ordenados:
-
-            print(
-                f"Nº: {aluno.numero} | "
-                f"{aluno.nome} {aluno.sobrenome}"
-            )
-
+        ordenar_por_nome()
+    
     elif opcao == "8":
 
         if len(lista_alunos) == 0:
