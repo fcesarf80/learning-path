@@ -403,10 +403,32 @@ Também compreendi a diferença entre ordenar toda a lista e obter apenas o maio
 
 Extensão opcional concluída.
 
+## Extensão 4 - Pior Aluno
 
+### Objetivo
 
+Identificar o aluno com a menor média.
 
+### Implementação
 
+Foi utilizada a função min() para localizar o objeto Aluno que possui o menor valor no atributo media.
+
+### Conteúdos Trabalhados
+
+- min()
+- lambda
+- key
+- Listas de objetos
+
+### Aprendizagem
+
+Aprendi a localizar o menor elemento de uma coleção utilizando um atributo específico como critério.
+
+Também compreendi a diferença entre ordenar uma lista e obter diretamente o menor elemento.
+
+### Estado do Projeto
+
+Extensão opcional concluída.
 
 ## Extensão 5 - Contar Alunos
 
@@ -420,9 +442,9 @@ Foi utilizada a função len() para obter a quantidade de objetos presentes na l
 
 ### Conteúdos Trabalhados
 
-* len()
-* Listas
-* Variáveis temporárias
+- len()
+- Listas
+- Variáveis temporárias
 
 ### Aprendizagem
 
@@ -432,3 +454,102 @@ Aprendi a determinar rapidamente a quantidade de elementos existentes numa lista
 
 Extensão opcional concluída.
 
+## Refatoração R1 - Função listar_alunos
+
+### Objetivo
+
+Separar a lógica de listagem do menu principal.
+
+### Implementação
+
+Foi criada a função listar_alunos() contendo toda a lógica de apresentação dos alunos.
+
+O menu passou a chamar a função em vez de conter diretamente o código.
+
+### Conteúdos Trabalhados
+
+* Funções
+* Organização de código
+* Reutilização
+
+### Aprendizagem
+
+Aprendi que funções permitem encapsular responsabilidades específicas e tornar o código mais limpo e legível.
+
+### Estado
+
+Refatoração concluída sem alteração de comportamento.
+
+## Refatoração R2 - Função adicionar_aluno
+
+### Objetivo
+
+Separar a lógica de cadastro de alunos do menu principal.
+
+### Implementação
+
+Foi criada a função adicionar_aluno() contendo toda a lógica de criação e inserção de novos alunos.
+
+O menu passou a chamar a função em vez de executar diretamente o código.
+
+### Conteúdos Trabalhados
+
+* Funções
+* Organização de código
+* Encapsulamento de responsabilidades
+
+### Aprendizagem
+
+Aprendi a concentrar toda a lógica de cadastro numa função específica, tornando o menu mais limpo e fácil de compreender.
+
+### Estado
+
+Refatoração concluída sem alteração de comportamento.
+
+## Refatoração R3 - Função procurar_aluno
+
+### Objetivo
+
+Separar a lógica de pesquisa de alunos do menu principal.
+
+### Implementação
+
+Foi criada a função procurar_aluno() contendo toda a lógica de pesquisa por nome.
+
+### Conteúdos Trabalhados
+
+* Funções
+* Pesquisa em listas
+* Organização de código
+
+### Aprendizagem
+
+Aprendi a encapsular funcionalidades completas em funções independentes, facilitando a manutenção e compreensão do programa.
+
+### Estado
+
+Refatoração concluída sem alteração de comportamento.
+
+## Refatoração R4 - Função remover_aluno
+
+### Objetivo
+
+Separar a lógica de remoção de alunos do menu principal.
+
+### Implementação
+
+Foi criada a função remover_aluno() contendo toda a lógica de pesquisa e remoção.
+
+### Conteúdos Trabalhados
+
+* Funções
+* Remoção em listas
+* Organização de código
+
+### Aprendizagem
+
+Aprendi a encapsular operações de remoção em funções independentes, tornando o programa mais organizado e fácil de manter.
+
+### Estado
+
+Refatoração concluída sem alteração de comportamento.

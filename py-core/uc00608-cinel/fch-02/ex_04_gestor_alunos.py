@@ -70,6 +70,114 @@ lista_alunos.append(
     Aluno(13, "Becky", "Shorter", 10, "4A - Edna Krabappel", 14.0)
 )
 
+def listar_alunos():
+
+    print("\n=== LISTA DE ALUNOS ===\n")
+
+    if len(lista_alunos) == 0:
+        print("Nenhum aluno cadastrado.")
+
+    else:
+
+        for aluno in lista_alunos:
+
+            print(
+                f"Nº: {aluno.numero} | "
+                f"Nome: {aluno.nome} {aluno.sobrenome} | "
+                f"Idade: {aluno.idade} | "
+                f"Curso: {aluno.curso} | "
+                f"Média: {aluno.media}"
+            )
+
+def adicionar_aluno():
+
+    print("\n=== NOVO ALUNO ===")
+
+    numero = len(lista_alunos) + 1
+
+    nome = input("Nome: ")
+    sobrenome = input("Sobrenome: ")
+    idade = int(input("Idade: "))
+    curso = input("Curso: ")
+    media = float(input("Média: "))
+
+    novo_aluno = Aluno(
+        numero,
+        nome,
+        sobrenome,
+        idade,
+        curso,
+        media
+    )
+
+    lista_alunos.append(novo_aluno)
+
+    print(f"\nAluno {nome} adicionado com sucesso!")
+
+def procurar_aluno():
+
+    nome_procurado = input("\nNome a procurar: ")
+
+    encontrado = False
+
+    for aluno in lista_alunos:
+
+        if aluno.nome.lower() == nome_procurado.lower():
+
+            print("\n=== ALUNO ENCONTRADO ===")
+
+            print(f"Nº: {aluno.numero}")
+            print(f"Nome: {aluno.nome} {aluno.sobrenome}")
+            print(f"Idade: {aluno.idade}")
+            print(f"Curso: {aluno.curso}")
+            print(f"Média: {aluno.media}")
+
+            encontrado = True
+            break
+
+    if not encontrado:
+        print("\nAluno não encontrado.")
+
+def remover_aluno():
+
+    nome_remover = input("\nNome do aluno a remover: ")
+
+    encontrado = False
+
+    for aluno in lista_alunos:
+
+        if aluno.nome.lower() == nome_remover.lower():
+
+            lista_alunos.remove(aluno)
+
+            print(f"\nAluno {aluno.nome} removido com sucesso!")
+
+            encontrado = True
+            break
+
+    if not encontrado:
+        print("\nAluno não encontrado.")
+
+
+def ordenar_por_media():
+
+    print("\n=== ALUNOS ORDENADOS POR MÉDIA ===\n")
+
+    alunos_ordenados = sorted(
+        lista_alunos,
+        key=lambda aluno: aluno.media,
+        reverse=True
+    )
+
+    for aluno in alunos_ordenados:
+
+        print(
+            f"Nº: {aluno.numero} | "
+            f"Nome: {aluno.nome} {aluno.sobrenome} | "
+            f"Média: {aluno.media}"
+        )
+
+
 while True:
 
     print("\n=== GESTOR DE ALUNOS ===")
@@ -88,109 +196,19 @@ while True:
     opcao = input("\nEscolha uma opção: ")
 
     if opcao == "1":
-        print("\n=== NOVO ALUNO ===")
-
-        numero = len(lista_alunos) + 1
-
-        nome = input("Nome: ")
-        sobrenome = input("Sobrenome: ")
-        idade = int(input("Idade: "))
-        curso = input("Curso: ")
-        media = float(input("Média: "))
-
-        novo_aluno = Aluno(
-            numero,
-            nome,
-            sobrenome,
-            idade,
-            curso,
-            media
-        )
-
-        lista_alunos.append(novo_aluno)
-
-        print(f"\nAluno {nome} adicionado com sucesso!")
+        adicionar_aluno()
     
     elif opcao == "2":
-
-        print("\n=== LISTA DE ALUNOS ===\n")
-
-        if len(lista_alunos) == 0:
-            print("Nenhum aluno cadastrado.")
-
-        else:
-
-            for aluno in lista_alunos:
-
-                print(
-                    f"Nº: {aluno.numero} | "
-                    f"Nome: {aluno.nome} {aluno.sobrenome} | "
-                    f"Idade: {aluno.idade} | "
-                    f"Curso: {aluno.curso} | "
-                    f"Média: {aluno.media}"
-                )
+        listar_alunos()
             
     elif opcao == "3":
-
-        nome_procurado = input("\nNome a procurar: ")
-
-        encontrado = False
-
-        for aluno in lista_alunos:
-
-            if aluno.nome.lower() == nome_procurado.lower():
-
-                print("\n=== ALUNO ENCONTRADO ===")
-
-                print(f"Nº: {aluno.numero}")
-                print(f"Nome: {aluno.nome} {aluno.sobrenome}")
-                print(f"Idade: {aluno.idade}")
-                print(f"Curso: {aluno.curso}")
-                print(f"Média: {aluno.media}")
-
-                encontrado = True
-                break
-
-        if not encontrado:
-            print("\nAluno não encontrado.")
+        procurar_aluno()
 
     elif opcao == "4":
-
-        print("\n=== ALUNOS ORDENADOS POR MÉDIA ===\n")
-
-        alunos_ordenados = sorted(
-            lista_alunos,
-            key=lambda aluno: aluno.media,
-            reverse=True
-        )
-
-        for aluno in alunos_ordenados:
-
-            print(
-                f"Nº: {aluno.numero} | "
-                f"Nome: {aluno.nome} {aluno.sobrenome} | "
-                f"Média: {aluno.media}"
-            )
+        ordenar_por_media()
 
     elif opcao == "5":
-
-        nome_remover = input("\nNome do aluno a remover: ")
-
-        encontrado = False
-
-        for aluno in lista_alunos:
-
-            if aluno.nome.lower() == nome_remover.lower():
-
-                lista_alunos.remove(aluno)
-
-                print(f"\nAluno {aluno.nome} removido com sucesso!")
-
-                encontrado = True
-                break
-
-        if not encontrado:
-            print("\nAluno não encontrado.")
+        remover_aluno()
 
     elif opcao == "6":
 
