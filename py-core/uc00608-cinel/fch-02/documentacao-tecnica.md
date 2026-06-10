@@ -5,7 +5,7 @@ UC: 00608 - Desenvolver programas em linguagem orientada a objetos
 
 Formador: Júlio Guilherme Moura Magalhães
 Formando: Fernando Cesar Ferreira Farias (Cesar)
-Projeto: ex_04_gestor_alunos.py
+Projeto: gestor_alunos.py
 
 ---
 
@@ -468,9 +468,9 @@ O menu passou a chamar a função em vez de conter diretamente o código.
 
 ### Conteúdos Trabalhados
 
-* Funções
-* Organização de código
-* Reutilização
+- Funções
+- Organização de código
+- Reutilização
 
 ### Aprendizagem
 
@@ -494,9 +494,9 @@ O menu passou a chamar a função em vez de executar diretamente o código.
 
 ### Conteúdos Trabalhados
 
-* Funções
-* Organização de código
-* Encapsulamento de responsabilidades
+- Funções
+- Organização de código
+- Encapsulamento de responsabilidades
 
 ### Aprendizagem
 
@@ -518,9 +518,9 @@ Foi criada a função procurar_aluno() contendo toda a lógica de pesquisa por n
 
 ### Conteúdos Trabalhados
 
-* Funções
-* Pesquisa em listas
-* Organização de código
+- Funções
+- Pesquisa em listas
+- Organização de código
 
 ### Aprendizagem
 
@@ -542,9 +542,9 @@ Foi criada a função remover_aluno() contendo toda a lógica de pesquisa e remo
 
 ### Conteúdos Trabalhados
 
-* Funções
-* Remoção em listas
-* Organização de código
+- Funções
+- Remoção em listas
+- Organização de código
 
 ### Aprendizagem
 
@@ -566,10 +566,10 @@ Foi criada a função ordenar_por_media() contendo toda a lógica de ordenação
 
 ### Conteúdos Trabalhados
 
-* Funções
-* sorted()
-* lambda
-* Organização de código
+- Funções
+- sorted()
+- lambda
+- Organização de código
 
 ### Aprendizagem
 
@@ -591,13 +591,134 @@ Foi criada a função media_da_turma() contendo toda a lógica de cálculo e apr
 
 ### Conteúdos Trabalhados
 
-* Funções
-* Acumuladores
-* Organização de código
+- Funções
+- Acumuladores
+- Organização de código
 
 ### Aprendizagem
 
 Aprendi a encapsular cálculos em funções específicas, tornando o programa mais organizado e legível.
+
+### Estado
+
+Refatoração concluída sem alteração de comportamento.
+
+## Refatoração R7 - Função ordenar_por_nome
+
+### Objetivo
+
+Separar a lógica de ordenação alfabética do menu principal.
+
+### Implementação
+
+Foi criada a função ordenar_por_nome() contendo toda a lógica de ordenação e apresentação dos alunos.
+
+### Conteúdos Trabalhados
+
+- Funções
+- sorted()
+- lambda
+- Organização de código
+
+### Aprendizagem
+
+Aprendi a reutilizar a função sorted() utilizando diferentes atributos como critério de ordenação.
+
+### Estado
+
+Refatoração concluída sem alteração de comportamento.
+
+## Refatoração R8 - Função melhor_aluno
+
+### Objetivo
+
+Separar a lógica de identificação do melhor aluno do menu principal.
+
+### Implementação
+
+Foi criada a função melhor_aluno() contendo toda a lógica de localização e apresentação do aluno com maior média.
+
+### Conteúdos Trabalhados
+
+- Funções
+- max()
+- Organização de código
+
+### Aprendizagem
+
+Aprendi a encapsular pesquisas específicas em funções independentes, tornando o código mais legível e modular.
+
+### Estado
+
+Refatoração concluída sem alteração de comportamento.
+
+## Refatoração R9 - Função pior_aluno
+
+### Objetivo
+
+Separar a lógica de identificação do pior aluno do menu principal.
+
+### Implementação
+
+Foi criada a função pior_aluno() contendo toda a lógica de localização e apresentação do aluno com menor média.
+
+### Conteúdos Trabalhados
+
+- Funções
+- min()
+- Organização de código
+
+### Aprendizagem
+
+Aprendi a reutilizar a mesma lógica do melhor aluno utilizando min() para encontrar o menor valor.
+
+### Estado
+
+Refatoração concluída sem alteração de comportamento.
+
+## Refatoração R10 - Função contar_alunos
+
+### Objetivo
+
+Separar a lógica de contagem de alunos do menu principal.
+
+### Implementação
+
+Foi criada a função contar_alunos() responsável por calcular e apresentar a quantidade total de alunos cadastrados.
+
+### Conteúdos Trabalhados
+
+- Funções
+- len()
+- Organização de código
+
+### Aprendizagem
+
+Aprendi a encapsular funcionalidades simples em funções específicas, mantendo a consistência da arquitetura do programa.
+
+### Estado
+
+Refatoração concluída sem alteração de comportamento.
+
+## Refatoração R11 - Função menu_principal
+
+### Objetivo
+
+Separar a lógica de navegação do sistema das restantes funcionalidades.
+
+### Implementação
+
+Foi criada a função menu_principal() contendo toda a interação com o utilizador e o controlo do fluxo do programa.
+
+### Conteúdos Trabalhados
+
+- Funções
+- Organização modular
+- Estruturação de aplicações
+
+### Aprendizagem
+
+Aprendi a distinguir funções responsáveis pela lógica de negócio das funções responsáveis pela coordenação da aplicação.
 
 ### Estado
 

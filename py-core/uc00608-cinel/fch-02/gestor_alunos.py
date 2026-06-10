@@ -1,5 +1,5 @@
 """
-Exercicio 04 - Gestor de Alunos Orientado a Objetos
+Gestor de Alunos Orientado a Objetos
 Enunciado:Seguindo os princípios de Programação Orientada a Objetos, crie uma classe “Aluno” que contenha os atributos nome, idade e média final. Desenvolva um programa que permita gerir uma lista de alunos através de um menu com as seguintes opções:
 a. Adicionar um novo aluno          d. Listar alunos ordenados pela maior média
 b. Listar todos os alunos           e. Remover aluno
@@ -211,98 +211,110 @@ def ordenar_por_nome():
             f"{aluno.nome} {aluno.sobrenome}"
         )
 
+def melhor_aluno():
 
-while True:
+    if len(lista_alunos) == 0:
 
-    print("\n=== GESTOR DE ALUNOS ===")
-    print("1 - Adicionar aluno")
-    print("2 - Listar alunos")
-    print("3 - Procurar aluno")
-    print("4 - Ordenar por média")
-    print("5 - Remover aluno")
-    print("6 - Calcular média da turma")
-    print("7 - Ordenar alunos por nome")
-    print("8 - Mostrar melhor aluno")
-    print("9 - Mostrar pior aluno")
-    print("10 - Contar alunos cadastrados")
-    print("0 - Sair")
-
-    opcao = input("\nEscolha uma opção: ")
-
-    if opcao == "1":
-        adicionar_aluno()
-    
-    elif opcao == "2":
-        listar_alunos()
-            
-    elif opcao == "3":
-        procurar_aluno()
-
-    elif opcao == "4":
-        ordenar_por_media()
-
-    elif opcao == "5":
-        remover_aluno()
-
-    elif opcao == "6":
-        media_da_turma()
-    
-    elif opcao == "7":
-        ordenar_por_nome()
-    
-    elif opcao == "8":
-
-        if len(lista_alunos) == 0:
-
-            print("\nNão existem alunos cadastrados.")
-
-        else:
-
-            melhor_aluno = max(
-                lista_alunos,
-                key=lambda aluno: aluno.media
-            )
-
-            print("\n=== MELHOR ALUNO ===\n")
-
-            print(f"Nº: {melhor_aluno.numero}")
-            print(f"Nome: {melhor_aluno.nome} {melhor_aluno.sobrenome}")
-            print(f"Curso: {melhor_aluno.curso}")
-            print(f"Média: {melhor_aluno.media}")
-
-    elif opcao == "9":
-
-        if len(lista_alunos) == 0:
-
-            print("\nNão existem alunos cadastrados.")
-
-        else:
-
-            pior_aluno = min(
-                lista_alunos,
-                key=lambda aluno: aluno.media
-            )
-
-            print("\n=== PIOR ALUNO ===\n")
-
-            print(f"Nº: {pior_aluno.numero}")
-            print(f"Nome: {pior_aluno.nome} {pior_aluno.sobrenome}")
-            print(f"Curso: {pior_aluno.curso}")
-            print(f"Média: {pior_aluno.media}")
-
-    elif opcao == "10":
-
-        total_alunos = len(lista_alunos)
-
-        print("\n=== TOTAL DE ALUNOS ===\n")
-        print(f"Quantidade de alunos: {total_alunos}")
-    
-    elif opcao == "0":
-        print("\nPrograma encerrado.")
-        break
+        print("\nNão existem alunos cadastrados.")
 
     else:
-        print("\nOpção inválida!")
+
+        melhor_aluno = max(
+            lista_alunos,
+            key=lambda aluno: aluno.media
+        )
+
+        print("\n=== MELHOR ALUNO ===\n")
+
+        print(f"Nº: {melhor_aluno.numero}")
+        print(f"Nome: {melhor_aluno.nome} {melhor_aluno.sobrenome}")
+        print(f"Curso: {melhor_aluno.curso}")
+        print(f"Média: {melhor_aluno.media}")
+
+def pior_aluno():
+
+    if len(lista_alunos) == 0:
+
+        print("\nNão existem alunos cadastrados.")
+
+    else:
+
+        aluno_destaque = min(
+            lista_alunos,
+            key=lambda aluno: aluno.media
+        )
+
+        print("\n=== PIOR ALUNO ===\n")
+
+        print(f"Nº: {aluno_destaque.numero}")
+        print(f"Nome: {aluno_destaque.nome} {aluno_destaque.sobrenome}")
+        print(f"Curso: {aluno_destaque.curso}")
+        print(f"Média: {aluno_destaque.media}")
+
+def contar_alunos():
+
+    total_alunos = len(lista_alunos)
+
+    print("\n=== TOTAL DE ALUNOS ===\n")
+    print(f"Quantidade de alunos: {total_alunos}")
+
+
+def menu_principal():
+
+    while True:
+
+        print("\n=== GESTOR DE ALUNOS ===")
+
+        print("1 - Adicionar aluno")
+        print("2 - Listar alunos")
+        print("3 - Procurar aluno")
+        print("4 - Ordenar por média")
+        print("5 - Remover aluno")
+        print("6 - Calcular média da turma")
+        print("7 - Ordenar alunos por nome")
+        print("8 - Mostrar melhor aluno")
+        print("9 - Mostrar pior aluno")
+        print("10 - Contar alunos")
+        print("0 - Sair")
+
+        opcao = input("\nEscolha uma opção: ")
+
+        if opcao == "1":
+            adicionar_aluno()
+
+        elif opcao == "2":
+            listar_alunos()
+
+        elif opcao == "3":
+            procurar_aluno()
+
+        elif opcao == "4":
+            ordenar_por_media()
+
+        elif opcao == "5":
+            remover_aluno()
+
+        elif opcao == "6":
+            media_da_turma()
+
+        elif opcao == "7":
+            ordenar_por_nome()
+
+        elif opcao == "8":
+            melhor_aluno()
+
+        elif opcao == "9":
+            pior_aluno()
+
+        elif opcao == "10":
+            contar_alunos()
+
+        elif opcao == "0":
+            print("\nPrograma encerrado.")
+            break
+
+        else:
+            print("\nOpção inválida!")
 
 
 
@@ -314,4 +326,4 @@ for aluno in lista_alunos:
         f"{aluno.nome} {aluno.sobrenome}"
     )
 
-        
+menu_principal()
