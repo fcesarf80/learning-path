@@ -251,3 +251,184 @@ Adicionar aluno concluído.
 Listar alunos concluído.
 
 Procurar aluno concluído.
+
+## Etapa 7 - Ordenação por Média
+
+### Objetivo
+
+Listar os alunos ordenados da maior média para a menor.
+
+### Implementação
+
+Foi utilizada a função sorted() para gerar uma cópia ordenada da lista principal.
+
+O atributo utilizado como critério de ordenação foi a média do aluno.
+
+### Conteúdos Trabalhados
+
+- sorted()
+- lambda
+- key
+- reverse=True
+- Listas de objetos
+
+### Aprendizagem
+
+Aprendi a ordenar objetos utilizando um atributo específico.
+
+Também aprendi a utilizar funções lambda para definir critérios de ordenação.
+
+### Estado do Projeto
+
+Adicionar aluno concluído.
+
+Listar alunos concluído.
+
+Procurar aluno concluído.
+
+Ordenar por média concluído.
+
+## Etapa 8 - Remover Aluno
+
+### Objetivo
+
+Permitir remover alunos da lista principal.
+
+### Implementação
+
+Foi criada uma pesquisa por nome.
+
+Quando o aluno é encontrado, o objeto correspondente é removido da lista utilizando o método remove().
+
+### Conteúdos Trabalhados
+
+- remove()
+- Pesquisa em listas
+- for
+- if
+- break
+- Variáveis booleanas
+
+### Aprendizagem
+
+Aprendi a localizar objetos numa lista e removê-los durante a execução do programa.
+
+Também compreendi que a remoção altera imediatamente o conteúdo da lista.
+
+### Estado do Projeto
+
+Todos os requisitos obrigatórios do enunciado foram concluídos.
+
+## Extensão 1 - Média da Turma
+
+### Objetivo
+
+Calcular a média geral dos alunos cadastrados.
+
+### Implementação
+
+Foi criada uma rotina que percorre todos os alunos da lista e acumula as respetivas médias.
+
+No final, a soma é dividida pela quantidade de alunos existentes.
+
+### Conteúdos Trabalhados
+
+- Acumuladores
+- Operadores aritméticos
+- for
+- len()
+- Formatação decimal
+
+### Aprendizagem
+
+Aprendi a utilizar uma variável acumuladora para calcular totais e médias.
+
+Também aprendi a formatar números decimais para apresentação ao utilizador.
+
+### Estado do Projeto
+
+Extensão opcional concluída.
+
+## Extensão 2 - Ordenação por Nome
+
+### Objetivo
+
+Permitir visualizar os alunos em ordem alfabética.
+
+### Implementação
+
+Foi utilizada a função sorted() com o atributo nome como chave de ordenação.
+
+### Conteúdos Trabalhados
+
+- sorted()
+- lambda
+- Ordenação de texto
+- Listas de objetos
+
+### Aprendizagem
+
+Aprendi que a função sorted() pode ordenar tanto valores numéricos quanto texto.
+
+Também compreendi que diferentes atributos podem ser utilizados como critério de ordenação.
+
+### Estado do Projeto
+
+Extensão opcional concluída.
+
+## Extensão 3 - Melhor Aluno
+
+### Objetivo
+
+Identificar o aluno com a maior média.
+
+### Implementação
+
+Foi utilizada a função max() para localizar o objeto Aluno que possui o maior valor no atributo media.
+
+### Conteúdos Trabalhados
+
+- max()
+- lambda
+- key
+- Listas de objetos
+
+### Aprendizagem
+
+Aprendi a localizar o maior elemento de uma coleção utilizando um atributo específico como critério.
+
+Também compreendi a diferença entre ordenar toda a lista e obter apenas o maior elemento.
+
+### Estado do Projeto
+
+Extensão opcional concluída.
+
+
+
+
+
+
+## Extensão 5 - Contar Alunos
+
+### Objetivo
+
+Mostrar a quantidade total de alunos cadastrados no sistema.
+
+### Implementação
+
+Foi utilizada a função len() para obter a quantidade de objetos presentes na lista principal.
+
+### Conteúdos Trabalhados
+
+* len()
+* Listas
+* Variáveis temporárias
+
+### Aprendizagem
+
+Aprendi a determinar rapidamente a quantidade de elementos existentes numa lista.
+
+### Estado do Projeto
+
+Extensão opcional concluída.
+

@@ -78,6 +78,11 @@ while True:
     print("3 - Procurar aluno")
     print("4 - Ordenar por média")
     print("5 - Remover aluno")
+    print("6 - Calcular média da turma")
+    print("7 - Ordenar alunos por nome")
+    print("8 - Mostrar melhor aluno")
+    print("9 - Mostrar pior aluno")
+    print("10 - Contar alunos cadastrados")
     print("0 - Sair")
 
     opcao = input("\nEscolha uma opção: ")
@@ -168,8 +173,106 @@ while True:
             )
 
     elif opcao == "5":
-        print("\n[Remover aluno]")
 
+        nome_remover = input("\nNome do aluno a remover: ")
+
+        encontrado = False
+
+        for aluno in lista_alunos:
+
+            if aluno.nome.lower() == nome_remover.lower():
+
+                lista_alunos.remove(aluno)
+
+                print(f"\nAluno {aluno.nome} removido com sucesso!")
+
+                encontrado = True
+                break
+
+        if not encontrado:
+            print("\nAluno não encontrado.")
+
+    elif opcao == "6":
+
+        if len(lista_alunos) == 0:
+
+            print("\nNão existem alunos cadastrados.")
+
+        else:
+
+            soma_medias = 0
+
+            for aluno in lista_alunos:
+                soma_medias += aluno.media
+
+            media_turma = soma_medias / len(lista_alunos)
+
+            print("\n=== MÉDIA DA TURMA ===")
+            print(f"Média geral: {media_turma:.2f}")
+    
+    elif opcao == "7":
+
+        print("\n=== ALUNOS ORDENADOS POR NOME ===\n")
+
+        alunos_ordenados = sorted(
+            lista_alunos,
+            key=lambda aluno: aluno.nome
+        )
+
+        for aluno in alunos_ordenados:
+
+            print(
+                f"Nº: {aluno.numero} | "
+                f"{aluno.nome} {aluno.sobrenome}"
+            )
+
+    elif opcao == "8":
+
+        if len(lista_alunos) == 0:
+
+            print("\nNão existem alunos cadastrados.")
+
+        else:
+
+            melhor_aluno = max(
+                lista_alunos,
+                key=lambda aluno: aluno.media
+            )
+
+            print("\n=== MELHOR ALUNO ===\n")
+
+            print(f"Nº: {melhor_aluno.numero}")
+            print(f"Nome: {melhor_aluno.nome} {melhor_aluno.sobrenome}")
+            print(f"Curso: {melhor_aluno.curso}")
+            print(f"Média: {melhor_aluno.media}")
+
+    elif opcao == "9":
+
+        if len(lista_alunos) == 0:
+
+            print("\nNão existem alunos cadastrados.")
+
+        else:
+
+            pior_aluno = min(
+                lista_alunos,
+                key=lambda aluno: aluno.media
+            )
+
+            print("\n=== PIOR ALUNO ===\n")
+
+            print(f"Nº: {pior_aluno.numero}")
+            print(f"Nome: {pior_aluno.nome} {pior_aluno.sobrenome}")
+            print(f"Curso: {pior_aluno.curso}")
+            print(f"Média: {pior_aluno.media}")
+
+    elif opcao == "10":
+
+        total_alunos = len(lista_alunos)
+
+        print("\n=== TOTAL DE ALUNOS ===\n")
+        print(f"Quantidade de alunos: {total_alunos}")
+    
     elif opcao == "0":
         print("\nPrograma encerrado.")
         break
