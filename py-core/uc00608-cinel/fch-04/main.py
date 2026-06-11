@@ -117,6 +117,46 @@ frame_cards.pack(
     pady=20
 )
 
+frame_acesso = tk.Frame(
+    frame_conteudo,
+    bg="white"
+)
+
+frame_acesso.pack(
+    anchor="w",
+    padx=30
+)
+
+linha1 = tk.Frame(
+    frame_acesso,
+    bg="white"
+)
+
+linha1.pack(
+    pady=5
+)
+
+linha2 = tk.Frame(
+    frame_acesso,
+    bg="white"
+)
+
+linha2.pack(
+    pady=5
+)
+
+
+
+criar_botao_dashboard(linha1, "Adicionar Livro").pack(side="left", padx=5)
+criar_botao_dashboard(linha1, "Pesquisar Livro").pack(side="left", padx=5)
+criar_botao_dashboard(linha1, "Empréstimo").pack(side="left", padx=5)
+criar_botao_dashboard(linha1, "Devolução").pack(side="left", padx=5)
+
+criar_botao_dashboard(linha2, "Utilizadores").pack(side="left", padx=5)
+criar_botao_dashboard(linha2, "Ativos").pack(side="left", padx=5)
+criar_botao_dashboard(linha2, "Histórico").pack(side="left", padx=5)
+criar_botao_dashboard(linha2, "Estatísticas").pack(side="left", padx=5)
+
 criar_card(frame_cards, "128", "Livros")
 criar_card(frame_cards, "56", "Utilizadores")
 criar_card(frame_cards, "18", "Empréstimos")
@@ -161,5 +201,33 @@ def criar_card(parent, numero, texto):
     )
 
     lbl_texto.pack()
+
+    titulo_acesso = tk.Label(
+    frame_conteudo,
+    text="Acesso Rápido",
+    font=("Segoe UI", 14, "bold"),
+    bg="white"
+)
+
+titulo_acesso.pack(
+    anchor="w",
+    padx=30,
+    pady=(20,10)
+)
+
+def criar_botao_dashboard(parent, texto):
+
+    botao = tk.Button(
+        parent,
+        text=texto,
+        width=18,
+        height=3,
+        bg="#E8F5E9",
+        relief="solid",
+        bd=1
+    )
+
+    return botao
+
 
 janela.mainloop()
