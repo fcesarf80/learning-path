@@ -1,12 +1,12 @@
-# ==================================================
 # IMPORTS
-# ==================================================
 
 import tkinter as tk
 
-# ==================================================
+from views.livros import criar_tela_livros
+
+from config import *
+
 # CONSTANTES
-# ==================================================
 
 # Cores
 
@@ -15,17 +15,14 @@ COR_MENU = "#F5F7F7"
 COR_BOTAO = "#E8F5E9"
 COR_BORDA = "#D9D9D9"
 
-
 # Janela
 
 LARGURA_JANELA = "1200x700"
 TITULO_JANELA = "Gestor de Biblioteca"
 
-
 # Menu
 
 LARGURA_MENU = 300
-
 
 # Fontes
 
@@ -34,10 +31,7 @@ FONTE_SUBTITULO = ("Segoe UI", 14, "bold")
 FONTE_NORMAL = ("Segoe UI", 10)
 FONTE_CARD = ("Segoe UI", 20, "bold")
 
-
-# ==================================================
 # FUNÇÕES
-# ==================================================
 
 def criar_card(parent, numero, texto):
 
@@ -92,9 +86,19 @@ def criar_botao_dashboard(parent, texto):
 
     return botao
 
-# ==================================================
+def limpar_conteudo():
+
+    for widget in frame_conteudo.winfo_children():
+        widget.destroy()
+
+def abrir_livros():
+
+    for widget in frame_conteudo.winfo_children():
+        widget.destroy()
+
+    criar_tela_livros(frame_conteudo)
+
 # JANELA PRINCIPAL
-# ==================================================
 
 janela = tk.Tk()
 
@@ -129,9 +133,8 @@ titulo_dashboard = tk.Label(
     font=FONTE_TITULO,
     bg="white"
 )
-# ==================================================
+
 # MENU LATERAL
-# ==================================================
 
 frame_menu = tk.Frame(
     janela,
@@ -168,23 +171,36 @@ menus = [
 ]
 
 for item in menus:
-    botao = tk.Button(
-        frame_menu,
-        text=item,
-        anchor="w",
-        relief="flat",
-        bg="#F5F7F7",
-        padx=15
-    )
+
+    if item == "Livros":
+
+        botao = tk.Button(
+            frame_menu,
+            text=item,
+            anchor="w",
+            relief="flat",
+            bg="#F5F7F7",
+            padx=15,
+            command=abrir_livros
+        )
+
+    else:
+
+        botao = tk.Button(
+            frame_menu,
+            text=item,
+            anchor="w",
+            relief="flat",
+            bg="#F5F7F7",
+            padx=15
+        )
 
     botao.pack(
         fill="x",
         pady=2
     )
 
-# ==================================================
 # DASHBOARD - CABEÇALHO
-# ==================================================
 
 titulo_dashboard.pack(
     anchor="w",
@@ -213,18 +229,14 @@ frame_acesso.pack(
     padx=30
 )
 
-# ==================================================
 # DASHBOARD - CARDS
-# ==================================================
 
 criar_card(frame_cards, "128", "Livros")
 criar_card(frame_cards, "56", "Utilizadores")
 criar_card(frame_cards, "18", "Empréstimos")
 criar_card(frame_cards, "325", "Histórico")
 
-# ==================================================
 # DASHBOARD - ACESSO RÁPIDO
-# ==================================================
 
 titulo_acesso = tk.Label(
     frame_conteudo,
@@ -267,9 +279,7 @@ criar_botao_dashboard(linha2, "Ativos").pack(side="left", padx=5)
 criar_botao_dashboard(linha2, "Histórico").pack(side="left", padx=5)
 criar_botao_dashboard(linha2, "Estatísticas").pack(side="left", padx=5)
 
-# ==================================================
 # DASHBOARD - ATIVIDADE RECENTE
-# ==================================================
 
 titulo_atividade = tk.Label(
     frame_conteudo,
