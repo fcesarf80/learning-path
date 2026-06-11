@@ -4,6 +4,36 @@
 
 import tkinter as tk
 
+# ==================================================
+# CONSTANTES
+# ==================================================
+
+# Cores
+
+COR_FUNDO = "white"
+COR_MENU = "#F5F7F7"
+COR_BOTAO = "#E8F5E9"
+COR_BORDA = "#D9D9D9"
+
+
+# Janela
+
+LARGURA_JANELA = "1200x700"
+TITULO_JANELA = "Gestor de Biblioteca"
+
+
+# Menu
+
+LARGURA_MENU = 300
+
+
+# Fontes
+
+FONTE_TITULO = ("Segoe UI", 20, "bold")
+FONTE_SUBTITULO = ("Segoe UI", 14, "bold")
+FONTE_NORMAL = ("Segoe UI", 10)
+FONTE_CARD = ("Segoe UI", 20, "bold")
+
 
 # ==================================================
 # FUNÇÕES
@@ -47,7 +77,6 @@ def criar_card(parent, numero, texto):
 
     lbl_texto.pack()
 
-   # endfuncao
 
 def criar_botao_dashboard(parent, texto):
 
@@ -56,13 +85,12 @@ def criar_botao_dashboard(parent, texto):
         text=texto,
         width=18,
         height=3,
-        bg="#E8F5E9",
+        bg=COR_BOTAO,
         relief="solid",
         bd=1
     )
 
     return botao
-
 
 # ==================================================
 # JANELA PRINCIPAL
@@ -70,9 +98,9 @@ def criar_botao_dashboard(parent, texto):
 
 janela = tk.Tk()
 
-janela.title("Gestor de Biblioteca")
-janela.geometry("1200x700")
-janela.configure(bg="white")
+janela.title(TITULO_JANELA)
+janela.geometry(LARGURA_JANELA)
+janela.configure(bg=COR_FUNDO)
 
 frame_conteudo = tk.Frame(
     janela,
@@ -98,7 +126,7 @@ cabecalho.pack(
 titulo_dashboard = tk.Label(
     cabecalho,
     text="Dashboard",
-    font=("Segoe UI", 20, "bold"),
+    font=FONTE_TITULO,
     bg="white"
 )
 # ==================================================
@@ -108,7 +136,7 @@ titulo_dashboard = tk.Label(
 frame_menu = tk.Frame(
     janela,
     width=300,
-    bg="#F5F7F7"
+    bg=COR_MENU
 )
 
 frame_menu.pack(
@@ -120,7 +148,7 @@ titulo = tk.Label(
     frame_menu,
     text="📚 Biblioteca",
     font=("Segoe UI", 16, "bold"),
-    bg="#F5F7F7"
+    bg=COR_MENU
 )
 
 titulo.pack(
@@ -154,9 +182,8 @@ for item in menus:
         pady=2
     )
 
-
 # ==================================================
-# DASHBOARD
+# DASHBOARD - CABEÇALHO
 # ==================================================
 
 titulo_dashboard.pack(
@@ -187,7 +214,7 @@ frame_acesso.pack(
 )
 
 # ==================================================
-# CARDS
+# DASHBOARD - CARDS
 # ==================================================
 
 criar_card(frame_cards, "128", "Livros")
@@ -196,19 +223,13 @@ criar_card(frame_cards, "18", "Empréstimos")
 criar_card(frame_cards, "325", "Histórico")
 
 # ==================================================
-# DASHBOARD - CABEÇALHO
-# ==================================================
-
-
-
-# ==================================================
 # DASHBOARD - ACESSO RÁPIDO
 # ==================================================
 
 titulo_acesso = tk.Label(
     frame_conteudo,
     text="Acesso Rápido",
-    font=("Segoe UI", 14, "bold"),
+    font=FONTE_SUBTITULO,
     bg="white"
 )
 
@@ -236,7 +257,6 @@ linha2.pack(
     pady=5
 )
 
-
 criar_botao_dashboard(linha1, "Adicionar Livro").pack(side="left", padx=5)
 criar_botao_dashboard(linha1, "Pesquisar Livro").pack(side="left", padx=5)
 criar_botao_dashboard(linha1, "Empréstimo").pack(side="left", padx=5)
@@ -247,11 +267,9 @@ criar_botao_dashboard(linha2, "Ativos").pack(side="left", padx=5)
 criar_botao_dashboard(linha2, "Histórico").pack(side="left", padx=5)
 criar_botao_dashboard(linha2, "Estatísticas").pack(side="left", padx=5)
 
-
 # ==================================================
-# ATIVIDADE RECENTE
+# DASHBOARD - ATIVIDADE RECENTE
 # ==================================================
-
 
 titulo_atividade = tk.Label(
     frame_conteudo,
@@ -292,7 +310,7 @@ for atividade in atividades:
         text=atividade,
         bg="white",
         anchor="w",
-        font=("Segoe UI", 10)
+        font=FONTE_NORMAL
     )
 
     lbl.pack(
@@ -300,6 +318,5 @@ for atividade in atividades:
         padx=15,
         pady=5
     )
-
 
 janela.mainloop()
