@@ -1,5 +1,7 @@
 import tkinter as tk
 
+from tkinter import filedialog
+
 from pathlib import Path
 
 from PIL import Image
@@ -15,8 +17,27 @@ print(
 # FUNÇÕES
 # ==================================
 
-def teste_botao():
-    print("Botão clicado!")
+def carregar_foto():
+
+    caminho_foto = filedialog.askopenfilename(
+        title="Selecionar foto do aluno",
+        filetypes=[
+            ("Imagens PNG", "*.png"),
+            ("Todos os ficheiros", "*.*")
+        ]
+    )
+
+    if caminho_foto:
+
+        imagem = Image.open(caminho_foto)
+
+        nova_foto = ImageTk.PhotoImage(imagem)
+
+        label_foto.config(
+            image=nova_foto
+        )
+
+        label_foto.image = nova_foto
 
 
 # ==========================
@@ -88,7 +109,7 @@ label_foto = tk.Label(
 
 label_foto.place(
     x=220,
-    y=280
+    y=272
 )
 
 # ==================================
@@ -98,12 +119,12 @@ label_foto.place(
 botao_teste = tk.Button(
     janela,
     text="CARREGAR FOTO",
-    command=teste_botao
+    command=carregar_foto
 )
 
 botao_teste.place(
     x=240,
-    y=450
+    y=477
 )
 
 
