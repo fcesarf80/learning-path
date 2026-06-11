@@ -724,4 +724,102 @@ Aprendi a distinguir funções responsáveis pela lógica de negócio das funç�
 
 Refatoração concluída sem alteração de comportamento.
 
+
+
+
 # Fase 2 - Interface Gráfica (Tkinter)
+
+## Etapa 1 - Separação da Classe Aluno
+
+### Objetivo
+
+Iniciar a migração da arquitetura do projeto para uma estrutura modular.
+
+### Implementação
+
+A classe Aluno foi movida para o módulo:
+
+models/aluno.py
+
+Passando a representar exclusivamente o modelo de dados do sistema.
+
+### Conteúdos Trabalhados
+
+- Arquitetura em camadas
+- Separação de responsabilidades
+- Importação de módulos
+- Classes
+
+### Aprendizagem
+
+Aprendi que uma classe deve representar apenas a estrutura e o comportamento de um objeto.
+
+A lógica do programa e a interface gráfica serão implementadas em módulos separados.
+
+### Estado
+
+Concluído.
+
+## Etapa 4 - Primeiro Frame da Interface
+
+### Objetivo
+
+Criar a primeira área estrutural da interface gráfica.
+
+### Implementação
+
+Foi criado um Frame posicionado na região superior da janela.
+
+O componente servirá como base para o cabeçalho da aplicação.
+
+### Conteúdos Trabalhados
+
+- Tkinter
+- Frame
+- place()
+- Coordenadas
+- Containers visuais
+
+### Aprendizagem
+
+Aprendi que um Frame funciona como um contentor capaz de agrupar widgets relacionados numa mesma área da interface.
+
+### Estado
+
+Concluído.
+## Etapa 3 - Definição do Layout Visual
+
+### Objetivo
+
+Definir a estrutura visual definitiva da interface gráfica.
+
+### Implementação
+
+Foi criado um novo background contendo as áreas funcionais da aplicação.
+
+As regiões de:
+
+- Cadastro de aluno
+- Funcionalidades
+- Listagem de alunos
+- Barra de estado
+
+passaram a fazer parte da arte base da aplicação.
+
+### Decisão de Projeto
+
+Optou-se por utilizar uma abordagem baseada em composição gráfica.
+
+A maior parte da interface visual será fornecida pelo background e pelos recursos PNG preparados previamente.
+
+Os widgets Tkinter serão posicionados sobre estas áreas utilizando coordenadas fixas.
+
+### Justificativa
+
+- Maior fidelidade ao tema Simpsons.
+- Menor complexidade visual em Tkinter.
+- Melhor aproveitamento dos recursos gráficos produzidos para o projeto.
+
+### Estado
+
+Concluído.
