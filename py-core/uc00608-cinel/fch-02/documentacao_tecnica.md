@@ -723,3 +723,5 @@ Aprendi a distinguir funções responsáveis pela lógica de negócio das funç�
 ### Estado
 
 Refatoração concluída sem alteração de comportamento.
+
+# Fase 2 - Interface Gráfica (Tkinter)
