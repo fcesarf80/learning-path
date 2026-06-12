@@ -3,17 +3,15 @@
 import tkinter as tk
 
 from views.livros import criar_tela_livros
+from views.utilizadores import criar_tela_utilizadores
+from views.emprestimos import criar_tela_emprestimos
+from views.devolucoes import criar_tela_devolucoes
+from views.ativos import criar_tela_ativos
+from views.historico import criar_tela_historico
+from views.csv_view import criar_tela_csv
+from views.estatisticas import criar_tela_estatisticas
 
 from config import *
-
-# CONSTANTES
-
-# Cores
-
-COR_FUNDO = "white"
-COR_MENU = "#F5F7F7"
-COR_BOTAO = "#E8F5E9"
-COR_BORDA = "#D9D9D9"
 
 # Janela
 
@@ -93,10 +91,42 @@ def limpar_conteudo():
 
 def abrir_livros():
 
-    for widget in frame_conteudo.winfo_children():
-        widget.destroy()
-
+    limpar_conteudo()
     criar_tela_livros(frame_conteudo)
+
+def abrir_utilizadores():
+    limpar_conteudo()
+    criar_tela_utilizadores(frame_conteudo)
+
+def abrir_emprestimos():
+    limpar_conteudo()
+    criar_tela_emprestimos(frame_conteudo)
+
+def abrir_devolucoes():
+    limpar_conteudo()
+    criar_tela_devolucoes(frame_conteudo)
+
+def abrir_ativos():
+    limpar_conteudo()
+    criar_tela_ativos(frame_conteudo)
+
+def abrir_historico():
+    limpar_conteudo()
+    criar_tela_historico(frame_conteudo)
+
+def abrir_csv():
+    limpar_conteudo()
+    criar_tela_csv(frame_conteudo)
+
+def abrir_estatisticas():
+    limpar_conteudo()
+    criar_tela_estatisticas(frame_conteudo)
+
+def abrir_dashboard():
+
+    limpar_conteudo()
+
+# reconstruir dashboard
 
 # JANELA PRINCIPAL
 
@@ -105,6 +135,59 @@ janela = tk.Tk()
 janela.title(TITULO_JANELA)
 janela.geometry(LARGURA_JANELA)
 janela.configure(bg=COR_FUNDO)
+
+# MENU LATERAL
+
+frame_menu = tk.Frame(
+    janela,
+    width=300,
+    bg=COR_MENU
+)
+
+frame_menu.pack(
+    side="left",
+    fill="y"
+)
+
+titulo = tk.Label(
+    frame_menu,
+    text="📚 Biblioteca",
+    font=("Segoe UI", 16, "bold"),
+    bg=COR_MENU
+)
+
+titulo.pack(
+    pady=20
+)
+
+menus = {
+    "Dashboard": None, #abrir_dashboard,
+    "Livros": abrir_livros,
+    "Utilizadores": abrir_utilizadores,
+    "Empréstimos": abrir_emprestimos,
+    "Devoluções": abrir_devolucoes,
+    "Ativos": abrir_ativos,
+    "Histórico": abrir_historico,
+    "CSV": abrir_csv,
+    "Estatísticas": abrir_estatisticas
+}
+
+for texto, comando in menus.items():
+
+    botao = tk.Button(
+        frame_menu,
+        text=texto,
+        anchor="w",
+        relief="flat",
+        bg="#F5F7F7",
+        padx=15,
+        command=comando
+    )
+
+    botao.pack(
+        fill="x",
+        pady=2
+    )
 
 frame_conteudo = tk.Frame(
     janela,
@@ -133,72 +216,6 @@ titulo_dashboard = tk.Label(
     font=FONTE_TITULO,
     bg="white"
 )
-
-# MENU LATERAL
-
-frame_menu = tk.Frame(
-    janela,
-    width=300,
-    bg=COR_MENU
-)
-
-frame_menu.pack(
-    side="left",
-    fill="y"
-)
-
-titulo = tk.Label(
-    frame_menu,
-    text="📚 Biblioteca",
-    font=("Segoe UI", 16, "bold"),
-    bg=COR_MENU
-)
-
-titulo.pack(
-    pady=20
-)
-
-menus = [
-    "Dashboard",
-    "Livros",
-    "Utilizadores",
-    "Empréstimos",
-    "Devoluções",
-    "Ativos",
-    "Histórico",
-    "CSV",
-    "Estatísticas"
-]
-
-for item in menus:
-
-    if item == "Livros":
-
-        botao = tk.Button(
-            frame_menu,
-            text=item,
-            anchor="w",
-            relief="flat",
-            bg="#F5F7F7",
-            padx=15,
-            command=abrir_livros
-        )
-
-    else:
-
-        botao = tk.Button(
-            frame_menu,
-            text=item,
-            anchor="w",
-            relief="flat",
-            bg="#F5F7F7",
-            padx=15
-        )
-
-    botao.pack(
-        fill="x",
-        pady=2
-    )
 
 # DASHBOARD - CABEÇALHO
 
