@@ -42,22 +42,23 @@
         android:layout_gravity="center"
         android:layout_marginTop="16dp">
 
-    <ImageView
-        android:id="@+id/imgBackground"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="fitXY"
-        android:src="@drawable/capivbackground"
-        android:contentDescription="Cenário" />
+        <ImageView
+            android:id="@+id/imgBackground"
+            android:layout_width="350dp"
+            android:layout_height="358dp"
+            android:contentDescription="Cenário"
+            android:scaleType="fitXY"
+            android:translationY="-60dp"
+            android:src="@drawable/capivbackground" />
 
-    <ImageView
-        android:id="@+id/imgCapivara"
-        android:layout_width="220dp"
-        android:layout_height="220dp"
-        android:layout_gravity="center|bottom"
-        android:src="@drawable/capiv1"
-        android:contentDescription="Capivara" />
+        <ImageView
+            android:id="@+id/imgCapivara"
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:layout_gravity="center|bottom"
+            android:contentDescription="Capivara"
+            android:src="@drawable/capiv1" />
 
-</FrameLayout>
+    </FrameLayout>
 
 </LinearLayout>
