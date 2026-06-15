@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ex-02-dados-pessoais</string>
+
+    <string name="hint_nome">Nome</string>
+    <string name="hint_idade">Idade</string>
+    <string name="hint_altura">Altura</string>
+
+    <string name="btn_registar">Registar</string>
+
+    <string name="desc_cenario_escritorio">Cenário Escritório</string>
+    <string name="desc_capivara_rh">Capivara RH</string>
+
+</resources>

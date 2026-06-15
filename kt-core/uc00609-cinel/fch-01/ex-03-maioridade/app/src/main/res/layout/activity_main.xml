@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/etNome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nome" />
+
+    <EditText
+        android:id="@+id/etIdade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Idade"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/btnVerificar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Verificar Acesso" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <!-- Cenário -->
+
+        <ImageView
+            android:id="@+id/imgBackground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/capivara_club"
+            android:contentDescription="Clube" />
+
+        <!-- Resultado -->
+
+        <TextView
+            android:id="@+id/tvResultado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:shadowColor="#000000"
+            android:shadowRadius="4" />
+
+        <!-- Segurança -->
+
+        <ImageView
+            android:id="@+id/imgSeguranca"
+            android:layout_width="500dp"
+            android:layout_height="500dp"
+            android:layout_gravity="center"
+            android:translationY="100dp"
+            android:src="@drawable/capivara_seguranca01"
+            android:contentDescription="Segurança" />
+
+    </FrameLayout>
+
+</LinearLayout>
