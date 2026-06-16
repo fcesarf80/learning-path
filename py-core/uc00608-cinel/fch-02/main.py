@@ -341,6 +341,20 @@ label_media.place(
     y=525
 )
 
+label_funcionalidades = tk.Label(
+    janela,
+    text="FUNCIONALIDADES",
+    font=("Fredoka SemiBold", 12),
+    bg="#fee686",
+    fg="#114510"
+)
+
+label_funcionalidades.place(
+    x=457,
+    y=205,
+    width=665
+)
+
 # ==================================================
 # ÍCONES
 # ==================================================
@@ -431,6 +445,179 @@ botao_proximo = tk.Button(
 botao_proximo.place(
     x=330,
     y=493
+)
+
+# ==================================================
+# PAINEL DE FUNCIONALIDADES
+# ==================================================
+
+painel_funcionalidades = tk.LabelFrame(
+    janela,
+    text=""
+)
+
+painel_funcionalidades.place(
+    x=457,
+    y=225,
+    width=665,
+    height=200
+)
+
+botao_adicionar = tk.Button(
+    painel_funcionalidades,
+    text="Adicionar"
+)
+
+botao_adicionar.grid(
+    row=0,
+    column=0,
+    padx=10,
+    pady=10
+)
+
+botao_listar = tk.Button(
+    painel_funcionalidades,
+    text="Listar"
+)
+
+botao_listar.grid(
+    row=0,
+    column=1,
+    padx=10,
+    pady=10
+)
+
+botao_procurar = tk.Button(
+    painel_funcionalidades,
+    text="Procurar"
+)
+
+botao_ordenar_media = tk.Button(
+    painel_funcionalidades,
+    text="Ord. Média"
+)
+
+botao_ordenar_media.grid(
+    row=1,
+    column=0,
+    padx=10,
+    pady=10
+)
+
+botao_remover = tk.Button(
+    painel_funcionalidades,
+    text="Remover"
+)
+
+botao_remover.grid(
+    row=1,
+    column=1,
+    padx=10,
+    pady=10
+)
+
+botao_media_turma = tk.Button(
+    painel_funcionalidades,
+    text="Média Turma"
+)
+
+botao_media_turma.grid(
+    row=1,
+    column=2,
+    padx=10,
+    pady=10
+)
+
+botao_procurar.grid(
+    row=0,
+    column=2,
+    padx=10,
+    pady=10
+)
+
+botao_ordenar_media.grid(
+    row=1,
+    column=0,
+    padx=10,
+    pady=10
+)
+
+botao_remover.grid(
+    row=1,
+    column=1,
+    padx=10,
+    pady=10
+)
+
+botao_media_turma.grid(
+    row=1,
+    column=2,
+    padx=10,
+    pady=10
+)
+
+# LINHA 3
+
+botao_ordenar_nome = tk.Button(
+    painel_funcionalidades,
+    text="Ord. Nome"
+)
+
+botao_ordenar_nome.grid(
+    row=2,
+    column=0,
+    padx=10,
+    pady=10
+)
+
+botao_melhor_aluno = tk.Button(
+    painel_funcionalidades,
+    text="Melhor"
+)
+
+botao_melhor_aluno.grid(
+    row=2,
+    column=1,
+    padx=10,
+    pady=10
+)
+
+botao_pior_aluno = tk.Button(
+    painel_funcionalidades,
+    text="Pior"
+)
+
+botao_pior_aluno.grid(
+    row=2,
+    column=2,
+    padx=10,
+    pady=10
+)
+
+# LINHA 4
+
+botao_contar_alunos = tk.Button(
+    painel_funcionalidades,
+    text="Contar"
+)
+
+botao_contar_alunos.grid(
+    row=3,
+    column=0,
+    padx=10,
+    pady=10
+)
+
+botao_sair = tk.Button(
+    painel_funcionalidades,
+    text="Sair"
+)
+
+botao_sair.grid(
+    row=3,
+    column=1,
+    padx=10,
+    pady=10
 )
 
 # ==================================================
