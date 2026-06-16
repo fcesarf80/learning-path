@@ -724,9 +724,6 @@ Aprendi a distinguir funções responsáveis pela lógica de negócio das funç�
 
 Refatoração concluída sem alteração de comportamento.
 
-
-
-
 # Fase 2 - Interface Gráfica (Tkinter)
 
 ## Etapa 1 - Separação da Classe Aluno
@@ -787,6 +784,7 @@ Aprendi que um Frame funciona como um contentor capaz de agrupar widgets relacio
 ### Estado
 
 Concluído.
+
 ## Etapa 3 - Definição do Layout Visual
 
 ### Objetivo
@@ -821,5 +819,149 @@ Os widgets Tkinter serão posicionados sobre estas áreas utilizando coordenadas
 - Melhor aproveitamento dos recursos gráficos produzidos para o projeto.
 
 ### Estado
+
+Concluído.
+
+# Fase 2 - Interface Gráfica (Tkinter)
+
+ETAPA 1 - JANELA PRINCIPAL
+
+Implementada a janela principal da aplicação utilizando Tkinter.
+
+Conceitos estudados:
+
+- Tk()
+- mainloop()
+- Frame
+- pack()
+
+Estrutura criada:
+
+- Topo
+- Painel esquerdo
+- Área de conteúdo
+- Rodapé
+
+Resolução:
+1366x768 (fixa)
+
+## Etapa 5 - Criação da Janela Principal
+
+### Objetivo
+
+Criar a janela principal da aplicação e compreender a arquitetura geral da interface gráfica.
+
+### Implementação
+
+Foi criada a janela principal utilizando a classe Tk().
+
+A aplicação passou a possuir:
+
+- Título da janela
+- Resolução fixa 1366x768
+- Bloqueio de redimensionamento
+- Estrutura inicial para os futuros componentes visuais
+
+### Conteúdos Trabalhados
+
+- Tk()
+- mainloop()
+- geometry()
+- title()
+- resizable()
+
+### Aprendizagem
+
+Aprendi que Tk() representa a janela principal da aplicação e que o método mainloop() mantém a interface ativa aguardando eventos do utilizador.
+
+Também compreendi que a interface gráfica funcionará como uma camada independente da lógica implementada em services/gestor_alunos.py.
+
+### Estado
+
+Concluído.
+
+Etapa 6 - Associação de Fotografias aos Alunos
+
+Objetivo
+
+Permitir que cada aluno possua uma fotografia associada.
+
+Implementação
+
+Foi adicionado o atributo foto à classe Aluno.
+
+Os 13 alunos iniciais passaram a possuir uma imagem PNG associada ao seu registo.
+
+Conteúdos Trabalhados
+
+- Classes
+- Atributos de instância
+- Modelagem de dados
+- Organização de recursos gráficos
+
+Aprendizagem
+
+Aprendi que objetos podem armazenar referências para recursos externos, como imagens, permitindo que a interface gráfica apresente informações visuais associadas aos dados.
+
+Estado
+
+Concluído.
+
+## Etapa 7 - Exibição Automática da Fotografia do Aluno
+
+### Objetivo
+
+Exibir automaticamente a fotografia associada a um aluno da lista principal.
+
+### Implementação
+
+Foi criado um mecanismo para carregar a fotografia utilizando o atributo foto do objeto Aluno.
+
+A imagem passou a ser localizada dinamicamente através do caminho armazenado no objeto.
+
+### Conteúdos Trabalhados
+
+- Objetos
+- Atributos de instância
+- pathlib.Path
+- Pillow (Image e ImageTk)
+- Integração entre módulos
+
+### Aprendizagem
+
+Aprendi a utilizar dados armazenados em objetos para localizar e apresentar recursos gráficos na interface.
+
+Também compreendi como integrar as camadas Model, Service e GUI.
+
+### Estado
+
+Concluído.
+
+Etapa 8 - Navegação Entre Alunos
+
+Objetivo
+
+Permitir navegar pelos alunos carregados no sistema através da interface gráfica.
+
+Implementação
+
+Foram criados botões para avançar e retroceder entre os alunos da lista principal.
+
+A fotografia exibida é atualizada automaticamente sempre que o aluno atual é alterado.
+
+Conteúdos Trabalhados
+
+- Eventos
+- command
+- Funções
+- Variáveis globais
+- Índices de listas
+- Atualização dinâmica de widgets
+
+Aprendizagem
+
+Aprendi a navegar por objetos armazenados em listas e atualizar componentes gráficos sem reiniciar a aplicação.
+
+Estado
 
 Concluído.

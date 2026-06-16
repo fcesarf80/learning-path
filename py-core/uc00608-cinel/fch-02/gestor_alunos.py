@@ -89,6 +89,49 @@ def listar_alunos():
                 f"Média: {aluno.media}"
             )
 
+def mostrar_aluno():
+
+    global foto_aluno
+
+    aluno = lista_alunos[indice_aluno]
+
+    caminho_foto = (
+        BASE_DIR
+        / "img"
+        / "class-edna-krabappel"
+        / aluno.foto
+    )
+
+    imagem = Image.open(caminho_foto)
+
+    foto_aluno = ImageTk.PhotoImage(imagem)
+
+    label_foto.config(
+        image=foto_aluno
+    )
+
+    label_foto.image = foto_aluno
+
+def proximo_aluno():
+
+    global indice_aluno
+
+    if indice_aluno < len(lista_alunos) - 1:
+
+        indice_aluno += 1
+
+        mostrar_aluno()
+
+def aluno_anterior():
+
+    global indice_aluno
+
+    if indice_aluno > 0:
+
+        indice_aluno -= 1
+
+        mostrar_aluno()
+
 def adicionar_aluno():
 
     print("\n=== NOVO ALUNO ===")

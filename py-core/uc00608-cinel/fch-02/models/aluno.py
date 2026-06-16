@@ -7,7 +7,8 @@ class Aluno:
         sobrenome,
         idade,
         curso,
-        media
+        media,
+        foto
     ):
         self.numero = numero
         self.nome = nome
@@ -15,3 +16,4 @@ class Aluno:
         self.idade = idade
         self.curso = curso
         self.media = media
+        self.foto = foto
