@@ -17,12 +17,8 @@ from services.gestor_alunos import lista_alunos
 aluno_atual = lista_alunos[0]
 indice_aluno = 0
 
-print(
-    f"Total de alunos: {len(lista_alunos)}"
-)
-
 # ==================================================
-# FUNÇÕES
+# FUNÇÕES DA INTERFACE
 # ==================================================
 
 def carregar_foto():
@@ -121,7 +117,6 @@ def mostrar_aluno():
         image=foto_aluno
     )
     
-
     label_foto.image = foto_aluno
 
 # ==================================================
@@ -239,7 +234,7 @@ label_numero.place(
     y=500
 )
 
-# IDADE ALUNO
+# IDADE DO ALUNO
 
 label_idade = tk.Label(
     janela,
@@ -330,9 +325,6 @@ botao_proximo.place(
 # ==================================================
 # INICIALIZAÇÃO
 # ==================================================
-
-print(lista_alunos[0].nome)
-print(lista_alunos[0].foto)
 
 mostrar_aluno()
 
