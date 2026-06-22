@@ -21,7 +21,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="439dp"
+        android:layout_height="0dp"
         android:layout_weight="1">
 
         <ImageView
@@ -31,7 +31,7 @@
             android:contentDescription="Cenário"
             android:scaleType="centerCrop"
             android:src="@drawable/cenario_bancada"
-            android:translationY="-60dp" />
+            android:translationY="0dp" />
 
         <TextView
             android:id="@+id/tvLista"
@@ -47,7 +47,7 @@
             android:id="@+id/imgCapivaras"
             android:layout_width="290dp"
             android:layout_height="290dp"
-            android:layout_gravity="center"
+            android:layout_gravity="bottom|center_horizontal"
             android:contentDescription="Capivaras" />
 
     </FrameLayout>

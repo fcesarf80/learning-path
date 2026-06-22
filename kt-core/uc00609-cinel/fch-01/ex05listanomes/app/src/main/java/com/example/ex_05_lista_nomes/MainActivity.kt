@@ -7,6 +7,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,8 +17,24 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //enableEdgeToEdge()
+        enableEdgeToEdge()
+
         setContentView(R.layout.activity_main)
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+
+            val systemBars =
+                insets.getInsets(WindowInsetsCompat.Type.systemBars())
+
+            v.setPadding(
+                systemBars.left,
+                systemBars.top,
+                systemBars.right,
+                systemBars.bottom
+            )
+
+            insets
+        }
 
         val etNome =
             findViewById<EditText>(R.id.etNome)
@@ -45,7 +63,7 @@ class MainActivity : AppCompatActivity() {
                             R.drawable.capivara_adepta
                         )
 
-                        imgCapivaras.translationY = 125f
+                        imgCapivaras.translationY = -520f
                     }
 
                     2 -> {
@@ -53,7 +71,7 @@ class MainActivity : AppCompatActivity() {
                             R.drawable.duas_capivaras_adeptas
                         )
 
-                        imgCapivaras.translationY = 115f
+                        imgCapivaras.translationY = -650f
 
                         imgCapivaras.scaleX = 1.3f
                         imgCapivaras.scaleY = 1.3f
@@ -64,10 +82,10 @@ class MainActivity : AppCompatActivity() {
                             R.drawable.grupo_capivaras_adeptos
                         )
 
-                        imgCapivaras.translationY = -230f
+                        imgCapivaras.translationY = -780f
 
-                        imgCapivaras.scaleX = 1.7f
-                        imgCapivaras.scaleY = 1.7f
+                        imgCapivaras.scaleX = 1.60f
+                        imgCapivaras.scaleY = 1.60f
                     }
                 }
 
