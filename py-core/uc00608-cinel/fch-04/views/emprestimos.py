@@ -1,40 +1,44 @@
 import tkinter as tk
 from tkinter import ttk
+from config import *
 
 def criar_tela_emprestimos(frame_conteudo):
 
+    # Configuração de fundo do frame principal da tela
+    frame_conteudo.configure(bg=COR_FUNDO)
+
     # SEÇÃO 1: TÍTULO DA TELA
-    titulo = Label(frame_conteudo, text="Realizar Empréstimo", font=("Arial", 20, "bold"))
+    titulo = tk.Label(frame_conteudo, text="Realizar Empréstimo", font=FONTE_TITULO, bg=COR_FUNDO)
     titulo.pack(pady=20)
 
     # SEÇÃO 2: FORMULÁRIO DE DADOS
-    frame_formulario = Frame(frame_conteudo)
+    frame_formulario = tk.Frame(frame_conteudo, bg=COR_FUNDO)
     frame_formulario.pack(padx=20, pady=10, fill="x")
 
-    Label(frame_formulario, text="Livro:").grid(row=0, column=0, padx=10, pady=5, sticky="w")
-    Entry(frame_formulario, width=30).grid(row=0, column=1, padx=10, pady=5)
+    tk.Label(frame_formulario, text="Livro:", font=FONTE_NORMAL, bg=COR_FUNDO).grid(row=0, column=0, padx=10, pady=5, sticky="w")
+    tk.Entry(frame_formulario, width=30, font=FONTE_NORMAL, highlightbackground=COR_BORDA).grid(row=0, column=1, padx=10, pady=5)
 
-    Label(frame_formulario, text="Utilizador:").grid(row=1, column=0, padx=10, pady=5, sticky="w")
-    Entry(frame_formulario, width=30).grid(row=1, column=1, padx=10, pady=5)
+    tk.Label(frame_formulario, text="Utilizador:", font=FONTE_NORMAL, bg=COR_FUNDO).grid(row=1, column=0, padx=10, pady=5, sticky="w")
+    tk.Entry(frame_formulario, width=30, font=FONTE_NORMAL, highlightbackground=COR_BORDA).grid(row=1, column=1, padx=10, pady=5)
 
-    Label(frame_formulario, text="Data Empréstimo:").grid(row=2, column=0, padx=10, pady=5, sticky="w")
-    Entry(frame_formulario, width=30).grid(row=2, column=1, padx=10, pady=5)
+    tk.Label(frame_formulario, text="Data Empréstimo:", font=FONTE_NORMAL, bg=COR_FUNDO).grid(row=2, column=0, padx=10, pady=5, sticky="w")
+    tk.Entry(frame_formulario, width=30, font=FONTE_NORMAL, highlightbackground=COR_BORDA).grid(row=2, column=1, padx=10, pady=5)
     
-    Label(frame_formulario, text="Data Prevista:").grid(row=3, column=0, padx=10, pady=5, sticky="w")
-    Entry(frame_formulario, width=30).grid(row=3, column=1, padx=10, pady=5)
+    tk.Label(frame_formulario, text="Data Prevista:", font=FONTE_NORMAL, bg=COR_FUNDO).grid(row=3, column=0, padx=10, pady=5, sticky="w")
+    tk.Entry(frame_formulario, width=30, font=FONTE_NORMAL, highlightbackground=COR_BORDA).grid(row=3, column=1, padx=10, pady=5)
     
     # SEÇÃO 3: BOTÕES DE AÇÃO
-    frame_botoes = Frame(frame_conteudo)
+    frame_botoes = tk.Frame(frame_conteudo, bg=COR_FUNDO)
     frame_botoes.pack(pady=10)
 
-    Button(frame_botoes, text="Registar Empréstimo").pack(side="left", padx=5)
-    Button(frame_botoes, text="Editar").pack(side="left", padx=5)
-    Button(frame_botoes, text="Remover").pack(side="left", padx=5)
-    Button(frame_botoes, text="Pesquisar").pack(side="left", padx=5)
+    tk.Button(frame_botoes, text="Registar Empréstimo", font=FONTE_NORMAL, bg=COR_BOTAO).pack(side="left", padx=5)
+    tk.Button(frame_botoes, text="Editar", font=FONTE_NORMAL, bg=COR_BOTAO).pack(side="left", padx=5)
+    tk.Button(frame_botoes, text="Remover", font=FONTE_NORMAL, bg=COR_BOTAO).pack(side="left", padx=5)
+    tk.Button(frame_botoes, text="Pesquisar", font=FONTE_NORMAL, bg=COR_BOTAO).pack(side="left", padx=5)
     
 
     # SEÇÃO 4: TABELA DE REGISTROS (TREEVIEW)
-    frame_tabela = Frame(frame_conteudo)
+    frame_tabela = tk.Frame(frame_conteudo, bg=COR_FUNDO)
     frame_tabela.pack(fill="both", expand=True, padx=20, pady=10)
 
     tabela = ttk.Treeview(frame_tabela, columns=("livro", "utilizador", "data_emprestimo", "data_prevista"), show="headings")
