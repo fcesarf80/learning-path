@@ -1,4 +1,5 @@
-from tkinter import *
+import tkinter as tk
+from tkinter import ttk
 
 def criar_tela_estatisticas(frame_conteudo):
 

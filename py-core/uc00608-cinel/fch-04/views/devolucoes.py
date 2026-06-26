@@ -1,4 +1,4 @@
-from tkinter import *
+import tkinter as tk
 from tkinter import ttk
 
 def criar_tela_devolucoes(frame_conteudo):
@@ -17,7 +17,7 @@ def criar_tela_devolucoes(frame_conteudo):
     Label(frame_formulario, text="Utilizador:").grid(row=1, column=0, padx=10, pady=5, sticky="w")
     Entry(frame_formulario, width=30).grid(row=1, column=1, padx=10, pady=5)
 
-    Label(frame_formulario, text="Data Devolução:").grid(row=1, column=0, padx=10, pady=5, sticky="w")
+    Label(frame_formulario, text="Data Devolução:").grid(row=2, column=0, padx=10, pady=5, sticky="w")
     Entry(frame_formulario, width=30).grid(row=1, column=1, padx=10, pady=5)
 
     # SEÇÃO 3: BOTÕES DE AÇÃO
