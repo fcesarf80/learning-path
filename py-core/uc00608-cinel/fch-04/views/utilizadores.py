@@ -4,9 +4,6 @@ from config import *
 
 def criar_tela_utilizadores(frame_conteudo):
 
-    # Configuração de fundo do frame principal da tela
-    frame_conteudo.configure(bg=COR_FUNDO)
-
     # SEÇÃO 1: TÍTULO DA TELA
     # CORREÇÃO: Parêntese fechado e adicionada a cor de fundo
     titulo = tk.Label(frame_conteudo, text="Gestão de Utilizadores", font=FONTE_TITULO, bg=COR_FUNDO)
