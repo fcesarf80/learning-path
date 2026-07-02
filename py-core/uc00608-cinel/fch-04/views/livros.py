@@ -432,9 +432,3 @@ def criar_tela_livros(frame_principal):
     )
 
     atualizar_treeview()
-
-    # Carrega na tabela os livros já existentes
-    atualizar_treeview()
-
-    # Preenche a tabela com os livros carregados do CSV
-    atualizar_treeview()

@@ -25,6 +25,12 @@ class UtilizadorService:
             if utilizador.email.lower() == email.lower():
                 return utilizador
         return None
+    
+    def pesquisar_por_nome(self, nome):
+        for utilizador in self.utilizadores:
+            if utilizador.nome.lower() == nome.lower():
+                return utilizador
+        return None
 
     def remover_utilizador(self, utilizador):
         self.utilizadores.remove(utilizador)

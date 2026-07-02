@@ -117,3 +117,52 @@ class CSVService:
                 utilizadores.append(utilizador)
 
         return utilizadores
+    
+    def salvar_emprestimos(self, emprestimos):
+
+        with open(
+            self.caminho_arquivo,
+            mode="w",
+            newline="",
+            encoding="utf-8"
+        ) as arquivo:
+
+            escritor = csv.writer(arquivo)
+
+            escritor.writerow([
+                "livro",
+                "utilizador",
+                "data_emprestimo",
+                "data_prevista"
+            ])
+
+            for emprestimo in emprestimos:
+
+                escritor.writerow([
+                    emprestimo.livro,
+                    emprestimo.utilizador,
+                    emprestimo.data_emprestimo,
+                    emprestimo.data_prevista
+                ])
+
+    def carregar_emprestimos(self):
+
+        if not os.path.exists(self.caminho_arquivo):
+            return []
+
+        emprestimos = []
+
+        with open(
+            self.caminho_arquivo,
+            mode="r",
+            newline="",
+            encoding="utf-8"
+        ) as arquivo:
+
+            leitor = csv.DictReader(arquivo)
+
+            for linha in leitor:
+
+                emprestimos.append(linha)
+
+        return emprestimos

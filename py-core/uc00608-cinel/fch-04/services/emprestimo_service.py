@@ -1,12 +1,20 @@
 from models.emprestimo import Emprestimo
+from services.csv_service import CSVService
 
 
 class EmprestimoService:
 
     def __init__(self):
-        self.emprestimos = []
+        self.csv_service = CSVService("data/emprestimos.csv")
+        self.emprestimos = self.csv_service.carregar_emprestimos()
 
-    def realizar_emprestimo(self, livro, utilizador):
+    def realizar_emprestimo(
+        self,
+        livro,
+        utilizador,
+        data_emprestimo,
+        data_prevista
+    ):
 
         if livro.quantidade <= 0:
             return False
@@ -14,11 +22,15 @@ class EmprestimoService:
         livro.quantidade -= 1
 
         emprestimo = Emprestimo(
-            livro,
-            utilizador
+            livro.titulo,
+            utilizador.nome,
+            data_emprestimo,
+            data_prevista
         )
 
         self.emprestimos.append(emprestimo)
+
+        self.csv_service.salvar_emprestimos(self.emprestimos)
 
         return True
 

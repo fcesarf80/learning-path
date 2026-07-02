@@ -1,6 +1,15 @@
 import tkinter as tk
 from tkinter import ttk
 from config import *
+from tkinter import messagebox
+from services.livro_service import LivroService
+from services.utilizador_service import UtilizadorService
+from services.emprestimo_service import EmprestimoService
+
+emprestimo_service = EmprestimoService()
+
+livro_service = LivroService()
+utilizador_service = UtilizadorService()
 
 def criar_tela_emprestimos(frame_conteudo):
 
@@ -8,13 +17,13 @@ def criar_tela_emprestimos(frame_conteudo):
     frame_conteudo.configure(bg=COR_FUNDO)
 
     # SEÇÃO 1: TÍTULO DA TELA
-    titulo = tk.Label(
+    titulo_tela = tk.Label(
         frame_conteudo,
         text="Realizar Empréstimo",
         font=FONTE_TITULO,
         bg=COR_FUNDO
     )
-    titulo.pack(pady=20)
+    titulo_tela.pack(pady=20)
 
     # SEÇÃO 2: FORMULÁRIO DE DADOS
     frame_formulario = tk.Frame(
@@ -134,6 +143,75 @@ def criar_tela_emprestimos(frame_conteudo):
         padx=10,
         pady=5
     )
+
+    def registar_emprestimo():
+        
+        titulo_busca = entry_livro.get().strip()
+        nome = entry_utilizador.get().strip()
+        
+        livro = livro_service.pesquisar_por_titulo(titulo_busca)
+
+        if not livro:
+            messagebox.showwarning(
+                "Livro",
+                "Livro não encontrado."
+            )
+            return
+        
+        print("Nome digitado:", repr(nome))
+
+        print("\nUtilizadores carregados:")
+
+        for u in utilizador_service.listar_utilizadores():
+            print(repr(u.nome))
+
+        utilizador = utilizador_service.pesquisar_por_nome(nome)
+
+        if not utilizador:
+            messagebox.showwarning(
+                "Utilizador",
+                "Utilizador não encontrado."
+            )
+            return
+
+        if livro.quantidade <= 0:
+            messagebox.showwarning(
+                "Sem stock",
+                "Este livro não está disponível."
+            )
+            return
+
+        if not emprestimo_service.realizar_emprestimo(
+            livro,
+            utilizador,
+            entry_data_emp.get(),
+            entry_data_prev.get()
+        ):
+            return
+
+        livro_service.salvar_alteracoes()
+
+        # Inserção visual dos dados corretos na Treeview
+        tabela.insert(
+            "",
+            "end",
+            values=(
+                titulo_busca,
+                utilizador.nome,
+                entry_data_emp.get(),
+                entry_data_prev.get()
+            )
+        )
+
+        messagebox.showinfo(
+            "Sucesso",
+            "Empréstimo realizado com sucesso!"
+        )
+
+        entry_livro.delete(0, tk.END)
+        entry_utilizador.delete(0, tk.END)
+        entry_data_emp.delete(0, tk.END)
+        entry_data_prev.delete(0, tk.END)
     
     # SEÇÃO 3: BOTÕES DE AÇÃO
     frame_botoes = tk.Frame(
@@ -146,7 +224,8 @@ def criar_tela_emprestimos(frame_conteudo):
         frame_botoes,
         text="Registar Empréstimo",
         font=FONTE_NORMAL,
-        bg=COR_BOTAO
+        bg=COR_BOTAO,
+        command=registar_emprestimo
     )
     btn_registar.pack(
         side="left",
@@ -185,7 +264,6 @@ def criar_tela_emprestimos(frame_conteudo):
         side="left",
         padx=5
     )
-    
 
     # SEÇÃO 4: TABELA DE REGISTROS (TREEVIEW)
     frame_tabela = tk.Frame(

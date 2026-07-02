@@ -62,6 +62,7 @@ def criar_tela_utilizadores(frame_conteudo):
     tabela.column("telefone", width=180)
 
     tabela.pack(fill="both", expand=True, padx=20, pady=20)
+    
 
     def adicionar_utilizador():
         utilizador = Utilizador(
@@ -84,6 +85,101 @@ def criar_tela_utilizadores(frame_conteudo):
         entry_nome.delete(0, tk.END)
         entry_email.delete(0, tk.END)
         entry_telefone.delete(0, tk.END)
+
+    def selecionar_utilizador(event):
+        item = tabela.focus()
+
+        if not item:
+            return
+
+        valores = tabela.item(item)["values"]
+
+        entry_nome.delete(0, tk.END)
+        entry_nome.insert(0, valores[0])
+
+        entry_email.delete(0, tk.END)
+        entry_email.insert(0, valores[1])
+
+        entry_telefone.delete(0, tk.END)
+        entry_telefone.insert(0, valores[2])
+
+    def editar_utilizador():
+        item = tabela.focus()
+
+        if not item:
+            messagebox.showwarning(
+                "Seleção",
+                "Selecione um utilizador."
+            )
+            return
+
+        valores = tabela.item(item)["values"]
+
+        utilizador = utilizador_service.pesquisar_por_email(valores[1])
+
+        if not utilizador:
+            return
+
+        utilizador.nome = entry_nome.get()
+        utilizador.email = entry_email.get()
+        utilizador.telefone = entry_telefone.get()
+
+        utilizador_service.salvar_alteracoes()
+
+        atualizar_treeview()
+        limpar_campos()
+
+    def pesquisar_utilizador():
+        email = entry_email.get().strip()
+
+        utilizador = utilizador_service.pesquisar_por_email(email)
+
+        if not utilizador:
+            messagebox.showinfo(
+                "Pesquisa",
+                "Utilizador não encontrado."
+            )
+            return
+
+        for item in tabela.get_children():
+            valores = tabela.item(item)["values"]
+
+            if valores[1] == utilizador.email:
+                tabela.selection_set(item)
+                tabela.focus(item)
+                tabela.see(item)
+                break
+
+        entry_nome.delete(0, tk.END)
+        entry_nome.insert(0, utilizador.nome)
+
+        entry_email.delete(0, tk.END)
+        entry_email.insert(0, utilizador.email)
+
+        entry_telefone.delete(0, tk.END)
+        entry_telefone.insert(0, utilizador.telefone)
+
+    def remover_utilizador():
+        item = tabela.focus()
+
+        if not item:
+            messagebox.showwarning(
+                "Seleção",
+                "Selecione um utilizador."
+            )
+            return
+
+        valores = tabela.item(item)["values"]
+
+        utilizador = utilizador_service.pesquisar_por_email(valores[1])
+
+        if not utilizador:
+            return
+
+        utilizador_service.remover_utilizador(utilizador)
+
+        atualizar_treeview()
+        limpar_campos()
 
     def atualizar_treeview():
         for item in tabela.get_children():
@@ -112,5 +208,33 @@ def criar_tela_utilizadores(frame_conteudo):
     )
     btn_adicionar.pack(side="left", padx=5)
 
-    # Carrega os dados iniciais na tabela ao abrir a tela
+    btn_editar = tk.Button(
+    frame_botoes,
+    text="Editar",
+    font=FONTE_NORMAL,
+    bg=COR_BOTAO,
+    command=editar_utilizador
+)
+    btn_editar.pack(side="left", padx=5)
+    
+    btn_pesquisar = tk.Button(
+    frame_botoes,
+    text="Pesquisar",
+    font=FONTE_NORMAL,
+    bg=COR_BOTAO,
+    command=pesquisar_utilizador
+)
+    btn_pesquisar.pack(side="left", padx=5)
+
+    btn_remover = tk.Button(
+    frame_botoes,
+    text="Remover",
+    font=FONTE_NORMAL,
+    bg=COR_BOTAO,
+    command=remover_utilizador
+)    
+    btn_remover.pack(side="left", padx=5)
+
+    tabela.bind("<<TreeviewSelect>>", selecionar_utilizador)
+    
     atualizar_treeview()
