@@ -1,4 +1,7 @@
 from models.livro import Livro
+from services.livro_service import LivroService
+
+service = LivroService()
 
 livro = Livro(
     1,
@@ -9,4 +12,8 @@ livro = Livro(
     3
 )
 
-print(livro)
+service.adicionar_livro(livro)
+
+resultado = service.pesquisar_por_titulo("Frankenstein")
+
+print(resultado)
