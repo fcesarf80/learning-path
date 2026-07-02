@@ -2,6 +2,7 @@ import os
 import csv
 from models.livro import Livro
 from models.utilizador import Utilizador
+from models.emprestimo import Emprestimo
 
 class CSVService:
 
@@ -163,6 +164,13 @@ class CSVService:
 
             for linha in leitor:
 
-                emprestimos.append(linha)
+                emprestimo = Emprestimo(
+                    livro=linha["livro"],
+                    utilizador=linha["utilizador"],
+                    data_emprestimo=linha["data_emprestimo"],
+                    data_prevista=linha["data_prevista"]
+                )
+
+                emprestimos.append(emprestimo)
 
         return emprestimos

@@ -36,3 +36,15 @@ class EmprestimoService:
 
     def listar_emprestimos(self):
         return self.emprestimos
+    
+    def remover_emprestimo(self, livro, utilizador):
+
+        self.emprestimos = [
+            e for e in self.emprestimos
+            if not (
+                e["livro"] == livro and
+                e["utilizador"] == utilizador
+            )
+        ]
+
+        self.csv_service.salvar_emprestimos(self.emprestimos)

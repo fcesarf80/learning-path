@@ -2,6 +2,10 @@ import tkinter as tk
 from tkinter import ttk
 from config import *
 
+from services.csv_service import CSVService
+
+csv_service = CSVService("data/emprestimos.csv")
+
 def criar_tela_ativos(frame_conteudo):
 
     # Configuração de fundo do frame principal da tela
@@ -81,46 +85,6 @@ def criar_tela_ativos(frame_conteudo):
         pady=5
     )
 
-    # SEÇÃO 3: BOTÕES DE AÇÃO
-    frame_botoes = tk.Frame(
-        frame_conteudo,
-        bg=COR_FUNDO
-    )
-    frame_botoes.pack(pady=10)
-
-    btn_pesquisar = tk.Button(
-        frame_botoes,
-        text="Pesquisar",
-        font=FONTE_NORMAL,
-        bg=COR_BOTAO
-    )
-    btn_pesquisar.pack(
-        side="left",
-        padx=5
-    )
-    
-    btn_renovar = tk.Button(
-        frame_botoes,
-        text="Renovar",
-        font=FONTE_NORMAL,
-        bg=COR_BOTAO
-    )
-    btn_renovar.pack(
-        side="left",
-        padx=5
-    )
-    
-    btn_devolver = tk.Button(
-        frame_botoes,
-        text="Devolver",
-        font=FONTE_NORMAL,
-        bg=COR_BOTAO
-    )
-    btn_devolver.pack(
-        side="left",
-        padx=5
-    )
-
     # SEÇÃO 4: TABELA DE REGISTROS (TREEVIEW)
     frame_tabela = tk.Frame(
         frame_conteudo,
@@ -193,3 +157,98 @@ def criar_tela_ativos(frame_conteudo):
         fill="both",
         expand=True
     )
+
+    def pesquisar_emprestimos():
+
+        livro = entry_livro.get().strip().lower()
+        utilizador = entry_utilizador.get().strip().lower()
+
+        for item in tabela.get_children():
+            tabela.delete(item)
+
+        emprestimos = csv_service.carregar_emprestimos()
+
+        for emprestimo in emprestimos:
+
+            if (
+                livro in emprestimo.livro.lower()
+                and
+                utilizador in emprestimo.utilizador.lower()
+            ):
+
+                tabela.insert(
+                    "",
+                    "end",
+                    values=(
+                        emprestimo.livro,
+                        emprestimo.utilizador,
+                        emprestimo.data_emprestimo,
+                        emprestimo.data_prevista,
+                        "-"
+                    )
+                )
+
+    def atualizar_treeview():
+
+        for item in tabela.get_children():
+            tabela.delete(item)
+
+        emprestimos = csv_service.carregar_emprestimos()
+
+        for emprestimo in emprestimos:
+
+            tabela.insert(
+                "",
+                "end",
+                values=(
+                    emprestimo.livro,
+                    emprestimo.utilizador,
+                    emprestimo.data_emprestimo,
+                    emprestimo.data_prevista,
+                    "-"
+                )
+            )
+
+# SEÇÃO 3: BOTÕES DE AÇÃO
+    frame_botoes = tk.Frame(
+        frame_conteudo,
+        bg=COR_FUNDO
+    )
+    frame_botoes.pack(pady=10)
+
+    btn_pesquisar = tk.Button(
+    frame_botoes,
+    text="Pesquisar",
+    font=FONTE_NORMAL,
+    bg=COR_BOTAO,
+    command=pesquisar_emprestimos
+    )
+    btn_pesquisar.pack(
+        side="left",
+        padx=5
+    )
+        
+    btn_renovar = tk.Button(
+        frame_botoes,
+        text="Renovar",
+        font=FONTE_NORMAL,
+        bg=COR_BOTAO
+    )
+    btn_renovar.pack(
+        side="left",
+        padx=5
+    )
+    
+    btn_devolver = tk.Button(
+        frame_botoes,
+        text="Devolver",
+        font=FONTE_NORMAL,
+        bg=COR_BOTAO
+    )
+    btn_devolver.pack(
+        side="left",
+        padx=5
+    )
+
+    atualizar_treeview()
+
