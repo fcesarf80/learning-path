@@ -1,7 +1,6 @@
 from models.livro import Livro
 from services.csv_service import CSVService
 
-
 class LivroService:
 
     def __init__(self):
@@ -27,7 +26,6 @@ class LivroService:
         for livro in self.livros:
             if livro.titulo.lower() == titulo.lower():
                 return livro
-
         return None
 
     def quantidade_livros(self):

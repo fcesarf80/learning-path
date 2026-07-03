@@ -1,5 +1,14 @@
 import tkinter as tk
 from config import *
+from services.livro_service import LivroService
+from services.utilizador_service import UtilizadorService
+from services.csv_service import CSVService
+
+livro_service = LivroService()
+utilizador_service = UtilizadorService()
+
+csv_emprestimos = CSVService("data/emprestimos.csv")
+csv_historico = CSVService("data/historico.csv")
 
 def criar_tela_estatisticas(frame_conteudo):
 
@@ -15,93 +24,39 @@ def criar_tela_estatisticas(frame_conteudo):
     )
     titulo.pack(pady=20)
 
-    # SEÇÃO 2: CARDS ESTATÍSTICOS
-    frame_cards = tk.Frame(
+    tk.Label(
         frame_conteudo,
+        text=f"📚 Livros: {livro_service.quantidade_livros()}",
+        font=FONTE_NORMAL,
         bg=COR_FUNDO
-    )
-    frame_cards.pack(pady=20)
+    ).pack(anchor="w", padx=30, pady=8)
 
-    # Card Livros
-    card_livros = tk.Label(
-        frame_cards,
-        text="128 Livros",
-        font=FONTE_CARD,
-        bg=COR_MENU,
-        highlightbackground=COR_BORDA,
-        highlightthickness=1,
-        relief="flat",
-        width=15,
-        height=3
-    )
-    card_livros.pack(
-        side="left",
-        padx=10
-    )
-
-    # Card Utilizadores
-    card_utilizadores = tk.Label(
-        frame_cards,
-        text="56 Utilizadores",
-        font=FONTE_CARD,
-        bg=COR_MENU,
-        highlightbackground=COR_BORDA,
-        highlightthickness=1,
-        relief="flat",
-        width=15,
-        height=3
-    )
-    card_utilizadores.pack(
-        side="left",
-        padx=10
-    )
-
-    # Card Empréstimos
-    card_emprestimos = tk.Label(
-        frame_cards,
-        text="18 Empréstimos",
-        font=FONTE_CARD,
-        bg=COR_MENU,
-        highlightbackground=COR_BORDA,
-        highlightthickness=1,
-        relief="flat",
-        width=15,
-        height=3
-    )
-    card_emprestimos.pack(
-        side="left",
-        padx=10
-    )
-
-    # Card Histórico
-    card_historico = tk.Label(
-        frame_cards,
-        text="325 Histórico",
-        font=FONTE_CARD,
-        bg=COR_MENU,
-        highlightbackground=COR_BORDA,
-        highlightthickness=1,
-        relief="flat",
-        width=15,
-        height=3
-    )
-    card_historico.pack(
-        side="left",
-        padx=10
-    )
-
-    # SEÇÃO 3: RESUMO GERAL
-    texto_resumo = """
-    Livros disponíveis: 110
-    Livros emprestados: 18
-    Utilizadores ativos: 56
-    """
-    
-    lbl_resumo = tk.Label(
+    tk.Label(
         frame_conteudo,
-        text=texto_resumo,
-        font=FONTE_SUBTITULO,
-        bg=COR_FUNDO,
-        justify="left"
-    )
-    lbl_resumo.pack(pady=20)
+        text=f"👤 Utilizadores: {utilizador_service.quantidade_utilizadores()}",
+        font=FONTE_NORMAL,
+        bg=COR_FUNDO
+    ).pack(anchor="w", padx=30, pady=8)
+
+    tk.Label(
+        frame_conteudo,
+        text=f"📖 Empréstimos Ativos: {len(csv_emprestimos.carregar_emprestimos())}",
+        font=FONTE_NORMAL,
+        bg=COR_FUNDO
+    ).pack(anchor="w", padx=30, pady=8)
+
+    tk.Label(
+        frame_conteudo,
+        text=f"📜 Histórico: {len(csv_historico.carregar_emprestimos())}",
+        font=FONTE_NORMAL,
+        bg=COR_FUNDO
+    ).pack(anchor="w", padx=30, pady=8)
+
+    tk.Label(
+        frame_conteudo,
+        text=f"📦 Livros Disponíveis: {livro_service.quantidade_livros()}",
+        font=FONTE_NORMAL,
+        bg=COR_FUNDO
+    ).pack(anchor="w", padx=30, pady=8)
+
+   

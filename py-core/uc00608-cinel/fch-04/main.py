@@ -1,4 +1,3 @@
-# IMPORTS
 import tkinter as tk
 from tkinter import ttk
 from views.livros import criar_tela_livros
@@ -9,7 +8,21 @@ from views.ativos import criar_tela_ativos
 from views.historico import criar_tela_historico
 from views.csv_view import criar_tela_csv
 from views.estatisticas import criar_tela_estatisticas
+from services.livro_service import LivroService
+from services.utilizador_service import UtilizadorService
+from services.csv_service import CSVService
 from config import *
+
+# INICIALIZA OS SERVICES
+livro_service = LivroService()
+utilizador_service = UtilizadorService()
+
+csv_emprestimos = CSVService(
+    "data/emprestimos.csv"
+)
+csv_historico = CSVService(
+    "data/historico.csv"
+)
 
 # CONFIGURAÇÕES
 LARGURA_JANELA = "1200x700"
@@ -26,9 +39,11 @@ def criar_card(parent, numero, texto):
         height=100,
         highlightbackground=COR_BORDA
     )
-    card.pack_propagate(False)
+    card.pack_propagate(
+        False
+    )
     card.pack(
-        side="left",
+        side="left", 
         padx=10
     )
     
@@ -38,7 +53,9 @@ def criar_card(parent, numero, texto):
         font=FONTE_CARD,
         bg=COR_FUNDO
     )
-    lbl_numero.pack(pady=(15, 5))
+    lbl_numero.pack(
+        pady=(15, 5)
+    )
     
     lbl_texto = tk.Label(
         card,
@@ -64,38 +81,54 @@ def limpar_conteudo():
     for widget in frame_conteudo.winfo_children():
         widget.destroy()
 
-# NAVEGAÇÃO DAS TELAS
+# NAVEGAÇÃO
 def abrir_livros():
     limpar_conteudo()
-    criar_tela_livros(frame_conteudo)
+    criar_tela_livros(
+        frame_conteudo
+    )
 
 def abrir_utilizadores():
     limpar_conteudo()
-    criar_tela_utilizadores(frame_conteudo)
+    criar_tela_utilizadores(
+        frame_conteudo
+    )
 
 def abrir_emprestimos():
     limpar_conteudo()
-    criar_tela_emprestimos(frame_conteudo)
+    criar_tela_emprestimos(
+        frame_conteudo
+    )
 
 def abrir_devolucoes():
     limpar_conteudo()
-    criar_tela_devolucoes(frame_conteudo)
+    criar_tela_devolucoes(
+        frame_conteudo
+    )
 
 def abrir_ativos():
     limpar_conteudo()
-    criar_tela_ativos(frame_conteudo)
+    criar_tela_ativos(
+        frame_conteudo
+    )
 
 def abrir_historico():
     limpar_conteudo()
-    criar_tela_historico(frame_conteudo)
+    criar_tela_historico(
+        frame_conteudo
+    )
 
 def abrir_csv():
     limpar_conteudo()
-    criar_tela_csv(frame_conteudo)
+    criar_tela_csv(
+        frame_conteudo
+    )
 
 def abrir_estatisticas():
     limpar_conteudo()
-    criar_tela_estatisticas(frame_conteudo)
+    criar_tela_estatisticas(
+        frame_conteudo
+    )
 
 def abrir_dashboard():
     limpar_conteudo()
@@ -106,7 +139,9 @@ def abrir_dashboard():
         bg=COR_FUNDO,
         height=80
     )
-    cabecalho.pack(fill="x")
+    cabecalho.pack(
+        fill="x"
+    )
 
     titulo_dashboard = tk.Label(
         cabecalho,
@@ -115,28 +150,47 @@ def abrir_dashboard():
         bg=COR_FUNDO
     )
     titulo_dashboard.pack(
-        anchor="w",
-        padx=30,
+        anchor="w", 
+        padx=30, 
         pady=20
     )
 
-    # DASHBOARD: CARDS INFORMATIVOS
+    # DASHBOARD: CARDS
     frame_cards = tk.Frame(
         frame_conteudo,
         bg=COR_FUNDO
     )
     frame_cards.pack(
-        anchor="w",
-        padx=30,
+        anchor="w", 
+        padx=30, 
         pady=20
     )
 
-    criar_card(frame_cards, "128", "Livros")
-    criar_card(frame_cards, "56", "Utilizadores")
-    criar_card(frame_cards, "18", "Empréstimos")
-    criar_card(frame_cards, "325", "Histórico")
+    criar_card(
+        frame_cards,
+        str(livro_service.quantidade_livros()),
+        "Livros"
+    )
 
-    # DASHBOARD: ACESSO RÁPIDO
+    criar_card(
+        frame_cards,
+        str(utilizador_service.quantidade_utilizadores()),
+        "Utilizadores"
+    )
+
+    criar_card(
+        frame_cards,
+        str(len(csv_emprestimos.carregar_emprestimos())),
+        "Empréstimos"
+    )
+
+    criar_card(
+        frame_cards,
+        str(len(csv_historico.carregar_emprestimos())),
+        "Histórico"
+    )
+
+    # ATALHOS
     titulo_acesso = tk.Label(
         frame_conteudo,
         text="Acesso Rápido",
@@ -144,8 +198,8 @@ def abrir_dashboard():
         bg=COR_FUNDO
     )
     titulo_acesso.pack(
-        anchor="w",
-        padx=30,
+        anchor="w", 
+        padx=30, 
         pady=(20, 10)
     )
 
@@ -154,71 +208,123 @@ def abrir_dashboard():
         bg=COR_FUNDO
     )
     frame_acesso.pack(
-        anchor="w",
+        anchor="w", 
         padx=30
     )
 
     linha1 = tk.Frame(
-        frame_acesso,
+        frame_acesso, 
         bg=COR_FUNDO
     )
-    linha1.pack(pady=5)
+    linha1.pack(
+        pady=5
+    )
 
     linha2 = tk.Frame(
-        frame_acesso,
+        frame_acesso, 
         bg=COR_FUNDO
     )
-    linha2.pack(pady=5)
+    linha2.pack(
+        pady=5
+    )
 
-    btn_add_livro = criar_botao_dashboard(linha1, "Adicionar Livro")
+    btn_add_livro = criar_botao_dashboard(
+        linha1, 
+        "Adicionar Livro"
+    )
+    btn_add_livro.config(
+        command=abrir_livros
+    )
     btn_add_livro.pack(
-        side="left",
+        side="left", 
         padx=5
     )
     
-    btn_pesq_livro = criar_botao_dashboard(linha1, "Pesquisar Livro")
+    btn_pesq_livro = criar_botao_dashboard(
+        linha1, 
+        "Pesquisar Livro"
+    )
+    btn_pesq_livro.config(
+        command=abrir_livros
+    )
     btn_pesq_livro.pack(
-        side="left",
+        side="left", 
         padx=5
     )
     
-    btn_emprestimo = criar_botao_dashboard(linha1, "Empréstimo")
+    btn_emprestimo = criar_botao_dashboard(
+        linha1, 
+        "Empréstimo"
+    )
+    btn_emprestimo.config(
+        command=abrir_emprestimos
+    )
     btn_emprestimo.pack(
-        side="left",
+        side="left", 
         padx=5
     )
     
-    btn_devolucao = criar_botao_dashboard(linha1, "Devolução")
+    btn_devolucao = criar_botao_dashboard(
+        linha1, 
+        "Devolução"
+    )
+    btn_devolucao.config(
+        command=abrir_devolucoes
+    )
     btn_devolucao.pack(
-        side="left",
+        side="left", 
         padx=5
     )
 
-    btn_utilizadores = criar_botao_dashboard(linha2, "Utilizadores")
+    btn_utilizadores = criar_botao_dashboard(
+        linha2, 
+        "Utilizadores"
+    )
+    btn_utilizadores.config(
+        command=abrir_utilizadores
+    )
     btn_utilizadores.pack(
-        side="left",
+        side="left", 
         padx=5
     )
     
-    btn_ativos = criar_botao_dashboard(linha2, "Ativos")
+    btn_ativos = criar_botao_dashboard(
+        linha2, 
+        "Ativos"
+    )
+    btn_ativos.config(
+        command=abrir_ativos
+    )
     btn_ativos.pack(
-        side="left",
+        side="left", 
         padx=5
     )
     
-    btn_historico = criar_botao_dashboard(linha2, "Histórico")
+    btn_historico = criar_botao_dashboard(
+        linha2, 
+        "Histórico"
+    )
+    btn_historico.config(
+        command=abrir_historico
+    )
     btn_historico.pack(
-        side="left",
+        side="left", 
         padx=5
     )
     
-    btn_estatisticas = criar_botao_dashboard(linha2, "Estatísticas")
+    btn_estatisticas = criar_botao_dashboard(
+        linha2, 
+        "Estatísticas"
+    )
+    btn_estatisticas.config(
+        command=abrir_estatisticas
+    )
     btn_estatisticas.pack(
-        side="left",
+        side="left", 
         padx=5
     )
 
-    # DASHBOARD: ATIVIDADE RECENTE
+    # DASHBOARD
     titulo_atividade = tk.Label(
         frame_conteudo,
         text="Atividade Recente",
@@ -226,8 +332,8 @@ def abrir_dashboard():
         bg=COR_FUNDO
     )
     titulo_atividade.pack(
-        anchor="w",
-        padx=30,
+        anchor="w", 
+        padx=30, 
         pady=(25, 10)
     )
 
@@ -239,7 +345,7 @@ def abrir_dashboard():
         highlightbackground=COR_BORDA
     )
     frame_atividade.pack(
-        fill="x",
+        fill="x", 
         padx=30
     )
 
@@ -259,39 +365,43 @@ def abrir_dashboard():
             font=FONTE_NORMAL
         )
         lbl.pack(
-            anchor="w",
-            padx=15,
+            anchor="w", 
+            padx=15, 
             pady=5
         )
 
 # JANELA PRINCIPAL
 janela = tk.Tk()
-janela.title(TITULO_JANELA)
-janela.geometry(LARGURA_JANELA)
-janela.configure(bg=COR_FUNDO)
+janela.title(
+    TITULO_JANELA
+)
+janela.geometry(
+    LARGURA_JANELA
+)
+janela.configure(
+    bg=COR_FUNDO
+)
 
 # MENU LATERAL
 frame_menu = tk.Frame(
-    janela,
-    width=300,
+    janela, 
+    width=300, 
     bg=COR_MENU
 )
 frame_menu.pack(
-    side="left",
+    side="left", 
     fill="y"
 )
 
 lbl_logo = tk.Label(
     frame_menu,
     text="📚 Biblioteca",
-    font=(
-        "Segoe UI",
-        16,
-        "bold"
-    ),
+    font=("Segoe UI", 16, "bold"),
     bg=COR_MENU
 )
-lbl_logo.pack(pady=20)
+lbl_logo.pack(
+    pady=20
+)
 
 menus = {
     "Dashboard": abrir_dashboard,
@@ -317,22 +427,21 @@ for texto, comando in menus.items():
         command=comando
     )
     botao.pack(
-        fill="x",
+        fill="x", 
         pady=2
     )
 
-# ÁREA DE CONTEÚDO PRINCIPAL
+# CONTEÚDO
 frame_conteudo = tk.Frame(
-    janela,
+    janela, 
     bg=COR_FUNDO
 )
 frame_conteudo.pack(
-    side="right",
-    expand=True,
+    side="right", 
+    expand=True, 
     fill="both"
 )
 
-# Construir o dashboard inicial assim que o programa abre
 abrir_dashboard()
 
 janela.mainloop()

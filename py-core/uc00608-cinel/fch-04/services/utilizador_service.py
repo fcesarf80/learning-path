@@ -19,6 +19,9 @@ class UtilizadorService:
 
     def listar_utilizadores(self):
         return self.utilizadores
+    
+    def quantidade_utilizadores(self):
+        return len(self.utilizadores)
 
     def pesquisar_por_email(self, email):
         for utilizador in self.utilizadores:
@@ -38,3 +41,5 @@ class UtilizadorService:
 
     def salvar_alteracoes(self):
         self.csv_service.salvar_utilizadores(self.utilizadores)
+
+    

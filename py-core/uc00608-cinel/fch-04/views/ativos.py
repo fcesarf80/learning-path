@@ -1,7 +1,8 @@
 import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk, messagebox
 from config import *
-
+from services.emprestimo_service import EmprestimoService
+emprestimo_service = EmprestimoService()
 from services.csv_service import CSVService
 
 csv_service = CSVService("data/emprestimos.csv")
@@ -85,7 +86,7 @@ def criar_tela_ativos(frame_conteudo):
         pady=5
     )
 
-    # SEÇÃO 4: TABELA DE REGISTROS (TREEVIEW)
+    # SEÇÃO 3: TABELA DE REGISTROS (TREEVIEW)
     frame_tabela = tk.Frame(
         frame_conteudo,
         bg=COR_FUNDO
@@ -188,6 +189,34 @@ def criar_tela_ativos(frame_conteudo):
                     )
                 )
 
+    def devolver_livro():
+
+        item = tabela.focus()
+
+        if not item:
+            messagebox.showwarning(
+                "Seleção",
+                "Selecione um empréstimo."
+            )
+            return
+
+        valores = tabela.item(item)["values"]
+
+        livro = valores[0]
+        utilizador = valores[1]
+
+        emprestimo_service.remover_emprestimo(
+            livro,
+            utilizador
+        )
+
+        atualizar_treeview()
+
+        messagebox.showinfo(
+            "Sucesso",
+            "Livro devolvido com sucesso!"
+        )
+
     def atualizar_treeview():
 
         for item in tabela.get_children():
@@ -209,7 +238,7 @@ def criar_tela_ativos(frame_conteudo):
                 )
             )
 
-# SEÇÃO 3: BOTÕES DE AÇÃO
+# SEÇÃO 4: BOTÕES DE AÇÃO
     frame_botoes = tk.Frame(
         frame_conteudo,
         bg=COR_FUNDO
@@ -243,7 +272,8 @@ def criar_tela_ativos(frame_conteudo):
         frame_botoes,
         text="Devolver",
         font=FONTE_NORMAL,
-        bg=COR_BOTAO
+        bg=COR_BOTAO,
+        command=devolver_livro
     )
     btn_devolver.pack(
         side="left",
