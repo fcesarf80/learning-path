@@ -3,6 +3,8 @@ package thecinelweek;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 public class NovoConcerto extends javax.swing.JFrame {
@@ -136,22 +138,30 @@ public class NovoConcerto extends javax.swing.JFrame {
 
     private void btnCriarConcertoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarConcertoActionPerformed
         String cidade =
-        cbCidade.getSelectedItem().toString();
+            cbCidade.getSelectedItem().toString();
+        
+        Date dataSelecionada =
+            dcDataConcerto.getDate();
+
+SimpleDateFormat formato =
+        new SimpleDateFormat("dd/MM/yyyy");
+
+String data =
+        formato.format(dataSelecionada);
 
 float preco =
         Float.parseFloat(
                 spnPreco.getValue().toString());
-
 int total =
         Integer.parseInt(
                 spnTotal.getValue().toString());
-
 Concerto novo =
-            new Concerto(
-                    cidade,
-                    "DATA",
-                    preco,
-                    total);
+        new Concerto(
+                cidade,
+                data,
+                preco,
+                total);
+
 novo.GuardarConcerto();
 
     JOptionPane.showMessageDialog(

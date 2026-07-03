@@ -1,5 +1,4 @@
 package com.example.ex_calculadora_imc_kt
-
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -41,10 +40,7 @@ class MainActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // Cálculo do IMC
             val imc = peso / (altura * altura)
-
-            // Formatar para mostrar apenas 2 casas decimais
             val imcFormatado = String.format("%.2f", imc)
 
             // Classificação da OMS usando a estrutura condicional 'when'

@@ -7,4 +7,19 @@
     android:layout_height="match_parent"
     tools:context=".SplashActivity">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="324dp"
+        android:layout_height="47dp"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="44dp"
+        tools:layout_editor_absoluteY="61dp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="327dp"
+        android:layout_height="49dp"
+        android:text="Button"
+        tools:layout_editor_absoluteX="41dp"
+        tools:layout_editor_absoluteY="140dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
