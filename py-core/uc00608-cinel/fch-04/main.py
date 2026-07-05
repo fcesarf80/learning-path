@@ -149,7 +149,7 @@ def abrir_dashboard():
         font=FONTE_TITULO,
         bg=COR_FUNDO
     )
-    titulo_dashboard.pack(
+    titulo_dashboard.pack(how do you translate screen to
         anchor="w", 
         padx=30, 
         pady=20
@@ -372,6 +372,8 @@ def abrir_dashboard():
 
 # JANELA PRINCIPAL
 janela = tk.Tk()
+janela.iconbitmap("img/cinel.ico")
+
 janela.title(
     TITULO_JANELA
 )
@@ -381,6 +383,9 @@ janela.geometry(
 janela.configure(
     bg=COR_FUNDO
 )
+
+
+
 
 # MENU LATERAL
 frame_menu = tk.Frame(
