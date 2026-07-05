@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+from views.dashboard import criar_tela_dashboard
 from views.livros import criar_tela_livros
 from views.utilizadores import criar_tela_utilizadores
 from views.emprestimos import criar_tela_emprestimos
@@ -82,6 +83,10 @@ def limpar_conteudo():
         widget.destroy()
 
 # NAVEGAÇÃO
+def abrir_dashboard():
+    limpar_conteudo()
+    criar_tela_dashboard(frame_conteudo)
+
 def abrir_livros():
     limpar_conteudo()
     criar_tela_livros(
@@ -130,7 +135,7 @@ def abrir_estatisticas():
         frame_conteudo
     )
 
-def abrir_dashboard():
+def criar_tela_dashboard(parent):
     limpar_conteudo()
     
     # DASHBOARD: CABEÇALHO
@@ -149,45 +154,10 @@ def abrir_dashboard():
         font=FONTE_TITULO,
         bg=COR_FUNDO
     )
-    titulo_dashboard.pack(how do you translate screen to
+    titulo_dashboard.pack(
         anchor="w", 
         padx=30, 
         pady=20
-    )
-
-    # DASHBOARD: CARDS
-    frame_cards = tk.Frame(
-        frame_conteudo,
-        bg=COR_FUNDO
-    )
-    frame_cards.pack(
-        anchor="w", 
-        padx=30, 
-        pady=20
-    )
-
-    criar_card(
-        frame_cards,
-        str(livro_service.quantidade_livros()),
-        "Livros"
-    )
-
-    criar_card(
-        frame_cards,
-        str(utilizador_service.quantidade_utilizadores()),
-        "Utilizadores"
-    )
-
-    criar_card(
-        frame_cards,
-        str(len(csv_emprestimos.carregar_emprestimos())),
-        "Empréstimos"
-    )
-
-    criar_card(
-        frame_cards,
-        str(len(csv_historico.carregar_emprestimos())),
-        "Histórico"
     )
 
     # ATALHOS
@@ -447,6 +417,8 @@ frame_conteudo.pack(
     fill="both"
 )
 
-abrir_dashboard()
+def abrir_dashboard():
+    limpar_conteudo()
+    criar_tela_dashboard(frame_conteudo)
 
 janela.mainloop()
