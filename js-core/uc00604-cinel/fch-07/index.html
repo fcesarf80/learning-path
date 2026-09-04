@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- (2.3) CONCERTO = nome do separador da pág. HTML;-->    
     <title>CONCERTO</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
+<!--(2.4) Header com img concerto;-->
     <header>
 
         <!-- Banner -->
         <img src="img/banner.jpg" alt="Banner do concerto">
-    
-        <!-- Menu de navegação -->
+        
+        <!-- (2.5) Menu de navegação -->
         <nav>
             <a href="#concerto">O Concerto</a>
             <a href="#bilhete">Compra do Bilhete</a>
@@ -24,10 +26,11 @@
 
     <main>
 
-        <!-- Secção O Concerto -->
+        <!-- (3) Secção O Concerto -->
         <section id="concerto">
 
             <h1>O Concerto</h1>
+            <!-- (3) texto concerto -->
 
             <div>
                 <div>
@@ -37,7 +40,7 @@
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium fuga possimus exercitationem dicta nobis, consectetur porro error deleniti maiores autem dolores. Quibusdam, tempora! Dolore, voluptatibus.
                     </p>
                 </div>
-
+                <!-- (3) img concerto -->
                 <div>
                     <img src="img/concerto.jpg" 
                     alt="Imagem da Banda XPTO em concerto">
@@ -47,21 +50,19 @@
         </section>
 
 
-        <!-- Secção Compra do Bilhete -->
+        <!-- (4) Secção Compra do Bilhete -->
         <section id="bilhete">
 
             <h1>Compra do Bilhete</h1>
-
+            <!-- (4.1) Formulario -->
             <form>
-
+                <!-- (4.2.1.1) Nome -->
                 <label for="nome">Nome Completo:</label>
                 <input type="text" id="nome" name="nome">
-            
-            
+                <!-- (4.2.1.2) E-mail-->
                 <label for="email">Email:</label>
-                <input type="text" id="email" name="email">
-            
-            
+                <input type="text" id="email" name="email">            
+                <!-- (4.2.1.3) Tipo Bilhete -->
                 <label for="tipoBilhete">Tipo de Bilhete:</label>
             
                 <select id="tipoBilhete" name="tipoBilhete">
@@ -73,14 +74,14 @@
             
             
                 <fieldset>
-            
+                    <!-- (4.2.1.4) Gênero / radio buttons -->
                     <legend>Género:</legend>
             
                     <label>
                         <input type="radio" name="genero" value="masculino">
                         Masculino
                     </label>
-            
+                    
                     <label>
                         <input type="radio" name="genero" value="feminino">
                         Feminino
@@ -88,16 +89,16 @@
             
                 </fieldset>
             
-            
+                <!-- (4.2.1.5) Termos e condições -->
                 <label>
                     <input type="checkbox" id="termos" name="termos">
                     Aceito os Termos e Condições
                 </label>
             
-            
+                <!-- (4.2.1.6) Botão Comprar bilhete -->
                 <button type="submit">Comprar Bilhete</button>
-            
-            
+
+                <!-- (4.2.1.7) Área MSG-->
                 <p id="mensagem"></p>
             
             </form>
@@ -107,9 +108,9 @@
     </main>
 
 
-    <!-- Footer -->
+    <!-- (5.1) Footer -->
     <footer>
-
+        <!-- (5.1) Infor -->
         <p>
             Concerto da Banda XPTO — Música ao vivo e muita animação.
         </p>

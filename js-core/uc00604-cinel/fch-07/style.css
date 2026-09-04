@@ -1,0 +1,224 @@
+/* (6.1) Personalização com CSS */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #222;
+}
+
+/* (6.1) Header */
+
+header {
+    background-color: #111;
+    text-align: center;
+    padding-bottom: 20px;
+}
+/* (7.4) formulário adaptar-se à largura */
+header img {
+    width: 100%;
+    max-width: 1200px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* (6.1) Menu de navegação */
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* (6.1) Secção "O Concerto" */
+
+#concerto {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 30px;
+}
+
+#concerto h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 36px;
+}
+/* (7.1) Texto e imagem lado a lado em ecrãs grandes */
+#concerto > div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+#concerto > div > div {
+    padding: 20px;
+}
+
+#concerto h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+#concerto p {
+    font-size: 18px;
+}
+
+#concerto img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Secção Compra do Bilhete */
+
+#bilhete {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 60px 30px;
+}
+
+#bilhete h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 36px;
+}
+
+form {
+    background-color: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+form input[type="text"],
+form select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+fieldset {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+fieldset legend {
+    font-weight: bold;
+}
+
+fieldset label {
+    display: inline-block;
+    margin-right: 20px;
+    font-weight: normal;
+}
+
+form input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+form button {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #111;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #333;
+}
+
+#mensagem {
+    margin-top: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* 5 - Footer */
+
+footer {
+    background-color: #111;
+    color: white;
+    text-align: center;
+    padding: 25px 30px;
+    margin-top: 20px;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* (7.2 e 7.4) Responsividade - até 768px */
+
+@media (max-width: 768px) {
+
+    #concerto > div {
+        grid-template-columns: 1fr;
+    }
+
+    #bilhete {
+        width: 100%;
+        padding: 40px 20px;
+    }
+
+    form {
+        width: 100%;
+        padding: 30px 20px;
+    }
+
+}
+
+/* (7.5) Ecrãs até 576px */
+
+@media (max-width: 576px) {
+
+    #concerto h1,
+    #bilhete h1 {
+        font-size: 28px;
+    }
+
+    #concerto,
+    #bilhete {
+        padding: 30px 15px;
+    }
+
+    form {
+        padding: 20px 15px;
+    }
+
+}
