@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONCERTO</title>
+</head>
+
+<body>
+
+    <header>
+
+        <!-- Banner -->
+        <img src="img/banner.jpg" alt="Banner do concerto">
+    
+        <!-- Menu de navegação -->
+        <nav>
+            <a href="#concerto">O Concerto</a>
+            <a href="#bilhete">Compra do Bilhete</a>
+        </nav>
+    
+    </header>
+
+
+    <main>
+
+        <!-- Secção O Concerto -->
+        <section id="concerto">
+
+            <h1>O Concerto</h1>
+
+            <div>
+                <div>
+                    <h2>Concerto da Banda XPTO</h2>
+
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium fuga possimus exercitationem dicta nobis, consectetur porro error deleniti maiores autem dolores. Quibusdam, tempora! Dolore, voluptatibus.
+                    </p>
+                </div>
+
+                <div>
+                    <img src="img/concerto.jpg" 
+                    alt="Imagem da Banda XPTO em concerto">
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- Secção Compra do Bilhete -->
+        <section id="bilhete">
+
+            <h1>Compra do Bilhete</h1>
+
+            <form>
+
+                <label for="nome">Nome Completo:</label>
+                <input type="text" id="nome" name="nome">
+            
+            
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email">
+            
+            
+                <label for="tipoBilhete">Tipo de Bilhete:</label>
+            
+                <select id="tipoBilhete" name="tipoBilhete">
+                    <option value="">Selecione uma opção</option>
+                    <option value="geral">Bilhete Geral</option>
+                    <option value="vip">Bilhete VIP</option>
+                    <option value="estudante">Bilhete Estudante</option>
+                </select>
+            
+            
+                <fieldset>
+            
+                    <legend>Género:</legend>
+            
+                    <label>
+                        <input type="radio" name="genero" value="masculino">
+                        Masculino
+                    </label>
+            
+                    <label>
+                        <input type="radio" name="genero" value="feminino">
+                        Feminino
+                    </label>
+            
+                </fieldset>
+            
+            
+                <label>
+                    <input type="checkbox" id="termos" name="termos">
+                    Aceito os Termos e Condições
+                </label>
+            
+            
+                <button type="submit">Comprar Bilhete</button>
+            
+            
+                <p id="mensagem"></p>
+            
+            </form>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <p>
+            Concerto da Banda XPTO — Música ao vivo e muita animação.
+        </p>
+
+    </footer>
+
+</body>
+</html>
