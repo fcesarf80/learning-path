@@ -2,14 +2,13 @@ import tkinter as tk
 from PIL import Image, ImageTk
 
 
-def aplicar_background(parent, caminho):
-    imagem = Image.open(caminho)
+def aplicar_background(parent, caminho_imagem):
+
+    imagem = Image.open(caminho_imagem)
     imagem = imagem.resize((1280, 720))
 
-    photo = ImageTk.PhotoImage(imagem)
+    bg = ImageTk.PhotoImage(imagem)
 
-    fundo = tk.Label(parent, image=photo)
-    fundo.image = photo
-    fundo.place(x=0, y=0)
-
-    return fundo
+    lbl = tk.Label(parent, image=bg, bd=0)
+    lbl.image = bg
+    lbl.place(x=0, y=0)

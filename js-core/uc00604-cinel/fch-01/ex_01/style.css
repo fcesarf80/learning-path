@@ -1,0 +1,11 @@
+.container-imagens {
+    display: flex;          /* Coloca os elementos filhos lado a lado */
+    justify-content: flex-start; /* Alinha os itens ao início da linha */
+    align-items: center;    /* Alinha os itens verticalmente pelo centro */
+    gap: 20px;              /* Cria um espaço de 20px entre o leão e a mulher */
+}
+
+.container-imagens img {
+    max-width: 45%;         /* Garante que as imagens não fiquem gigantes e caibam juntas */
+   
+}*/

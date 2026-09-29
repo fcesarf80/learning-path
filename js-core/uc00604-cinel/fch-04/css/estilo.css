@@ -1,159 +1,244 @@
-*{
+/* RESET DE SINTAXE */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box; /* Garante que padding não quebre as larguras definidas */
 }
 
-body{
-    background-color: gray;;
+body {
+    background-color: #2b2b2b; /* Um cinza escuro mais moderno que o 'gray' puro */
+    font-family: Arial, sans-serif;
+    color: #f4f4f4;
 }
 
-/* HEADER  */
-nav{
+/* HEADER & NAV */
+nav {
     text-align: center;
     padding: 20px;
+    background-color: #1a1a1a;
 }
-nav a{
+
+nav a {
     text-decoration: none;
     color: white;
-    padding: 20px;
+    padding: 10px 20px; /* Reduzido o padding vertical para não quebrar linha */
+    display: inline-block;
+    transition: all 0.3s ease; /* Transição suave no hover */
 }
-nav a:hover{
 
-    color: gray;
+nav a:hover {
+    color: #1a1a1a;
     background-color: white;
-
+    border-radius: 5px;
 }
-header img{
 
+header img {
     width: 100%;
-    height: 60vh;
+    height: 50vh; /* Ajustado para 50% da altura da tela para não cobrir tudo */
+    object-fit: cover; /* Evita que a imagem do banner fique distorcida */
     display: block;
 }
 
-/* Processador */
-
-.processador{
+/* SECTION PROCESSADOR */
+.processador {
     display: flex;
+    flex-direction: row; /* Alinhamento em linha por padrão */
     align-items: center;
-    gap:30px;
-    padding: 10px;
+    gap: 30px;
+    padding: 40px 20px;
+    max-width: 1200px; /* Centraliza o conteúdo em telas gigantes */
+    margin: 0 auto;
 }
 
-.texto{
+.texto {
     flex: 2;
 }
-.imagem{
+
+.imagem {
     flex: 1;
     text-align: center;
 }
 
-.processador h1{
-    color:white;
-    margin-bottom: 10px;
-    text-align: center;
-
+/* Ajustado para H2 conforme a correção do HTML */
+.processador h2 {
+    color: white;
+    margin-bottom: 15px;
+    text-align: left; /* Títulos de blocos de texto longos ficam melhores à esquerda */
 }
-.processador p{
+
+.processador p {
     text-align: justify;
-    line-height: 2;
+    line-height: 1.6; /* 1.6 é o padrão ouro de legibilidade */
+    color: #d1d1d1;
 }
 
-.processador img{
-    max-width: 350px;
+.processador img {
+    max-width: 100%; /* Garante que a imagem se ajuste ao container */
     height: auto;
-    border-radius: 30px;
-}
-
-/* CARDS */
-
-.cards{
-   /* background-color: white;*/
-    display: flex;
-    gap:30px;
-    justify-content: center;
-    padding: 20px;
-}
-
-.card{
-    width: 300px;
-    background-color: rgb(109, 108, 108);
-    padding: 20px;
     border-radius: 20px;
-    box-shadow: 5px 10px;
-
 }
 
+/* CARDS CONTAINER */
+.cards {
+    display: flex;
+    flex-wrap: wrap; /* ESSENCIAL: Faz os cards irem para baixo no telemóvel */
+    gap: 30px;
+    justify-content: center;
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
 
-.card img{
+.card {
+    width: 300px;
+    background-color: #3a3a3a; /* Cinza ligeiramente mais claro que o fundo */
+    padding: 20px;
     border-radius: 15px;
-    width: 100%;
+    /* Sombra corrigida: suave e moderna */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Mantém os botões "Saber Mais" alinhados embaixo */
 }
 
-.card h2{
+.card img {
+    border-radius: 10px;
+    width: 100%;
+    height: 180px;
+    object-fit: cover; /* Mantém todas as imagens dos cards com o mesmo tamanho */
+}
+
+.card h2 {
     color: white;
     text-align: center;
-    margin: 10px 0;
+    margin: 15px 0 10px 0;
+    font-size: 1.4rem;
 }
 
-.card p{
-    line-height: 2;
-    text-align: justify;
+.card p {
+    line-height: 1.5;
+    text-align: center; /* Textos curtos de cards ficam melhores centralizados */
+    color: #e0e0e0;
+    font-size: 0.95rem;
+    margin-bottom: 15px;
 }
 
-.card a{
+.card a {
     display: inline-block;
-    margin-top: 15px;
     background-color: white;
     color: black;
     text-decoration: none;
-    padding: 10px;
-    border-radius: 15px;
+    padding: 10px 20px;
+    border-radius: 25px; /* Botão estilo pílula, mais moderno */
+    font-weight: bold;
+    transition: background 0.3s, color 0.3s;
 }
 
-.card a:hover{
-
-    background-color: black;
+.card a:hover {
+    background-color: #1a1a1a;
     color: white;
-
 }
 
-.centro{
+.centro {
     text-align: center;
 }
 
-
-
-
+/* FORMULÁRIO */
 #formulario {
-    width: 400px;
+    width: 100%;
+    max-width: 450px; /* Mudado para max-width para não quebrar em telas pequenas */
     background-color: white;
     border-radius: 15px;
     padding: 30px;
-    margin: 30px auto;
+    margin: 40px auto;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    color: #333; /* Texto escuro já que o fundo do formulário é branco */
 }
 
 #formulario div {
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
-#formulario span {
+#formulario label, 
+#formulario .label-simulada { /* Tags ajustadas conforme as boas práticas do HTML */
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     font-weight: bold;
+    font-size: 0.9rem;
 }
 
-#formulario input[type="text"]{
-    width: 75%;
-    padding: 10px;
+/* Unificado estilos de inputs de texto e selects */
+#formulario input[type="text"],
+#formulario select {
+    width: 100%; /* Ocupa 100% do espaço do formulário */
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    font-size: 1rem;
 }
 
-#formulario select{
-    width: 80%;
-    padding: 10px;
+#formulario input[type="text"]:focus,
+#formulario select:focus {
+    border-color: #2b2b2b; /* Destaca o campo quando clicado */
 }
 
-#formulario button{
-    padding: 10px;
-    display: block;
-    margin: auto;
+#formulario input[type="radio"] {
+    margin-right: 5px;
+    margin-left: 10px;
+}
+
+#formulario button {
+    width: 100%; /* Botão largo é mais fácil de clicar em telemóveis */
+    padding: 12px;
+    background-color: #2b2b2b;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#formulario button:hover {
+    background-color: #1a1a1a;
+}
+
+#resposta {
+    text-align: center;
+    font-weight: bold;
+    font-size: 0.95rem;
+}
+
+/* --- RESPONSIVIDADE (MEDIA QUERIES) --- */
+
+/* Ajustes para ecrãs médios e pequenos (Telemóveis e Tablets) */
+@media (max-width: 768px) {
+    header img {
+        height: 35vh; /* Diminui o banner no telemóvel */
+    }
+
+    .processador {
+        flex-direction: column; /* Transforma a linha em coluna (imagem vai para baixo ou para cima) */
+        text-align: center;
+        padding: 20px;
+    }
+
+    .processador h2 {
+        text-align: center;
+    }
+
+    .processador img {
+        max-width: 280px; /* Reduz a imagem lateral no telemóvel */
+    }
+
+    .cards {
+        gap: 20px; /* Reduz o espaçamento entre cards */
+    }
+    
+    .card {
+        width: 100%; /* O card passa a ocupar a largura total disponível na tela */
+        max-width: 340px;
+    }
 }

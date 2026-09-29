@@ -1,0 +1,68 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    padding: 10px;
+}
+
+/* Container principal com CSS Grid */
+.grid-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Coluna da esquerda maior que a da direita */
+    gap: 10px; /* Espaçamento entre os blocos */
+    background-color: #5a1fa2; /* Cor roxa do fundo da imagem */
+    padding: 10px;
+    border-radius: 4px;
+}
+
+/* Estilização base de todas as seções */
+header, nav, section, article, aside, footer {
+    background-color: white;
+    padding: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    border-radius: 2px;
+}
+
+/* Posicionamento dos elementos na grade */
+header {
+    grid-column: span 2; /* Ocupa as duas colunas */
+}
+
+.imagem-cortada {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    object-position: center; /* Mantém o carro centralizado no corte */
+  }
+  
+  
+
+nav {
+    grid-column: span 2; /* Ocupa as duas colunas */
+}
+
+section {
+    grid-column: 1; /* Fica na primeira coluna */
+}
+
+article {
+    grid-column: 1; /* Fica na primeira coluna, abaixo da section */
+}
+
+aside {
+    grid-column: 2; /* Fica na segunda coluna */
+    grid-row: 3 / 5; /* Estende-se verticalmente ao lado de section e article */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+footer {
+    grid-column: span 2; /* Ocupa as duas colunas */
+}

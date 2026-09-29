@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> .: CARDS :. </title>
+        <link rel="stylesheet" href="css/estilo.css">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <header>
+            <label>&#8801;</label>
+            <nav>
+                <a href="#">HOME</a>
+                <a href="#">DEFINIÇÃO</a>
+                <a href="#">PROCESSADORES</a>
+            </nav>
+             <img src="imagens/banner.jpg">
+        </header>
+        <main>
+
+            <section class="processador">
+                <div class="texto">
+                    <h1>PROCESSADOR</h1>
+                    <P>
+                        Um processador, também conhecido como CPU (Unidade Central de Processamento), é o "cérebro" de um computador, smartphone ou qualquer outro dispositivo eletrónico. A sua principal função é receber instruções, realizar cálculos matemáticos e tomar decisões lógicas, transformando dados brutos em informações úteis.Como funciona o Processador?Para entender o seu papel na prática, o processador divide as suas tarefas em três elementos principais:Unidade de Controlo (UC): Coordena e gere o fluxo de dados, interpretando as instruções dos programas.Unidade Lógica e Aritmética (ULA): Realiza todos os cálculos matemáticos (como somar e subtrair) e decisões lógicas (como comparar se um valor é maior ou menor que outro).Registradores: Funcionam como pequenas memórias de altíssima velocidade que armazenam dados temporários enquanto o processador trabalha.
+                    </P>
+                </div>
+                <div class="imagem">
+                    <img src="imagens/cpu.jpg">
+
+                </div>
+
+            </section>
+            <section class="cards">
+                <div class="card">
+                    <img src="imagens/intel.jpg">
+                    <h2>Processador INTEL</h2>
+                    <p>Processadores Intel Core i3, Intel Core i5, Intel Core i7 e Intel Core i9 </p>
+                    <div class="centro">
+                        <a href="#">Saber Mais</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="imagens/amd.jpg">
+                    <h2>Processador INTEL</h2>
+                    <p>Os processadores AMD Ryzen Série 7000 podem oferecer até 49% mais desempenho</p>
+                    <div class="centro">
+                        <a href="#">Saber Mais</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="imagens/processador2.jpg">
+                    <h2>Processador CINEL</h2>
+                    <p>Os processadores CINEL andam que nem os carros do CINEL do Porto</p>
+                    <div class="centro">
+                        <a href="#">Saber Mais</a>
+                    </div>
+                </div>
+            </section>
+
+              <section class="processador">
+                <div class="texto">
+                    <h1>PROCESSADOR</h1>
+                    <P>
+                        Um processador, também conhecido como CPU (Unidade Central de Processamento), é o "cérebro" de um computador, smartphone ou qualquer outro dispositivo eletrónico. A sua principal função é receber instruções, realizar cálculos matemáticos e tomar decisões lógicas, transformando dados brutos em informações úteis.Como funciona o Processador?Para entender o seu papel na prática, o processador divide as suas tarefas em três elementos principais:Unidade de Controlo (UC): Coordena e gere o fluxo de dados, interpretando as instruções dos programas.Unidade Lógica e Aritmética (ULA): Realiza todos os cálculos matemáticos (como somar e subtrair) e decisões lógicas (como comparar se um valor é maior ou menor que outro).Registradores: Funcionam como pequenas memórias de altíssima velocidade que armazenam dados temporários enquanto o processador trabalha.
+                    </P>
+                </div>
+                <div class="imagem">
+                    <img src="imagens/cpu.jpg">
+
+                </div>
+
+            </section>
+
+            <section>
+                <form id="formulario">
+                    
+                    <div>
+                        <span>Nome Completo</span>
+                        <input type="text" id="nome" placeholder="Nome Completo" oninput="verificar_nome()" maxlength="10" required pattern="[A-Za-z]{3}">
+                        <p id="erro_nome"></p>
+                    </div>
+                     <div>
+                        <span>Localidade</span>
+                        <input type="number" id="quantidade" placeholder="ex: 2" step="20">
+                    </div>
+                    <div>
+                        <span>Menu</span>
+                        <select id="nacionalidade">
+                            <option value="nada">Escolha uma Opção</option>
+                            <option value="Casa">Menu Casa (20€)</option>
+                            <option value="Dia">Menu Dia (30€)</option>
+                            <option value="Fds">Menu Fds (24€)</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <span>Vale Cliente</span>
+                        <input type="text" id="vale_cliente" placeholder="Ex: Desconto 10"
+                     </div>
+
+                    <div>
+                        <button onclick="exemplo()" type="submit">Finalizar Compra</button> 
+                        <p id="resposta"></p>
+                    </div>
+
+                </form>
+
+            </section>
+
+        </main>
+
+    <script>        
+
+        function exemplo() {
+            
+            const nome = document.getElementById("nome").value;
+
+            const quantidade = document.getElementById("quantidade").value;
+
+            const menu = document.getElementById("menu").value;
+
+            const vale_cliente = document.getElementById("vale_cliente").value;
+
+            const mensagem = document.getElementById("resposta");
+        
+        //let genero = "";
+
+        if (nome.value.trim() == "")
+        {
+            nome.style.border = "2px solid red";
+
+        }
+
+        if (quantidade.value == "" || quantidade.value <= 0)
+
+        {
+            nome.style.border = "2px solid red";
+            valido = false;
+
+        }
+
+        if (menu.value == "nada")
+        {
+            nome.style.border = "2px solid red";
+            valido = false;
+        }
+        if (valido) {
+
+            if (menu.value == "casa") {
+                
+            }
+
+            mensagem.style.color = "green";
+            mensagem.innerHTML = nome.value + "<br>" + quantidade.value + "<br>" + "<br>" menu.value;
+        }
+        else{
+            mensagem.style.color = "red";
+            mensagem.innerHTML = "Os campos são de preenchimento obrigatório";
+        }
+
+    }
+
+    </script>
+    </body>
+</html>
