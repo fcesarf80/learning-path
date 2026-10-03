@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FORMAÇÃO ONLINE</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- CABEÇALHO -->
+    <header class="header">
+        <div class="banner">
+            <div class="banner-conteudo">
+                <h1>FORMAÇÃO ONLINE</h1>
+                <p>Aprenda tecnologia de forma simples, prática e profissional.</p>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- OFERTA FORMATIVA -->
+    <main>
+
+        <section class="cursos">
+
+            <h2>Oferta Formativa</h2>
+            <p class="subtitulo">
+                Escolha os cursos que deseja adicionar à sua inscrição.
+            </p>
+
+            <div class="cards">
+
+
+                <!-- CARD HTML/CSS -->
+                <article class="card-container">
+
+                    <div class="card">
+
+                        <!-- FRENTE -->
+                        <div class="card-face card-front">
+
+                            <img src="img/card_html.png"
+                                 alt="Curso de HTML e CSS">
+
+                            <div class="card-titulo">
+                                <h3>HTML / CSS</h3>
+                            </div>
+
+                        </div>
+
+
+                        <!-- VERSO -->
+                        <div class="card-face card-back">
+
+                            <h3>HTML / CSS</h3>
+
+                            <p>
+                                Aprenda a criar páginas web utilizando
+                                HTML5 e CSS3, desde a estrutura até à
+                                estilização e organização dos conteúdos.
+                            </p>
+
+                            <div class="info-curso">
+                                <p><strong>Carga horária:</strong> 40 horas</p>
+                                <p><strong>Preço:</strong> 120,00 €</p>
+                            </div>
+
+                            <button
+                                class="btn-inscricao"
+                                data-curso="HTML / CSS"
+                                data-preco="120">
+                                Adicionar ao plano
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- CARD JAVASCRIPT BÁSICO -->
+                <article class="card-container">
+
+                    <div class="card">
+
+                        <!-- FRENTE -->
+                        <div class="card-face card-front">
+
+                            <img src="img/card_js_basico.png"
+                                 alt="Curso de JavaScript Básico">
+
+                            <div class="card-titulo">
+                                <h3>JavaScript Básico</h3>
+                            </div>
+
+                        </div>
+
+
+                        <!-- VERSO -->
+                        <div class="card-face card-back">
+
+                            <h3>JavaScript Básico</h3>
+
+                            <p>
+                                Aprenda os fundamentos de JavaScript,
+                                variáveis, funções, condições, eventos
+                                e manipulação do DOM.
+                            </p>
+
+                            <div class="info-curso">
+                                <p><strong>Carga horária:</strong> 50 horas</p>
+                                <p><strong>Preço:</strong> 150,00 €</p>
+                            </div>
+
+                            <button
+                                class="btn-inscricao"
+                                data-curso="JavaScript Básico"
+                                data-preco="150">
+                                Adicionar ao plano
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- CARD JAVASCRIPT AVANÇADO -->
+                <article class="card-container card-avancado">
+
+                    <!-- MÁSCARA -->
+                    <div class="mascara-bloqueio">
+
+                        <div class="cadeado">
+                            🔒
+                        </div>
+
+                        <h3>Módulo bloqueado</h3>
+
+                        <p>
+                            Complete o JavaScript Básico
+                            para desbloquear este curso.
+                        </p>
+
+                    </div>
+
+
+                    <div class="card">
+
+                        <!-- FRENTE -->
+                        <div class="card-face card-front">
+
+                            <img src="img/card_js_avancado.png"
+                                 alt="Curso de JavaScript Avançado">
+
+                            <div class="card-titulo">
+                                <h3>JavaScript Avançado</h3>
+                            </div>
+
+                        </div>
+
+
+                        <!-- VERSO -->
+                        <div class="card-face card-back">
+
+                            <h3>JavaScript Avançado</h3>
+
+                            <p>
+                                Aprofunde os conhecimentos em JavaScript,
+                                trabalhando com programação assíncrona,
+                                APIs, módulos e aplicações mais complexas.
+                            </p>
+
+                            <div class="info-curso">
+                                <p><strong>Carga horária:</strong> 60 horas</p>
+                                <p><strong>Preço:</strong> 200,00 €</p>
+                            </div>
+
+                            <button
+                                class="btn-inscricao"
+                                data-curso="JavaScript Avançado"
+                                data-preco="200"
+                                data-avancado="true">
+                                Adicionar ao plano
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- CARRINHO -->
+        <section class="carrinho">
+
+            <h2>Resumo da Inscrição</h2>
+
+            <div id="lista-carrinho">
+                <p class="carrinho-vazio">
+                    Nenhum curso selecionado.
+                </p>
+            </div>
+
+            <div class="total">
+                <strong>Total:</strong>
+                <span id="total">0,00 €</span>
+            </div>
+
+        </section>
+
+
+
+        <!-- CADASTRO -->
+        <section class="cadastro">
+
+            <h2>Cadastro e Inscrição</h2>
+
+            <form id="form-inscricao">
+
+                <div class="campo">
+
+                    <label for="nome">Nome</label>
+
+                    <input
+                        type="text"
+                        id="nome"
+                        name="nome"
+                        placeholder="Digite o seu nome">
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="email">Email</label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Digite o seu email">
+
+                </div>
+
+
+                <div class="termos">
+
+                    <input
+                        type="checkbox"
+                        id="termos"
+                        name="termos">
+
+                    <label for="termos">
+                        Aceito os Termos e Condições.
+                    </label>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="btn-submit">
+                    Finalizar inscrição
+                </button>
+
+            </form>
+
+
+            <div
+                id="mensagem"
+                class="mensagem">
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- RODAPÉ -->
+    <footer>
+
+        <p>
+            &copy; 2026 Formação Online. Todos os direitos reservados.
+        </p>
+
+        <p>
+            Página criada com os conceitos aprendidos no curso
+            Site/Firebase.
+        </p>
+
+    </footer>
+
+
+    <script src="js/javascript.js"></script>
+
+</body>
+
+</html>
