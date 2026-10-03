@@ -27,41 +27,15 @@ body {
 
 .header {
     width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
-.banner {
-    min-height: 300px;
-
-    background-image:
-        linear-gradient(
-            rgba(0, 0, 0, 0.55),
-            rgba(0, 0, 0, 0.55)
-        ),
-        url("../img/card_html.png");
-
-    background-size: cover;
-    background-position: center;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    text-align: center;
+.banner-img {
+    display: block;
+    width: 100%;
+    height: auto;
 }
-
-.banner-conteudo {
-    color: white;
-}
-
-.banner h1 {
-    font-size: 3rem;
-    margin-bottom: 10px;
-}
-
-.banner p {
-    font-size: 1.2rem;
-}
-
 
 /* ==============================
    SEÇÕES
@@ -280,9 +254,12 @@ button {
     padding: 30px;
 
     transition:
-        opacity 0.35s ease,
-        visibility 0.35s ease;
+        opacity 0.5s ease,
+        visibility 0.5s ease;
 }
+
+
+/* Cadeado */
 
 .cadeado {
     font-size: 70px;
@@ -296,22 +273,25 @@ button {
     margin-bottom: 15px;
 }
 
+
+/* Título */
+
 .mascara-bloqueio h3 {
     color: #39ff14;
     margin-bottom: 10px;
 }
+
+
+/* Texto */
 
 .mascara-bloqueio p {
     color: white;
 }
 
 
-/*
-   Ao passar o rato no Card 3,
-   a máscara desaparece.
-*/
+/* Máscara desaparecida */
 
-.card-avancado:hover .mascara-bloqueio {
+.mascara-bloqueio.ocultar-mascara {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
@@ -522,4 +502,14 @@ footer p {
         max-width: 320px;
     }
 
+}
+
+/* ==============================
+   DESAPARECER MÁSCARA APÓS 5s
+============================== */
+
+.mascara-bloqueio.ocultar-mascara {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
 }

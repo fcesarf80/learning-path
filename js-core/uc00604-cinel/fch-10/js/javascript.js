@@ -408,3 +408,20 @@ formulario.addEventListener(
 // ==============================
 
 atualizarCarrinho();
+
+// ==============================
+// DESBLOQUEIO VISUAL DO CARD 3
+// ==============================
+
+setTimeout(() => {
+
+    const mascara =
+        document.querySelector(".mascara-bloqueio");
+
+    if (mascara) {
+
+        mascara.classList.add("ocultar-mascara");
+
+    }
+
+}, 5000);
